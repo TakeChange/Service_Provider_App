@@ -31,7 +31,7 @@ const HomeScreen = () => {
     <TouchableOpacity>
       <View style={{ backgroundColor: 'orange', width: 80, height: 130, marginHorizontal: 8, marginTop: 20 }}>
         <View style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={item.icon} size={40} color="black" />
+          <Image source={item.icon} size={10} color="black" />
         </View>
         <View style={{ backgroundColor: 'yellow', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>{item.title}</Text>
