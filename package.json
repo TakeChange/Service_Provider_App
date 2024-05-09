@@ -12,12 +12,9 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.74.1",
-<<<<<<< HEAD
     "react-native-paper": "^5.12.3",
-=======
     "react-native-geolocation-service": "^5.3.1",
     "react-native-phone-number-input": "^2.1.0",
->>>>>>> dda896b004d9544bd3fa202d8cff82005707e42c
     "react-native-vector-icons": "^10.1.0"
   },
   "devDependencies": {
