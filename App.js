@@ -8,6 +8,7 @@ const App = () => {
     <View>
       <Text>App</Text>
     </View>
+    
   )
 }
 
