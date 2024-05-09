@@ -4,7 +4,6 @@ import ChangePasswordScreen from './src/screen/ChangePasswordScreen'
 import ProfileScreen from './src/screen/ProfileScreen'
 
 
-
 const App = () => {
   return (
     <View>
