@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -14,6 +14,21 @@ const CategoryScreen = () => {
         { id: '8', title: 'Cleaning', icon: require('../../asset/icons/cleaning.png') },
         { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
         { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+
+        { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
+        { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+        { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
+        { id: '4', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+        { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+        { id: '6', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
+        { id: '7', title: 'Repair', icon: require('../../asset/icons/repair.png') },
+        { id: '8', title: 'Cleaning', icon: require('../../asset/icons/cleaning.png') },
+        { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+        { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+        { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
+        { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+        { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
+    
 
     ];
 
