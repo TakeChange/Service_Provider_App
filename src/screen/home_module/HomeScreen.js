@@ -1,21 +1,37 @@
-import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Home from 'react-native-vector-icons/MaterialIcons';
+import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity ,Image} from 'react-native';
+import React from 'react';
+
+
+
 const HomeScreen = () => {
   const services = [
     {
       id: 1,
       title: 'Home cleaning',
-     
+      icon: require('../../asset/icons/home.png') 
     },
-    // Add more service items here if needed
+    {
+      id: 2,
+      title: 'Beauty',
+      icon: require('../../asset/icons/home.png') 
+    },
+    {
+      id: 3,
+      title: 'AC repair',
+      icon: require('../../asset/icons/home.png') 
+    },
+    {
+      id: 4,
+      title: 'Salon',
+      icon: require('../../asset/icons/home.png') 
+    },
   ];
 
   const renderItem = ({ item }) => (
     <TouchableOpacity>
-      <View style={{ backgroundColor: 'orange', width: 80, height: 150,  }}>
+      <View style={{ backgroundColor: 'orange', width: 80, height: 130, marginHorizontal: 8, marginTop: 20 }}>
         <View style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Home name="home" size={40} color="black" />
+          <Image source={item.icon} size={40} color="black" />
         </View>
         <View style={{ backgroundColor: 'yellow', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>{item.title}</Text>
