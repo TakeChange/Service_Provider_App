@@ -3,3 +3,7 @@ plugin :
 Phone Number :
     plugin :
         npm i react-native-phone-number-input
+
+
+plugin:
+        npm i react-native-google-places-autocomplete
