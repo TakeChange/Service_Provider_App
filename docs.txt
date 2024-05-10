@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 React Native Vector Icon
     plugins:
         npm i react-native-vector-icons
@@ -23,3 +24,10 @@ Navigation :
             plugins: ['react-native-reanimated/plugin'],
 
         
+=======
+plugin :
+        npm i react-native-paper
+Phone Number :
+    plugin :
+        npm i react-native-phone-number-input
+>>>>>>> c23f807cb4a8857af373066db7fbb93b4e1c092f
