@@ -1,3 +1,5 @@
+plugin :
+        npm i react-native-paper
 Phone Number :
     plugin :
         npm i react-native-phone-number-input
