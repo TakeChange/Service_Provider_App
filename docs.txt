@@ -30,4 +30,11 @@ plugin :
 Phone Number :
     plugin :
         npm i react-native-phone-number-input
+<<<<<<< HEAD
 >>>>>>> c23f807cb4a8857af373066db7fbb93b4e1c092f
+=======
+
+
+plugin:
+        npm i react-native-google-places-autocomplete
+>>>>>>> 3a6662e71d86b0b68f69804ea48962b06dff025c

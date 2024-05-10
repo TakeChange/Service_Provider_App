@@ -12,19 +12,18 @@ const SignUpScreen = () => {
         <View style={styles.container}>
         <View style={{justifyContent:'center',alignItems:'center'}}>
             <View style={styles.Icon}>
-                <FontAwesome5 name="user" size={30} color="black" style={{ padding: 10 }} />
+                <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
             </View>
             </View>
 
             <View style={styles.txtstyle}>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', color: 'black', justifyContent: 'center', textAlign: 'center' }}>Hello, User</Text>
-                <Text style={{ fontSize: 18, color: 'black', justifyContent: 'center', textAlign: 'center' }}>Create an Account</Text>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Hello, User</Text>
+                <Text style={{ fontSize: 18, color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Create an Account</Text>
             </View>
             <Text style={styles.text} >Full Name</Text>
                     <TextInput
                     style={styles.txtinput}
                         placeholder=""
-                        placeholderTextColor={'white'}
                     />
             <Text style={styles.text}>Mobile Number</Text>
             <View style={styles.txtinput}>
@@ -33,23 +32,18 @@ const SignUpScreen = () => {
                    defaultCode='IN'
                    />
                    <TouchableOpacity  onPress={()=>{ Alert.alert(phoneNumber)}}>
-                   </TouchableOpacity>
-                    
+                   </TouchableOpacity>  
             </View>
             <Text style={styles.text}>Adhar Number</Text>
                     <TextInput
                     style={styles.txtinput}
                         placeholder=""
                         keyboardType='numeric'
-                        placeholderTextColor={'white'}
-                       
                     />
             <Text style={styles.text}>Address</Text>
                     <TextInput
                     style={styles.txtinput}
                         placeholder=""
-                        placeholderTextColor={'white'}
-                        
                     />
             <Text style={styles.text}>Area</Text>
             <View style={styles.txtinput}>
@@ -78,13 +72,11 @@ const SignUpScreen = () => {
                     <TextInput
                     style={styles.txtinput}
                         placeholder=""
-                        placeholderTextColor={'white'}
                     />
             <Text style={styles.text}>Confirm Password</Text>
                     <TextInput
                     style={styles.txtinput}
                         placeholder=""
-                        placeholderTextColor="#999"
                     />
             <TouchableOpacity style={styles.btn}>
             <Text style={styles.txt}>Create an Account</Text>
@@ -126,7 +118,7 @@ const styles = StyleSheet.create({
         marginTop:5,
         backgroundColor: '#ffffff',
         flex: 1,
-        fontSize: 20,
+        fontSize: 17,
         borderRadius:10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -137,7 +129,7 @@ const styles = StyleSheet.create({
         
     },
     btn:{
-        color:'white',
+        color:'#ffffff',
         backgroundColor: '#FF7235',
         height: 55,
         justifyContent: 'center',
@@ -146,13 +138,11 @@ const styles = StyleSheet.create({
         marginTop: '10%'
     },
     text:{
-        
-        fontSize: 17,
         fontWeight: '600',
         marginTop:8
     },
     txt:{
-        fontSize:20,
+        fontSize:10,
         color:'#000000',
         justifyContent:'center',
         alignSelf:'center',
