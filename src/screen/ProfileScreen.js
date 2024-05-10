@@ -1,13 +1,13 @@
-
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
 import PhoneInput from 'react-native-phone-number-input';
 const ProfileScreen = () => {
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [area, setArea] = useState('');
-  const[address,setAddress]=useState('');
+  const [address, setAddress] = useState('');
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -29,27 +29,35 @@ const ProfileScreen = () => {
             defaultValue={phoneNumber}
             defaultCode='IN'
           />
-          <TouchableOpacity style={styles.phoneButton} onPress={() => { Alert.alert(phoneNumber) }}>
+          <TouchableOpacity onPress={() => { Alert.alert(phoneNumber) }}>
           </TouchableOpacity>
         </View>
 
         <Text style={styles.label}>Confirm Password</Text>
         <TextInput
           style={styles.input}
-          
           secureTextEntry
           value={confirmPassword}
           onChangeText={setConfirmPassword}
         />
 
-         <Text style={styles.label}>Area</Text>
-        <TextInput
-          style={styles.input}
-          value={area}
-          onChangeText={setArea}
-        />
+        <Text style={styles.label}>Area</Text>
+        <View style={{ flex: 1, flexDirection: 'row', }}>
+          <TouchableOpacity>
+            <Entypo
+              name='location-pin'
+              size={35}
+              color='#ff7235' />
+          </TouchableOpacity>
+          <TextInput
+            style={styles.searchinput}
+            placeholder="Search area"
+            value={area}
+            onChangeText={setArea}
+          />
+        </View>
 
-<Text style={styles.label}>Address</Text>
+        <Text style={styles.label}>Address</Text>
         <TextInput
           style={styles.input}
           value={address}
@@ -100,20 +108,20 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: '#fff',
     padding: '3%',
+    color:'#000',
     borderRadius: 8,
     borderColor: '#ccc',
-    marginBottom: '9%',
+    marginBottom: '6%',
     fontSize: 16,
-
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 15,
   },
-  txtinput:{
+  txtinput: {
     backgroundColor: '#fff',
-   borderRadius: 8,
+    borderRadius: 8,
     borderColor: '#ccc',
     marginBottom: '9%',
     fontSize: 16,
@@ -121,19 +129,35 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 15, 
+    elevation: 15,
 
-},
-updateButton: {
+  },
+  updateButton: {
     backgroundColor: '#ff7235',
     justifyContent: 'center',
-    marginTop: '2%',
+    marginTop: '10%',
     alignSelf: 'center',
     alignItems: 'center',
     padding: '4%',
     width: '50%',
     borderRadius: 15
   },
+  searchinput: {
+    backgroundColor: '#fff',
+    padding: '3%',
+    borderRadius: 8,
+    borderColor: '#ccc',
+    marginBottom: '9%',
+    fontSize: 16,
+    width: "88%",
 
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 15,
+
+  }
 });
+
 
