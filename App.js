@@ -6,7 +6,7 @@ const App = () => {
     <View>
       <Text>App</Text>
     </View>
-  )
+    )
 }
 
 export default App
