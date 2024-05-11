@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import ButtonIcon from 'react-native-vector-icons/MaterialIcons'
 import { RadioButton } from 'react-native-paper'
-const LoginOption = () => {
+const LoginOption = ({navigation}) => {
     const [checked, setChecked] = useState('');
 
     return (
@@ -59,7 +59,7 @@ const LoginOption = () => {
                 </View>
             </View>
             <View style={styles.Butnview}>
-                <TouchableOpacity style={styles.butn}>
+                <TouchableOpacity style={styles.butn}  onPress={() => navigation.navigate('SignUpScreen')}>
                 <ButtonIcon
                         name='arrow-forward'
                         size={30}
