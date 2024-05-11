@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView, FlatList,TextInput, TouchableOpacit
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/AntDesign';; // Assuming you are using Expo for vector icons
 import Entypo from 'react-native-vector-icons/Entypo'
-import ViewService from  '../ViewService'
+import ViewService from  '../../screen/services/ViewService'
 const HomeScreen = ({navigation}) => {
   const services = [
     { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },

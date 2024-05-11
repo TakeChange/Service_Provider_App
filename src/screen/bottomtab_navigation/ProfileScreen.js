@@ -1,163 +1,159 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, Text, View,TextInput, ScrollView,TouchableOpacity, Alert} from 'react-native'
+import React, { useState } from 'react'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import PhoneInput from "react-native-phone-number-input";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
-import PhoneInput from 'react-native-phone-number-input';
-const ProfileScreen = () => {
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [area, setArea] = useState('');
-  const [address, setAddress] = useState('');
-  return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.heading}>Profile </Text>
-          <View />
-        </View>
 
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput
-          style={styles.input}
-          value={fullName}
-          onChangeText={setFullName}
-        />
+const SignUpScreen = () => {
+    const[phoneNumber ,setPhoneNumber] =useState('');
+    return (
+        <ScrollView>
+        <View style={styles.container}>
+        <View style={{justifyContent:'center',alignItems:'center'}}>
+            <View style={styles.Icon}>
+                <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
+            </View>
+            </View>
 
-        <Text style={styles.label}>Mobile Number</Text>
-        <View style={styles.txtinput}>
-          <PhoneInput
-            defaultValue={phoneNumber}
-            defaultCode='IN'
-          />
-          <TouchableOpacity onPress={() => { Alert.alert(phoneNumber) }}>
-          </TouchableOpacity>
-        </View>
-
-        <Text style={styles.label}>Confirm Password</Text>
-        <TextInput
-          style={styles.input}
-          secureTextEntry
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-        />
-
-        <Text style={styles.label}>Area</Text>
-        <View style={{ flex: 1, flexDirection: 'row', }}>
-          <TouchableOpacity>
-            <Entypo
-              name='location-pin'
-              size={35}
-              color='#ff7235' />
-          </TouchableOpacity>
-          <TextInput
-            style={styles.searchinput}
-            placeholder="Search area"
-            value={area}
-            onChangeText={setArea}
-          />
-        </View>
-
-        <Text style={styles.label}>Address</Text>
-        <TextInput
-          style={styles.input}
-          value={address}
-          onChangeText={setAddress}
-        />
-
-        <TouchableOpacity style={styles.updateButton} >
-          <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#fff' }}>Update</Text>
+            <View style={styles.txtstyle}>
+                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Hello, User</Text>
+                <Text style={{ fontSize: 18, color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Create an Account</Text>
+            </View>
+            <Text style={styles.text} >Full Name</Text>
+                    <TextInput
+                    style={styles.txtinput}
+                        placeholder=""
+                    />
+            <Text style={styles.text}>Mobile Number</Text>
+            <View style={styles.txtinput}>
+                   <PhoneInput
+                   defaultValue={phoneNumber}
+                   defaultCode='IN'
+                   />
+                   <TouchableOpacity  onPress={()=>{ Alert.alert(phoneNumber)}}>
+                   </TouchableOpacity>  
+            </View>
+            <Text style={styles.text}>Adhar Number</Text>
+                    <TextInput
+                    style={styles.txtinput}
+                        placeholder=""
+                        keyboardType='numeric'
+                    />
+            <Text style={styles.text}>Address</Text>
+                    <TextInput
+                    style={styles.txtinput}
+                        placeholder=""
+                    />
+            <Text style={styles.text}>Area</Text>
+            <View style={styles.txtinput}>
+            <View style={{flex:1,flexDirection:'row',alignItems:'center',}}>
+            <Entypo name='location-pin'size={30} color='#ff7235'/>
+                <GooglePlacesAutocomplete
+                placeholder='Search Area'
+                debounce={400}
+                query={{
+                    key:'API_KEY',
+                    language:'en'
+                }}
+                styles={{
+                    container: {
+                        flex: 1,
+                    },
+                    listView: {
+                        position: 'absolute',
+                        top: 50,
+                    },
+                }}
+                />
+                </View>
+            </View>
+            <Text style={styles.text}>Password</Text>
+                    <TextInput
+                    style={styles.txtinput}
+                        placeholder=""
+                    />
+            <Text style={styles.text}>Confirm Password</Text>
+                    <TextInput
+                    style={styles.txtinput}
+                        placeholder=""
+                    />
+            <TouchableOpacity style={styles.btn}>
+            <Text style={styles.txt}>Create an Account</Text>
         </TouchableOpacity>
-      </View>
-    </ScrollView>
-  );
-};
+        <View style={styles.msg}>
+        <Text style={{color:'#6d767a',fontWeight:'700'}}>Already have an account?</Text>
+        <Text style={{color:'#FF7235',fontWeight:'700'}}> Login</Text>
+        </View>
+    </View>
+        </ScrollView>
+    )
+}
 
-export default ProfileScreen;
+export default SignUpScreen
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: '4%',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: '12%',
-
-  },
-  icon: {
-    backgroundColor: '#000',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: '2%',
-    width: '12%',
-    borderRadius: 10
-  },
-  heading: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#000',
-    flex: 1,
-    textAlign: 'center',
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '800',
-    marginBottom: '2%',
-  },
-  input: {
-    backgroundColor: '#fff',
-    padding: '3%',
-    color: '#000',
-    borderRadius: 8,
-    borderColor: '#ccc',
-    marginBottom: '6%',
-    fontSize: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 15,
-  },
-  txtinput: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    borderColor: '#ccc',
-    marginBottom: '9%',
-    fontSize: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 15,
-
-  },
-  updateButton: {
-    backgroundColor: '#ff7235',
-    justifyContent: 'center',
-    marginTop: '10%',
-    alignSelf: 'center',
-    alignItems: 'center',
-    padding: '4%',
-    width: '50%',
-    borderRadius: 15
-  },
-  searchinput: {
-    backgroundColor: '#fff',
-    padding: '3%',
-    borderRadius: 8,
-    borderColor: '#ccc',
-    marginBottom: '9%',
-    fontSize: 16,
-    width: "88%",
-
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 15,
-
-  }
-});
-
-
+    container: {
+        flex: 1,
+        padding: '8%',
+        
+    },
+    Icon: {
+        alignItems: 'center',
+        backgroundColor:'#FF7235',
+        height: 50,
+        width: 50,
+        borderRadius: 40,
+        
+    },
+    txtstyle: {
+        fontSize: 27,
+        fontWeight:'800',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        textAlign: 'center'
+    },
+    txtinput:{
+        color:'#000000',
+        marginTop:5,
+        backgroundColor: '#ffffff',
+        flex: 1,
+        fontSize: 17,
+        borderRadius:10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 15, 
+        alignItems:'center',
+        
+    },
+    btn:{
+        color:'#ffffff',
+        backgroundColor: '#FF7235',
+        height: 55,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
+        marginTop: '10%'
+    },
+    text:{
+        fontWeight: '600',
+        marginTop:8
+    },
+    txt:{
+        fontSize:10,
+        color:'#000000',
+        justifyContent:'center',
+        alignSelf:'center',
+        alignItems:'center',
+        padding:'5%',
+        width:'70%',
+        borderRadius:2
+    },
+    msg:{
+        flex:1,
+        flexDirection:'row',
+        marginTop:10
+    }
+})
