@@ -1,5 +1,40 @@
+<<<<<<< HEAD
+React Native Vector Icon
+    plugins:
+        npm i react-native-vector-icons
+
+    android/app/build.gradle (NOT android/build.gradle) and add:
+        apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+
+
+Navigation :
+    Stack Navigation:
+        plugins:
+            npm install @react-navigation/stack
+            npm install @react-navigation/native
+            npm install react-native-screens react-native-safe-area-context
+            npm install @react-navigation/native-stack
+
+    Drawer Navigation:
+        plugins:
+            npm install @react-navigation/drawer
+            npm install react-native-gesture-handler react-native-reanimated
+
+        Add react-native-reanimated/plugin plugin to your babel.config.js:
+            plugins: ['react-native-reanimated/plugin'],
+
+        
+=======
 plugin :
         npm i react-native-paper
 Phone Number :
     plugin :
         npm i react-native-phone-number-input
+<<<<<<< HEAD
+>>>>>>> c23f807cb4a8857af373066db7fbb93b4e1c092f
+=======
+
+
+plugin:
+        npm i react-native-google-places-autocomplete
+>>>>>>> 3a6662e71d86b0b68f69804ea48962b06dff025c
