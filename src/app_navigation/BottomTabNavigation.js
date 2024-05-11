@@ -4,8 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/home_module/HomeScreen';
 import CategoryScreen from '../screen/bottomtab_navigation/CategoryScreen';
 import { View } from 'react-native';
-import HomeIcon from 'react-native-vector-icons/AntDesign';
-
+import HomeIcon from 'react-native-vector-icons/MaterialIcons';
+import Category from 'react-native-vector-icons/MaterialIcons';
+import Profile from 'react-native-vector-icons/FontAwesome';
+import ProfileScreen from '../screen/ProfileScreen'
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {
@@ -33,8 +35,8 @@ const BottomTabNavigation = () => {
             <View>
               <HomeIcon
                 name='home'
-                color={focused ? '#3f55f8' : 'grey'}
-                size={30}
+                color={focused ? '#ff7235' : 'grey'}
+                size={28}
                 style={{ alignSelf: 'center', marginTop: 2 }}
               />
             </View>
@@ -48,10 +50,29 @@ const BottomTabNavigation = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View>
-              <HomeIcon
-                name='home'
-                color={focused ? '#3f55f8' : 'grey'}
-                size={30}
+              <Category
+                name='category'
+                color={focused ? '#ff7235' : 'grey'}
+                size={28}
+                style={{ alignSelf: 'center', marginTop: 2 }}
+              />
+            </View>
+          )
+        }}
+      />
+     
+
+     <Tab.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <View>
+              <Profile
+                name='user'
+                color={focused ? '#ff7235' : 'grey'}
+                size={28}
                 style={{ alignSelf: 'center', marginTop: 2 }}
               />
             </View>
