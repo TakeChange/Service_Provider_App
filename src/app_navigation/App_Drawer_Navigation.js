@@ -3,6 +3,7 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import BottomTabNavigation from './BottomTabNavigation';
 import ForgotPassword from '../screen/ForgotPassword';
+import CustomDrawer from '../app_navigation/CustomDrawer'
 const Drawer = createDrawerNavigator();
 
 const App_Drawer_Navigation = () => {
@@ -15,13 +16,13 @@ const App_Drawer_Navigation = () => {
           backgroundColor: 'transparent',
           elevation: 0,
           shadowOpacity: 0,
-
+          headerTintColor: 'pink',
         },
 
         headerTitle: ''
       }}
+      drawerContent={props => <CustomDrawer {...props} />}>
 
-    >
       <Drawer.Screen name="Home" component={BottomTabNavigation} />
       <Drawer.Screen name="ForgotPassword" component={ForgotPassword} />
     </Drawer.Navigator>
