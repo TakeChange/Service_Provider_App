@@ -5,11 +5,13 @@ import { NavigationContainer } from '@react-navigation/native'
 
 const App = () => {
   return (
-    <NavigationContainer>
-       <AppNavigation/>
-    </NavigationContainer> 
+    
+  <NavigationContainer>
+    <AppNavigation/>
+  </NavigationContainer>
   )
 }
-export default App
-const styles = StyleSheet.create({})
 
+export default App
+
+const styles = StyleSheet.create({})
