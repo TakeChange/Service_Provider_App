@@ -1,41 +1,131 @@
-import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity ,Image} from 'react-native';
+// import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
+// import React from 'react';
+
+// const HomeScreen = () => {
+//   const services = [
+//     { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
+//     { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+//     { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
+//     { id: '4', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+//     { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+//     { id: '6', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
+//     { id: '7', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+//     { id: '8', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+//     { id: '9', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
+//     { id: '10', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+//     { id: '11', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+
+//   ];
+//   const windowWidth = useWindowDimensions().width;
+//   const itemWidth = (windowWidth - 60) / 4;
+//   const renderItem = ({ item }) => (
+//     <TouchableOpacity style={styles.cardContiner}>
+//       <View style={styles.imageContiner}>
+//         <Image source={item.icon} style={styles.serviceIcon} />
+//         <Text style={styles.cardTitle}>{item.title}</Text>
+//       </View>
+//     </TouchableOpacity>
+//   );
+
+//   return (
+//     <ScrollView style={styles.container}>
+//       <View style={styles.container1}>
+//         <View style={styles.text}>
+//           <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 20 }}>
+//             Hello, User
+//           </Text>
+//           <Text style={{ fontSize: 16, color: '#c2c2c2' }}>
+//             Which service do you want today ?
+//           </Text>
+//         </View>
+//         <View style={styles.popularContainer}>
+//           <Text style={{ color: 'black', fontSize: 15, fontWeight: '500' }}>Polular services</Text>
+//           <Text>View All</Text>
+//         </View>
+//         <View style={styles.flatlist}>
+//           <FlatList
+//             data={services}
+//             renderItem={renderItem}
+//             keyExtractor={item => item.id.toString()}
+//             numColumns={4}
+//           />
+//         </View>
+//       </View>
+//     </ScrollView>
+//   );
+// }
+
+// export default HomeScreen;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   container1: {
+//     padding: 12
+//   },
+ 
+//   popularContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     marginTop: 20
+//   },
+
+//   ///////////Flatlist code
+//   flatlist: {
+//     flex: 1
+//   },
+//   cardContiner: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     borderRadius: 10,
+//     padding: '4%',
+//     margin: '1%',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     elevation: 1,
+
+//   },
+//   cardTitle: {
+//     fontSize: 10,
+//     fontWeight: 'bold',
+//     marginTop: 5,
+//     color: '#000',
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//   },
+//   serviceIcon: {
+//     width: 50,
+//     height: 50,
+//   },
+// });
+
+
+import { StyleSheet, Text, View, ScrollView, FlatList,TextInput, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import React from 'react';
-
-
+import MaterialIcons from 'react-native-vector-icons/AntDesign';; // Assuming you are using Expo for vector icons
 
 const HomeScreen = () => {
   const services = [
-    {
-      id: 1,
-      title: 'Home cleaning',
-      icon: require('../../asset/icons/home.png') 
-    },
-    {
-      id: 2,
-      title: 'Beauty',
-      icon: require('../../asset/icons/home.png') 
-    },
-    {
-      id: 3,
-      title: 'AC repair',
-      icon: require('../../asset/icons/home.png') 
-    },
-    {
-      id: 4,
-      title: 'Salon',
-      icon: require('../../asset/icons/home.png') 
-    },
+    { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
+    { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+    { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
+    { id: '4', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+    { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+    { id: '6', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
+    { id: '7', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+    { id: '8', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+    { id: '9', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
+    { id: '10', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
+    { id: '11', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
   ];
-
+  const windowWidth = useWindowDimensions().width;
+  const itemWidth = (windowWidth - 60) / 4;
   const renderItem = ({ item }) => (
-    <TouchableOpacity>
-      <View style={{ backgroundColor: 'orange', width: 80, height: 130, marginHorizontal: 8, marginTop: 20 }}>
-        <View style={{ backgroundColor: 'blue', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={item.icon} size={10} color="black" />
-        </View>
-        <View style={{ backgroundColor: 'yellow', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>{item.title}</Text>
-        </View>
+    <TouchableOpacity style={styles.cardContainer}>
+      <View style={styles.imageContainer}>
+        <Image source={item.icon} style={styles.serviceIcon} />
+        <Text style={styles.cardTitle}>{item.title}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -48,16 +138,23 @@ const HomeScreen = () => {
             Hello, User
           </Text>
           <Text style={{ fontSize: 16, color: '#c2c2c2' }}>
-            Which service do you want today ?
+            Which service do you want today?
           </Text>
+          <View style={styles.searchLocationContainer}>
+            <MaterialIcons name="location-on" size={24} color="black" style={{ marginRight: 10 }} />
+            <TextInput placeholder="Search location" style={styles.searchInput} />
+          </View>
+        </View>
+        <View style={styles.popularContainer}>
+          <Text style={{ color: 'black', fontSize: 15, fontWeight: '500' }}>Popular services</Text>
+          <Text>View All</Text>
         </View>
         <View style={styles.flatlist}>
           <FlatList
             data={services}
             renderItem={renderItem}
             keyExtractor={item => item.id.toString()}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
+            numColumns={4}
           />
         </View>
       </View>
@@ -70,16 +167,54 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
   },
   container1: {
-    backgroundColor: 'pink',
-    padding: 10
+    padding: 12
   },
   text: {
-    backgroundColor: 'yellow'
+    marginBottom: 20,
+  },
+  searchLocationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  searchInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  popularContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20
   },
   flatlist: {
     flex: 1
-  }
+  },
+  cardContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: '4%',
+    margin: '1%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 1,
+  },
+  cardTitle: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    marginTop: 5,
+    color: '#000',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  serviceIcon: {
+    width: 50,
+    height: 50,
+  },
 });

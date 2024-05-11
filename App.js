@@ -1,17 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CategoryScreen from './src/screen/CategoryScreen'
+import AppNavigation from './src/app_navigation/AppNavigation'
+import { NavigationContainer } from '@react-navigation/native'
 
 const App = () => {
   return (
-    
-    // <View>
-    //   <Text>App</Text>
-    // </View>
-    <CategoryScreen/>
-    )
+    <NavigationContainer>
+       <AppNavigation/>
+    </NavigationContainer> 
+  )
 }
-
 export default App
-
 const styles = StyleSheet.create({})
+
