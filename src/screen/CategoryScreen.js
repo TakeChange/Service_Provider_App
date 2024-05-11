@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation: 15, 
+        elevation: 5, 
     },
     input: {
         flex: 1,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation: 15, 
+        elevation: 5, 
     },
     locationContainer: {
         flex: 1,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation: 15, 
+        elevation: 5, 
     },
     location: {
         color: '#000',
