@@ -2,7 +2,7 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import BottomTabNavigation from './BottomTabNavigation';
-import ForgotPassword from '../screen/ForgotPassword';
+import ForgotPassword from '../screen/authentication_module/ForgotPassword';
 const Drawer = createDrawerNavigator();
 
 const App_Drawer_Navigation = () => {
