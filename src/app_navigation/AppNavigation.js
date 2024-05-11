@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import App_Drawer_Navigation from './App_Drawer_Navigation';
 import SignUpScreen from '../screen/authentication_module/SignUpScreen'
-import ViewService from '../screen/ViewService';
+import ViewService from '../screen/services/ViewService';
 const AppNavigation = () => {
   const Stack = createNativeStackNavigator();
 

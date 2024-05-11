@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import HomeIcon from 'react-native-vector-icons/MaterialIcons';
 import Category from 'react-native-vector-icons/MaterialIcons';
 import Profile from 'react-native-vector-icons/FontAwesome';
-import ProfileScreen from '../screen/ProfileScreen'
+import ProfileScreen from '../screen/bottomtab_navigation/ProfileScreen'
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = () => {

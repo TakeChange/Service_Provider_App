@@ -6,17 +6,10 @@ import {NavigationContainer} from '@react-navigation/native'
 
 const App = () => {
   return (
-<<<<<<< HEAD
-    
-  <NavigationContainer>
-    <AppNavigation/>
-  </NavigationContainer>
-=======
     <NavigationContainer>
       <AppNavigation/>
     </NavigationContainer>
     
->>>>>>> 706ff34bc791f83fe4af806afa61a8491baaaa41
   )
 }
 

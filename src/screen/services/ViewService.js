@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, ScrollVi
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import Entypo from 'react-native-vector-icons/Entypo'
-import data from './data'
+import data from '../../asset/data/data'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HeartComponent from '../component/HeartComponent'
+import HeartComponent from '../../component/HeartComponent'
 const ViewService = () => {
     const [searchText, setSearchText] = useState('');
     const renderItem = ({ item }) => {
