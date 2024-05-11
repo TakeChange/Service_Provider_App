@@ -2,7 +2,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/home_module/HomeScreen';
-import CategoryScreen from '../screen/CategoryScreen';
+import CategoryScreen from '../screen/bottomtab_navigation/CategoryScreen';
 import { View } from 'react-native';
 import HomeIcon from 'react-native-vector-icons/MaterialIcons';
 import Category from 'react-native-vector-icons/MaterialIcons';
