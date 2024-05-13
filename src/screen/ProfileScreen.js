@@ -1,3 +1,4 @@
+
 import { StyleSheet, Text, View,TextInput, ScrollView,TouchableOpacity, Alert} from 'react-native'
 import React, { useState } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -11,15 +12,12 @@ const SignUpScreen = () => {
         <ScrollView>
         <View style={styles.container}>
         <View style={{justifyContent:'center',alignItems:'center'}}>
-            <View style={styles.Icon}>
-                <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
+            <View>
+              <Text style={{fontSize:20,color:'#000',fontWeight:'800'}}>Profile</Text>
             </View>
             </View>
 
-            <View style={styles.txtstyle}>
-                <Text style={{ fontSize: 25, fontWeight: 'bold', color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Hello, User</Text>
-                <Text style={{ fontSize: 18, color: '#ffffff', justifyContent: 'center', textAlign: 'center' }}>Create an Account</Text>
-            </View>
+            
             <Text style={styles.text} >Full Name</Text>
                     <TextInput
                     style={styles.txtinput}
@@ -34,12 +32,13 @@ const SignUpScreen = () => {
                    <TouchableOpacity  onPress={()=>{ Alert.alert(phoneNumber)}}>
                    </TouchableOpacity>  
             </View>
-            <Text style={styles.text}>Adhar Number</Text>
+            <Text style={styles.text}>Confirm Password</Text>
                     <TextInput
                     style={styles.txtinput}
+                    secureTextEntry
                         placeholder=""
-                        keyboardType='numeric'
                     />
+            
             <Text style={styles.text}>Address</Text>
                     <TextInput
                     style={styles.txtinput}
@@ -68,23 +67,9 @@ const SignUpScreen = () => {
                 />
                 </View>
             </View>
-            <Text style={styles.text}>Password</Text>
-                    <TextInput
-                    style={styles.txtinput}
-                        placeholder=""
-                    />
-            <Text style={styles.text}>Confirm Password</Text>
-                    <TextInput
-                    style={styles.txtinput}
-                        placeholder=""
-                    />
-            <TouchableOpacity style={styles.btn}>
-            <Text style={styles.txt}>Create an Account</Text>
+              <TouchableOpacity style={styles.btn}>
+            <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#fff' }}>Update</Text>
         </TouchableOpacity>
-        <View style={styles.msg}>
-        <Text style={{color:'#6d767a',fontWeight:'700'}}>Already have an account?</Text>
-        <Text style={{color:'#FF7235',fontWeight:'700'}}> Login</Text>
-        </View>
     </View>
         </ScrollView>
     )
@@ -129,13 +114,14 @@ const styles = StyleSheet.create({
         
     },
     btn:{
-        color:'#ffffff',
-        backgroundColor: '#FF7235',
-        height: 55,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 15,
-        marginTop: '10%'
+      backgroundColor: '#ff7235',
+      justifyContent: 'center',
+      marginTop: '10%',
+      alignSelf: 'center',
+      alignItems: 'center',
+      padding: '2%',
+      width: '50%',
+      borderRadius: 15
     },
     text:{
         fontWeight: '600',
@@ -157,3 +143,4 @@ const styles = StyleSheet.create({
         marginTop:10
     }
 })
+
