@@ -13,8 +13,8 @@ const CategoryScreen = () => {
         { id: '6', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
         { id: '7', title: 'Repair', icon: require('../../asset/icons/repair.png') },
         { id: '8', title: 'Cleaning', icon: require('../../asset/icons/cleaning.png') },
-        { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
-        { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+        { id: '9', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
+        { id: '10', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
 
     ];
 

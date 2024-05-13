@@ -9,11 +9,6 @@ const App = () => {
     <NavigationContainer>
       <AppNavigation />
     </NavigationContainer>
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> c0c89d7d3f3c5846aabeb8535c11bd3b504d7469
   )
 }
 
