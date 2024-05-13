@@ -39,9 +39,10 @@ const SignInScreen = ({navigation}) => {
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.title1}>Login to your existing account</Text>
       <View style={styles.main}>
-        <Text style={styles.textStyle}>username</Text>
-        <View style={styles.inputStyle}>
+        <Text style={styles.textStyle}>Username</Text>
+        <View style={styles.inputStyle} >
           <TextInput
+          
             placeholder="username"
             value={username}
             onChangeText={setUsername}
@@ -56,7 +57,7 @@ const SignInScreen = ({navigation}) => {
           </View>
         </View>
         <Text style={styles.error}>{userError}</Text>
-        <Text style={styles.textStyle}>password</Text>
+        <Text style={styles.textStyle}>Password</Text>
 
         <View style={styles.inputStyle}>
           <TextInput
@@ -112,7 +113,9 @@ const styles = StyleSheet.create({
     marginRight: '60%',
     color: '#1C3C20',
     fontSize: 16,
-    marginBottom: 5
+    marginBottom: 1,
+     fontWeight:'bold',
+     marginTop:10
   },
   title: {
     marginTop: 20,
@@ -131,19 +134,23 @@ const styles = StyleSheet.create({
   },
 
   inputStyle: {
+    
+    color: '#000000',
+    marginTop: 3,
+    backgroundColor: '#ffffff',
     width: '85%',
-    height: 45,
-    borderWidth: 1,
+    height: 50,
+    fontSize: 16,
+    paddingLeft: 5,
     borderRadius: 10,
-    marginBottom: 5,
-    paddingLeft: 15,
-    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 6,
+    alignItems: 'center',
+    flexDirection:'row',
     justifyContent: 'space-between',
-    fontSize: 15,
-    fontWeight: 'bold',
-
-   
-
   },
   forgotText: {
     color: '#ff7235',
