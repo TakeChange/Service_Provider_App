@@ -80,7 +80,7 @@ const ProfileScreen = () => {
                     />
                     {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
                     <Text style={styles.text}>Mobile Number</Text>
-                    <View style={styles.txtinput}>
+                    <View style={styles.numberinput}>
                         <PhoneInput
                             defaultValue={phoneNumber}
                             defaultCode='IN'
@@ -122,6 +122,7 @@ const ProfileScreen = () => {
                                 }}
                             />
                         </View>
+                     
                     </View>
                     <Text style={styles.text}>Address</Text>
                     <TextInput
@@ -146,7 +147,7 @@ export default ProfileScreen
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        padding: '3%',
+        padding: '5%',
     },
     text: {
         fontWeight: '600',
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         backgroundColor: '#fff',
         flex: 1,
+        height:'50%',
         fontSize: 17,
         borderRadius: 10,
         shadowColor: '#000',
@@ -174,6 +176,21 @@ const styles = StyleSheet.create({
         padding: '2%',
         width: '50%',
         borderRadius: 15
+    },
+    numberinput:{
+        height: 51,
+        color: '#000000',
+        marginTop: 5,
+        backgroundColor: '#ffffff',
+        flex: 1,
+        fontSize: 15,
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+        alignItems: 'center',
     },
     error: {
         color: 'red',
