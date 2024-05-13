@@ -8,6 +8,14 @@ import ViewService from './../screen/services/ViewService';
 import SplashScreen from '../screen/authentication_module/SplashScreen';
 import LoginOption from '../screen/authentication_module/LoginOption';
 const AppNavigation = () => {
+  
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
   const Stack = createNativeStackNavigator();
 
   return (
