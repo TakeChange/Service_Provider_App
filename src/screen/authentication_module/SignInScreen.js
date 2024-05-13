@@ -34,11 +34,7 @@ const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.lefticon} >
-        <LeftArrow
-          name='arrow-left'
-          size={25}
-          color='#000'
-        />
+        
       </TouchableOpacity>
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.title1}>Login to your existing account</Text>
@@ -103,6 +99,7 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:30
 
   },
   main: {
@@ -110,9 +107,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 80,
   },
-  lefticon: {
-    margin: 15
-  },
+  
   textStyle: {
     marginRight: '60%',
     color: '#1C3C20',
@@ -121,7 +116,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    marginHorizontal: 15,
+    marginHorizontal: 20,
     fontSize: 30,
     fontWeight: 'bold',
     color: '#1C3C20',
@@ -147,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: "#1C3C20",
+    
 
   },
   forgotText: {
