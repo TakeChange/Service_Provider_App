@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     fontSize: 15,
     fontWeight: 'bold',
-    color: "#1C3C20",
-    
+
+   
 
   },
   forgotText: {
