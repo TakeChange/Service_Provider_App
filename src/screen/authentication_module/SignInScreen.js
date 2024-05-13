@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import User from 'react-native-vector-icons/FontAwesome'
 import LeftArrow from 'react-native-vector-icons/Feather'
-
 import Eye from 'react-native-vector-icons/Ionicons';
+import LoginOption from '../authentication_module/LoginOption'
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -87,7 +87,7 @@ const SignInScreen = () => {
 
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <Text style={{ color: '#1C3C20', fontSize: 15, fontWeight: 'bold', }}>New User? </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginOption')}>
           <Text style={{ color: '#ff7235', fontSize: 15, fontWeight: 'bold', }}>Create an Account</Text>
           </TouchableOpacity>
         </View>

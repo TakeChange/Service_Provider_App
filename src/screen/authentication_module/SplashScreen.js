@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View ,Image } from 'react-native'
 import React, { useEffect } from 'react'
-
-const SplashScreen = () => {
-    // useEffect(()=>{
-    //     setTimeout(()=>{
-    //       navigation.navigate('')
-    //     }, 2000)
-    //   })
+import SignInScreen from '../authentication_module/SignInScreen'
+const SplashScreen = ({navigation}) => {
+    useEffect(()=>{
+        setTimeout(()=>{
+          navigation.navigate('SignInScreen')
+        }, 2000)
+      })
   return (
     <View style={styles.container}>
       <Image source={require('../../asset/icons/cleaning.png')}
