@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import User from 'react-native-vector-icons/FontAwesome'
 import LeftArrow from 'react-native-vector-icons/Feather'
-
 import Eye from 'react-native-vector-icons/Ionicons';
+import LoginOption from '../authentication_module/LoginOption'
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -34,18 +34,15 @@ const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.lefticon} >
-        <LeftArrow
-          name='arrow-left'
-          size={25}
-          color='#000'
-        />
+        
       </TouchableOpacity>
       <Text style={styles.title}>Welcome Back</Text>
       <Text style={styles.title1}>Login to your existing account</Text>
       <View style={styles.main}>
-        <Text style={styles.textStyle}>username</Text>
-        <View style={styles.inputStyle}>
+        <Text style={styles.textStyle}>Username</Text>
+        <View style={styles.inputStyle} >
           <TextInput
+          
             placeholder="username"
             value={username}
             onChangeText={setUsername}
@@ -60,7 +57,7 @@ const SignInScreen = () => {
           </View>
         </View>
         <Text style={styles.error}>{userError}</Text>
-        <Text style={styles.textStyle}>password</Text>
+        <Text style={styles.textStyle}>Password</Text>
 
         <View style={styles.inputStyle}>
           <TextInput
@@ -91,7 +88,7 @@ const SignInScreen = () => {
 
         <View style={{ flexDirection: 'row', marginTop: 10 }}>
           <Text style={{ color: '#1C3C20', fontSize: 15, fontWeight: 'bold', }}>New User? </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('LoginOption')}>
           <Text style={{ color: '#ff7235', fontSize: 15, fontWeight: 'bold', }}>Create an Account</Text>
           </TouchableOpacity>
         </View>
@@ -103,6 +100,7 @@ const SignInScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop:30
 
   },
   main: {
@@ -110,18 +108,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 80,
   },
-  lefticon: {
-    margin: 15
-  },
+  
   textStyle: {
     marginRight: '60%',
     color: '#1C3C20',
     fontSize: 16,
-    marginBottom: 5
+    marginBottom: 1,
+     fontWeight:'bold',
+     marginTop:10
   },
   title: {
     marginTop: 20,
-    marginHorizontal: 15,
+    marginHorizontal: 20,
     fontSize: 30,
     fontWeight: 'bold',
     color: '#1C3C20',
@@ -136,18 +134,23 @@ const styles = StyleSheet.create({
   },
 
   inputStyle: {
+    
+    color: '#000000',
+    marginTop: 3,
+    backgroundColor: '#ffffff',
     width: '85%',
-    height: 45,
-    borderWidth: 1,
+    height: 50,
+    fontSize: 16,
+    paddingLeft: 5,
     borderRadius: 10,
-    marginBottom: 5,
-    paddingLeft: 15,
-    flexDirection: 'row',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 6,
+    alignItems: 'center',
+    flexDirection:'row',
     justifyContent: 'space-between',
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: "#1C3C20",
-
   },
   forgotText: {
     color: '#ff7235',

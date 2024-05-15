@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import { RadioButton } from 'react-native-paper'
-const LoginOption = () => {
+const LoginOption = ({navigation}) => {
     const [checked, setChecked] = useState('');
 
     return (
