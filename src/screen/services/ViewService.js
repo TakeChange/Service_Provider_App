@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, ScrollVi
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import Entypo from 'react-native-vector-icons/Entypo'
-import data from './data'
+import data from '../../asset/data/data'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HeartComponent from '../component/HeartComponent'
+import HeartComponent from '../../component/HeartComponent'
 const ViewService = () => {
     const [searchText, setSearchText] = useState('');
     const renderItem = ({ item }) => {
@@ -28,20 +28,20 @@ const ViewService = () => {
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.lefticon}>
+                    <TouchableOpacity>
                         <LeftArrow
                             name='arrow-left'
-                            size={20}
-                            color='#fff'
+                            size={30}
+                            color='#000'
                         />
                     </TouchableOpacity>
-                    <Text style={styles.service}>Service</Text>
+                    <Text style={styles.service}>Services</Text>
                 </View>
                 <View style={styles.location}>
                     <Entypo
                         name='location-pin'
                         size={40}
-                        color='#ff7235'
+                        color='#000'
                     />
                     <Text style={styles.total}>444 Walnut St, City, Country</Text>
                 </View>
@@ -100,12 +100,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         margin: 8,
         borderRadius: 10,
+        borderColor:'#009eb4',
+        borderWidth:1,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        padding: 5,
+        padding: 10,
         paddingBottom: '4%'
     },
     total: {
