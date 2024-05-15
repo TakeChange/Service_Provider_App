@@ -4,13 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import App_Drawer_Navigation from '../app_navigation/App_Drawer_Navigation';
 import SignInScreen from '../screen/authentication_module/SignInScreen';
 import SignUpScreen from '../screen/authentication_module/SignUpScreen'
-<<<<<<< HEAD
-import ViewService from '../screen/services/ViewService';
-=======
 import ViewService from './../screen/services/ViewService';
 import SplashScreen from '../screen/authentication_module/SplashScreen';
 import LoginOption from '../screen/authentication_module/LoginOption';
->>>>>>> 99cf6096739006e5dffbc392c28a81d8166e274c
 const AppNavigation = () => {
   
 function NotificationsScreen({ navigation }) {
