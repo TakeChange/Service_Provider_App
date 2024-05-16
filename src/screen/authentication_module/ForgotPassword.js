@@ -7,27 +7,27 @@ const ForgotPassword = () => {
 
       <View style={styles.imgContainer}>
         <Image
-          source={require('../../asset/images/forgot-password.webp')}
+          source={require('../../asset/images/Signup.png')}
           style={{ width: "90%", height: 200, }}
         />
       </View>
       <View style={styles.title}>
-        <Text style={styles.text}>Forgot Password</Text>
-        <Text style={styles.msg}>We have send a four digit code on your</Text>
-        <Text style={styles.msg}>Phone number</Text>
+        <Text style={styles.text}>Login Here</Text>
+        <Text style={styles.msg}>Enter Your Mobile Number </Text>
+        <Text style={styles.msg1}>reset your password </Text>
 
       </View>
 
-      <Text style={styles.textname}>Phone number</Text>
+      <Text style={styles.textname}>Mobile Number</Text>
       <View style={styles.txtinput}>
         <TextInput
           style={styles.textfield}
-          placeholder="Enter your phone number"
+          placeholder="Enter your Mobile number"
           keyboardType='numeric'
         />
       </View>
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Submit</Text>
+        <Text style={styles.buttonText}>Get OTP</Text>
       </TouchableOpacity>
     </View>
   )
@@ -38,7 +38,7 @@ export default ForgotPassword
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: '5%',
+    padding: '8%',
 
   },
   title: {
@@ -46,10 +46,11 @@ const styles = StyleSheet.create({
     marginTop:'3%'
   },
   text: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: 'bold',
-    color: '#000',
-   padding:'2%'
+    color: '#009eb4',
+   padding:'2%',
+   marginTop:'5%'
   },
   imgContainer: {
     justifyContent: 'center',
@@ -57,14 +58,21 @@ const styles = StyleSheet.create({
 
   },
   msg: {
-    fontSize: 17,
-    fontWeight: '700',
+    color:'#000',
+    fontSize: 20,
+    fontWeight: '600',
+    marginTop:'5%'
+  },
+  msg1:{
+    color:'#000',
+    fontSize: 20,
+    fontWeight: '600',
     
   },
   textname: {
     fontWeight: '600',
     marginTop: '10%',
-    fontSize: 18,
+    fontSize: 17,
     padding: '2%'
 
   },
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#ff7235',
+    backgroundColor: '#009eb4',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

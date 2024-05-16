@@ -20,13 +20,6 @@ const FavouriteService = () => {
         <ScrollView>
         <View style={styles.container}>
         <View style={styles.title}>
-            <TouchableOpacity style={styles.icon}>
-                <Feather
-                    name='arrow-left'
-                    size={20}
-                    color='#fff'
-                />
-            </TouchableOpacity>
         <Text style={styles.service}>Favourite Services</Text>
         </View>
         <View style={styles.inputContainer}>
@@ -78,7 +71,7 @@ const styles = StyleSheet.create({
     },
     service: {
         marginLeft: '18%',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         color: '#000',
     },
@@ -99,7 +92,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 10,
         paddingHorizontal: 15,
-        fontSize: 15,
+        fontSize: 17,
         color: 'black',
        
       },
@@ -124,7 +117,7 @@ const styles = StyleSheet.create({
         color: '#000',
         fontWeight: 'bold',
         paddingLeft: '5%',
-        fontSize: 15
+        fontSize: 17
     },
     
 })
