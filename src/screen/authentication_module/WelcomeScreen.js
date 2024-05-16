@@ -1,21 +1,30 @@
 
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import LeftArrow from 'react-native-vector-icons/Feather'
 
 
 const Welcome = () => {
     return (
         <View style={styles.container}>
+            <TouchableOpacity>
+                    <LeftArrow
+                        name='arrow-left'
+                        size={30}
+                        color='#000'
+                    />
+                </TouchableOpacity>
             
             <View style={styles.content}>
                 <ImageBackground
-                    source={require('../../asset/images/welcm.png')}
+                    source={require('../../asset/images/welcome.png')}
                     resizeMode="contain"
                     style={styles.imageBackground}
                 />
                 <View style={styles.textContainer}>
                     <Text style={styles.textStyle}>Effortless & Reliable</Text>
                     <Text style={styles.textStyle}>Electrician Tracking !!!</Text>
+                    <Text style={styles.textStyle}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
                     
 
                 </View>
@@ -32,7 +41,7 @@ export default Welcome;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        
         padding: 20,
     },
     content: {
