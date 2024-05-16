@@ -1,5 +1,3 @@
-
-
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import React, { useState } from 'react';
 import PhoneInput from "react-native-phone-number-input";
@@ -124,8 +122,9 @@ const ProfileScreen = () => {
                         </View>
                      
                     </View>
+ 
                     <Text style={styles.text}>Address</Text>
-                    <TextInput
+                     <TextInput
                         style={styles.txtinput}
                         placeholder=""
                         value={address}
@@ -178,8 +177,8 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     numberinput:{
-        height: 51,
-        color: '#000000',
+        height: 65,
+        textcolor: '#000000',
         marginTop: 5,
         backgroundColor: '#ffffff',
         flex: 1,
@@ -196,4 +195,12 @@ const styles = StyleSheet.create({
         color: 'red',
     }
 })
+
+
+
+
+
+
+
+
 

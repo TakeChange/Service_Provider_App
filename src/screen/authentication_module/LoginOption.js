@@ -1,25 +1,24 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
-import ButtonIcon from 'react-native-vector-icons/MaterialIcons'
 import { RadioButton } from 'react-native-paper'
 const LoginOption = ({navigation}) => {
     const [checked, setChecked] = useState('');
 
     return (
         <View style={styles.container}>
-            <View>
-                <TouchableOpacity style={styles.lefticon}>
+            <View style={styles.leftIcon}>
+                <TouchableOpacity>
                     <LeftArrow
                         name='arrow-left'
-                        size={20}
-                        color='#fff'
+                        size={30}
+                        color='#000'
                     />
                 </TouchableOpacity>
             </View>
-            <View style={styles.Lable}>
+            <View style={styles.lable}>
                 <Text style={styles.txt}>You are</Text>
-                <Text style={styles.info}>Please select your role for this app.</Text>
+                <Text style={styles.info}>Please select your role for this app</Text>
             </View>
             <Text></Text>
             <View>
@@ -30,11 +29,11 @@ const LoginOption = ({navigation}) => {
                         onPress={() => setChecked('first')}
                         color='#000'
                     />
-                    <Text style={styles.info}>Customer</Text>
+                    <Text style={styles.user}>User</Text>
                 </View>
                 <View style={styles.imgContainer}>
                     <Image
-                        source={require('../../asset/images/customer.jpg')}
+                        source={require('../../asset/images/customers.jpeg')}
                         style={{ width: "90%", height: 200, borderRadius: 20 }}
                     />
                 </View>
@@ -49,7 +48,7 @@ const LoginOption = ({navigation}) => {
                         onPress={() => setChecked('second')}
                         color='#000'
                     />
-                    <Text style={styles.info}>Service</Text>
+                    <Text style={styles.user}>Vendor</Text>
                 </View>
                 <View style={styles.imgContainer}>
                     <Image
@@ -59,12 +58,8 @@ const LoginOption = ({navigation}) => {
                 </View>
             </View>
             <View style={styles.Butnview}>
-                <TouchableOpacity style={styles.butn}  onPress={() => navigation.navigate('SignUpScreen')}>
-                <ButtonIcon
-                        name='arrow-forward'
-                        size={30}
-                        color='#fff'
-                    />
+                <TouchableOpacity style={styles.butn}>
+                    <Text style={styles.next}>Next</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -76,49 +71,50 @@ export default LoginOption
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding:'4%'
-    },
-    lefticon: {
-        backgroundColor:'#000',
-        justifyContent:'flex-start',
-        alignItems:'center',
-        padding:'2%',
-        width:'12%',
-        borderRadius:10
-    },
-    Lable: {
-        marginTop: "3%",
+        padding: '4%'
     },
     txt: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: '600',
         color: '#000'
     },
     info: {
         color: '#000',
-        marginTop: "2%",
-        fontWeight: '500'
     },
     radio: {
         alignItems: 'flex-start',
-        flexDirection:'row'
+        flexDirection: 'row'
     },
     imgContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        padding: '4%'
     },
-    Butnview:{
-       // paddingTop: "5%",
-       paddingVertical:'8%'
+    Butnview: {
+        paddingVertical: '8%'
     },
-    butn:{
-        backgroundColor:'#ff7235',
-        justifyContent:'center',
-        alignSelf:'center',
-        alignItems:'center',
-        padding:'5%',
-        width:'45%',
-        borderRadius:15
+    butn: {
+        backgroundColor: '#009eb4',
+        justifyContent: 'center',
+        alignSelf: 'flex-end',
+        alignItems: 'center',
+        padding: '2%',
+        width: '20%',
+        borderRadius: 10
+    },
+    next: {
+        color: '#fff',
+        fontWeight: '500',
+        fontSize: 15
+    },
+    user: {
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        color: '#000',
+        fontSize: 20
+    },
+    lable: {
+        paddingLeft: '2%'
     }
 
 })
