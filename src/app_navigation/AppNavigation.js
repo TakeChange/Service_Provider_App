@@ -56,3 +56,4 @@ function NotificationsScreen({ navigation }) {
 }
 
 export default AppNavigation;
+
