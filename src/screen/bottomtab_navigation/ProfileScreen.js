@@ -65,73 +65,86 @@ const ProfileScreen = () => {
     };
 
     return (
-        <ScrollView style={{ flexGrow: 1 }}>
+        <ScrollView>
             <View style={styles.Container}>
-                <Text style={{marginLeft:'50%',fontWeight:'800',color:'#000',fontSize:15}}>Profile</Text>
-                <View>
-                    <Text style={styles.text}>Full Name</Text>
+
+                <Text style={styles.text}>Full Name</Text>
+                <View style={styles.txtinput}>
                     <TextInput
-                        style={styles.txtinput}
+                        style={styles.txtfield}
                         placeholder=""
                         value={fullName}
                         onChangeText={setFullName}
                     />
-                    {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
-                    <Text style={styles.text}>Mobile Number</Text>
-                    <View style={styles.numberinput}>
-                        <PhoneInput
-                            defaultValue={phoneNumber}
-                            defaultCode='IN'
-                            onChangeFormattedText={(text) => setPhoneNumber(text)}
-                        />
-                        <TouchableOpacity onPress={() => { Alert.alert(phoneNumber) }}>
-                        </TouchableOpacity>
-                    </View>
-                    {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
-                    <Text style={styles.text}>Confirm Password</Text>
+                </View>
+                {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
+
+                <Text style={styles.text}>Mobile Number</Text>
+                <View style={styles.numberinput}>
+                    <PhoneInput
+                        defaultValue={phoneNumber}
+                        defaultCode='IN'
+                        onChangeFormattedText={(text) => setPhoneNumber(text)}
+                    />
+                    <TouchableOpacity onPress={() => { Alert.alert(phoneNumber) }}>
+                    </TouchableOpacity>
+                </View>
+                {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
+
+                <Text style={styles.text}>Confirm Password</Text>
+                <View style={styles.txtinput}>
                     <TextInput
-                        style={styles.txtinput}
+                        style={styles.txtfield}
                         placeholder=""
                         secureTextEntry
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
 
                     />
-                    {confirmPasswordError !== '' && <Text style={styles.error}>{confirmPasswordError}</Text>}
-                    <Text style={styles.text}>Area</Text>
-                    <View style={styles.txtinput}>
-                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
-                            <Entypo name='location-pin' size={30} color='#ff7235' />
-                            <GooglePlacesAutocomplete
-                                placeholder='Search Area'
-                                debounce={400}
-                                query={{
-                                    key: 'API_KEY',
-                                    language: 'en'
-                                }}
-                                styles={{
-                                    container: {
-                                        flex: 1,
-                                    },
-                                    listView: {
-                                        position: 'absolute',
-                                        top: 50,
-                                    },
-                                }}
-                            />
-                        </View>
-                     
+                </View>
+                {confirmPasswordError !== '' && <Text style={styles.error}>{confirmPasswordError}</Text>}
+
+
+                <Text style={styles.text}>Area</Text>
+                <View style={styles.inputContainer}>
+                    <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
+                    <TextInput
+                        placeholder="Enter location"
+                        value={area}
+                        onChangeText={setArea}
+                    />
+                    <View>
+                        <GooglePlacesAutocomplete
+                            debounce={400}
+                            query={{
+                                key: 'API_KEY',
+                                language: 'en'
+                            }}
+                            styles={{
+                                container: {
+                                    flex: 1,
+                                },
+                                listView: {
+                                    position: 'absolute',
+                                    top: 50,
+                                },
+                            }}
+                        />
                     </View>
- 
-                    <Text style={styles.text}>Address</Text>
-                     <TextInput
-                        style={styles.txtinput}
+
+                </View>
+                {areaError !== '' && <Text style={styles.error}>{areaError}</Text>}
+
+                <Text style={styles.text}>Address</Text>
+                <View style={styles.txtinput}>
+                    <TextInput
+                        style={styles.txtfield}
                         placeholder=""
                         value={address}
                         onChangeText={setAddress}
                     />
-                    {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
                 </View>
+                {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
 
                 <TouchableOpacity style={styles.updatebtn} onPress={handleUpdate}>
                     <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#fff' }}>Update</Text>
@@ -150,13 +163,17 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: '600',
-        marginTop: '2%'
+        fontSize: 17
+    },
+    txtfield: {
+        marginLeft: '2%',
+        color: '#000'
     },
     txtinput: {
         marginTop: 5,
         backgroundColor: '#fff',
         flex: 1,
-        height:'50%',
+        height: '50%',
         fontSize: 17,
         borderRadius: 10,
         shadowColor: '#000',
@@ -164,21 +181,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        alignItems: 'center',
     },
-    updatebtn: {
-        backgroundColor: '#ff7235',
-        justifyContent: 'center',
-        marginTop: '2%',
-        alignSelf: 'center',
-        alignItems: 'center',
-        padding: '2%',
-        width: '50%',
-        borderRadius: 15
-    },
-    numberinput:{
+    numberinput: {
         height: 65,
-        textcolor: '#000000',
+        textcolor: '#000',
         marginTop: 5,
         backgroundColor: '#ffffff',
         flex: 1,
@@ -191,9 +197,35 @@ const styles = StyleSheet.create({
         elevation: 5,
         alignItems: 'center',
     },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    icon: {
+        marginLeft: 10,
+    },
+    updatebtn: {
+        backgroundColor: '#009eb4',
+        justifyContent: 'center',
+        marginTop: '10%',
+        alignSelf: 'center',
+        alignItems: 'center',
+        padding: '2%',
+        width: '50%',
+        borderRadius: 15
+    },
     error: {
         color: 'red',
-    }
+    },
+
 })
 
 
