@@ -9,8 +9,8 @@ const SplashScreen = ({navigation}) => {
       })
   return (
     <View style={styles.container}>
-      <Image source={require('../../asset/icons/cleaning.png')}
-      resizeMode='contain' style={{height:"50%", width:'40%'}}/>
+      <Image source={require('../../asset/images/Splash.png')}
+      resizeMode='contain' style={{height:"90%", width:'90%'}}/>
     </View>
   )
 }
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:'center',
+        backgroundColor:'#009eb4'
         
 
     }

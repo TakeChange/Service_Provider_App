@@ -14,26 +14,27 @@ const OtpVerifyScreen = ({ navigation }) => {
   const [f4, setF4] = useState('');
   return (
     <ScrollView >
-      <View style={{ flex:1,margin: 15 }}>
-        <TouchableOpacity style={styles.lefticon} onPress={() => navigation.navigate('')}>
-            <LeftArrow
+      <View style={{ flex: 1, margin: 15 }}>
+        <TouchableOpacity  onPress={() => navigation.navigate('')}>
+          <LeftArrow
             name='arrow-left'
-            size={20}
-            color='#fff'
+            size={30}
+            color='#000'
           />
-       </TouchableOpacity>
+        </TouchableOpacity>
 
-        <Text style={styles.MainText}>Verification Code</Text>
         <Image
           source={require('../../asset/images/OTP.png')}
-          style={{ width: 230, height: 230,alignSelf:'center',marginTop: '10%' }}
+          style={{ width: 230, height: 230, alignSelf: 'center', marginTop: '10%' }}
         />
-        <Text style={styles.reqText}>Please enter the verification code sent to your mobile number...</Text>
+
+        <Text style={styles.enterText}>Enter OTP</Text>
+        <Text style={styles.reqText}>On 4 Digit Code has been sent to *******421 number</Text>
 
         <View style={styles.otpView}>
           <TextInput
             ref={et1}
-            style={[styles.inputView, { borderColor: f1.length >= 1 ? 'blue' : '#000' }]}
+            style={[styles.inputView, { borderColor: f1.length >= 1 ? '#009eb4' : '#000' }]}
             keyboardType='number-pad'
             maxLength={1}
             onChangeText={txt => {
@@ -44,7 +45,7 @@ const OtpVerifyScreen = ({ navigation }) => {
             }} />
           <TextInput
             ref={et2}
-            style={[styles.inputView, { borderColor: f2.length >= 1 ? 'blue' : '#000' }]}
+            style={[styles.inputView, { borderColor: f2.length >= 1 ? '#009eb4' : '#000' }]}
             keyboardType='number-pad'
             maxLength={1}
             onChangeText={txt => {
@@ -57,7 +58,7 @@ const OtpVerifyScreen = ({ navigation }) => {
             }} />
           <TextInput
             ref={et3}
-            style={[styles.inputView, { borderColor: f3.length >= 1 ? 'blue' : '#000' }]}
+            style={[styles.inputView, { borderColor: f3.length >= 1 ? '#009eb4' : '#000' }]}
             keyboardType='number-pad'
             maxLength={1}
             onChangeText={txt => {
@@ -70,7 +71,7 @@ const OtpVerifyScreen = ({ navigation }) => {
             }} />
           <TextInput
             ref={et4}
-            style={[styles.inputView, { borderColor: f4.length >= 1 ? 'blue' : '#000' }]}
+            style={[styles.inputView, { borderColor: f4.length >= 1 ? '#009eb4' : '#000' }]}
             keyboardType='number-pad'
             maxLength={1}
             value={f4}
@@ -83,19 +84,18 @@ const OtpVerifyScreen = ({ navigation }) => {
               }
             }} />
         </View>
-        <View>
-          <Text style={styles.TimeText}>Do not received code? </Text>
-        </View>
-        <View>
-          <TouchableOpacity style={{ alignSelf: 'center' }}>
-            <Text style={{ color: '#000', fontWeight: 'bold', textDecorationLine: 'underline' }}>RESEND</Text>
-          </TouchableOpacity>
-        </View>
 
         <View>
           <TouchableOpacity style={styles.bottomButton} onPress={() => navigation.navigate('')}>
-            <Text style={styles.ConfirmC}>Confirm Code</Text>
-          </TouchableOpacity></View>
+            <Text style={styles.verify}>Verify</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity style={{ alignSelf: 'center',flexDirection:'row' }}>
+            <Text style={styles.resend}>Resend OTP</Text>
+            <Text style={{color:'#000',marginTop:'3%',paddingLeft:'2%'}}>0:20</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   )
@@ -111,26 +111,31 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   bottomButton: {
-    backgroundColor: '#ff7235',
+    backgroundColor: '#009eb4',
     justifyContent: 'center',
     alignSelf: 'center',
-    padding: '5%',
-    width: '60%',
+    padding: '2%',
+    width: '80%',
     borderRadius: 15,
     marginTop: '12%'
   },
-  ConfirmC: {
+  verify: {
     textAlign: 'center',
     color: '#FFFFFF',
     fontSize: 17,
     fontWeight: 'bold'
   },
+  enterText: {
+    fontSize: 20,
+    color: '#009eb4',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: '5%'
+  },
   reqText: {
     textAlign: 'center',
     fontSize: 16,
-    padding: '4%',
     color: '#000',
-    marginTop: '4%'
   },
   otpView: {
     width: '100%',
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
   },
   inputView: {
     marginTop: '15%',
-    width: '15%',
+    width: '14%',
     height: '45%',
     borderWidth: 0.5,
     borderRadius: 10,
@@ -155,12 +160,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     marginTop: '10%',
   },
-  lefticon: {
-    backgroundColor: '#000',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: '2%',
-    width: '12%',
-    borderRadius: 10
+  resend: {
+    color: '#009eb4',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    marginTop:'3%'
   }
 })
