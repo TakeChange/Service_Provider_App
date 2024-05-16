@@ -4,7 +4,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import BottomTabNavigation from './BottomTabNavigation';
 import ForgotPassword from '../screen/authentication_module/ForgotPassword';
 
-
 const App_Drawer_Navigation = () => {
 
   const Drawer = createDrawerNavigator();
