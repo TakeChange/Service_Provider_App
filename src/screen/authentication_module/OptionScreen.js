@@ -1,17 +1,17 @@
-
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
+import LoginOption from './LoginOption';
 const OptionScreen = ({ navigation }) => {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
 
   const handleLoginPress = () => {
     setIsLoginClicked(true);
-    
+    navigation.navigate('LoginOption'); // Change 'LoginScreen' to the name of your login screen
   };
 
   const handleRegisterPress = () => {
     setIsLoginClicked(false);
+    navigation.navigate('LoginOption'); // Change 'SignUpScreen' to the name of your sign-up screen
   };
 
   return (
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 55,
     marginBottom: 20,
-    
   },
   loginButtonActive: {
     borderColor: '#009eb4',
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color:"#000"
+    color: "#000"
   },
   buttonTextActive: {
     color: '#fff',

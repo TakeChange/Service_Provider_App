@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View ,Image } from 'react-native'
 import React, { useEffect } from 'react'
-import SignInScreen from '../authentication_module/SignInScreen'
 const SplashScreen = ({navigation}) => {
     useEffect(()=>{
         setTimeout(()=>{
-          navigation.navigate('SignInScreen')
+          navigation.navigate('WelcomeScreen')
         }, 2000)
       })
   return (

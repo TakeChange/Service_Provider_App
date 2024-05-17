@@ -2,7 +2,7 @@ import { ScrollView, StyleSheet, Text, View, TouchableOpacity,TextInput,searchTe
 import React, { useState } from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import data from './data';
+import data from '../../asset/data/data';
 
 const FavouriteService = () => {
     const [searchText, setSearchText] = useState('');

@@ -1,11 +1,11 @@
 
 
-import { StyleSheet, Text, View, ScrollView, FlatList,TextInput, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList, TextInput, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo'
 // Assuming you are using Expo for vector iconsr
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const services = [
     { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
     { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
@@ -40,25 +40,18 @@ const HomeScreen = ({navigation}) => {
           <Text style={{ fontSize: 16, color: '#c2c2c2' }}>
             Which service do you want today?
           </Text>
-          <View style={{ flexDirection: 'row',marginTop:20}}>
-                <TouchableOpacity >
-                    <Entypo
-                        name='location-pin'
-                        size={35}
-                        color='#ff7235'
-                        style={styles.locIcon}
-                    />
-                </TouchableOpacity>
-                <View style={styles.locationContainer}>
-                    <TextInput
-                        style={styles.location}
-                        placeholder="Search location here..."
-                        placeholderTextColor="#888"
-                        
-                    />
-
-                </View>
-            </View>
+          <View style={{ flexDirection: 'row', marginTop: 20 }}>
+            <TouchableOpacity>
+              <View style={{ flexDirection: 'row' }}>
+                <Entypo
+                  name='location-pin'
+                  size={30}
+                  color='#000'
+                />
+                <Text style={styles.address}>123 Main St,City,Country</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.popularContainer}>
           <Text style={{ color: 'black', fontSize: 15, fontWeight: '500' }}>Popular services</Text>
@@ -105,11 +98,11 @@ const styles = StyleSheet.create({
   popularContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    
+
   },
   flatlist: {
     flex: 1,
-    marginTop:15
+    marginTop: 15
   },
   cardContainer: {
     flex: 1,
@@ -135,31 +128,10 @@ const styles = StyleSheet.create({
   },
 
   //
-  locationContainer: {
-    flex: 1,
-    paddingHorizontal: '3%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: '3%',
-    marginLeft:'3%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 15, 
-},
-location: {
-    color: '#000',
+  address:{
     fontSize: 16,
-},
-locIcon:{
-  backgroundColor:'#fff',
-  padding:'2%',
-  borderRadius:10,
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.3,
-  shadowRadius: 4,
-  elevation: 15, 
+    fontWeight: '500',
+    color: 'black',
+   
 },
 });

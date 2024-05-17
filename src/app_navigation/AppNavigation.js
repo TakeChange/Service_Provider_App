@@ -2,20 +2,23 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import App_Drawer_Navigation from '../app_navigation/App_Drawer_Navigation';
-import SignInScreen from '../screen/authentication_module/SignInScreen';
+import WelcomeScreen from '../screen/authentication_module/WelcomeScreen'
+import OptionScreen from '../screen/authentication_module/OptionScreen'
 import SignUpScreen from '../screen/authentication_module/SignUpScreen'
+import SignInScreen from '../screen/authentication_module/SignInScreen'
+import OtpVerifyScreen from '../screen/authentication_module/OtpVerifyScreen';
 import ViewService from './../screen/services/ViewService';
 import SplashScreen from '../screen/authentication_module/SplashScreen';
 import LoginOption from '../screen/authentication_module/LoginOption';
 const AppNavigation = () => {
-  
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
+
+  function NotificationsScreen({ navigation }) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button onPress={() => navigation.goBack()} title="Go back home" />
+      </View>
+    );
+  }
   const Stack = createNativeStackNavigator();
 
   return (
@@ -27,13 +30,13 @@ function NotificationsScreen({ navigation }) {
       />
 
       <Stack.Screen
-        name='SignInScreen'
-        component={SignInScreen}
+        name='WelcomeScreen'
+        component={WelcomeScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='SignUpScreen'
-        component={SignUpScreen}
+        name='OptionScreen'
+        component={OptionScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -41,6 +44,24 @@ function NotificationsScreen({ navigation }) {
         component={LoginOption}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name='SignInScreen'
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
+        name='OtpVerifyScreen'
+        component={OtpVerifyScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='SignUpScreen'
+        component={SignUpScreen}
+        options={{ headerShown: false }}
+      />
+
+
       <Stack.Screen
         name='App_Drawer_Navigation'
         component={App_Drawer_Navigation}

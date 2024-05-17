@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native'
 import React, { useRef, useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
-
+import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation'
 const OtpVerifyScreen = ({ navigation }) => {
   const et1 = useRef();
   const et2 = useRef();
@@ -86,7 +86,7 @@ const OtpVerifyScreen = ({ navigation }) => {
         </View>
 
         <View>
-          <TouchableOpacity style={styles.bottomButton} onPress={() => navigation.navigate('')}>
+          <TouchableOpacity style={styles.bottomButton} onPress={() => navigation.navigate('App_Drawer_Navigation')}>
             <Text style={styles.verify}>Verify</Text>
           </TouchableOpacity>
         </View>

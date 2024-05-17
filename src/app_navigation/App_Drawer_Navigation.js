@@ -2,8 +2,8 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import BottomTabNavigation from './BottomTabNavigation';
-import ForgotPassword from '../screen/authentication_module/ForgotPassword';
-
+import FavouriteService from '../screen/services/FavouriteService';
+import CustomDrawer from '../app_navigation/CustomDrawer'
 const App_Drawer_Navigation = () => {
 
   const Drawer = createDrawerNavigator();
@@ -22,10 +22,10 @@ const App_Drawer_Navigation = () => {
 
         headerTitle: ''
       }}
-
+      drawerContent={props => <CustomDrawer {...props} />}
     >
       <Drawer.Screen name="Home" component={BottomTabNavigation} />
-      <Drawer.Screen name="ForgotPassword" component={ForgotPassword} />
+      <Drawer.Screen name="FavouriteService" component={FavouriteService} />
     </Drawer.Navigator>
   );
 }

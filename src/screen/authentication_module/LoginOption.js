@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import { RadioButton } from 'react-native-paper'
+import SignInScreen from './SignInScreen'
 const LoginOption = ({navigation}) => {
     const [checked, setChecked] = useState('');
 
@@ -58,7 +59,7 @@ const LoginOption = ({navigation}) => {
                 </View>
             </View>
             <View style={styles.Butnview}>
-                <TouchableOpacity style={styles.butn}>
+                <TouchableOpacity style={styles.butn} onPress={()=>navigation.navigate('SignInScreen')}> 
                     <Text style={styles.next}>Next</Text>
                 </TouchableOpacity>
             </View>

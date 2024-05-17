@@ -2,19 +2,18 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LeftArrow from 'react-native-vector-icons/Feather'
-
-
-const Welcome = () => {
+import OptionScreen from './OptionScreen';
+const Welcome = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity>
-                    <LeftArrow
-                        name='arrow-left'
-                        size={30}
-                        color='#000'
-                    />
-                </TouchableOpacity>
-            
+                <LeftArrow
+                    name='arrow-left'
+                    size={30}
+                    color='#000'
+                />
+            </TouchableOpacity>
+
             <View style={styles.content}>
                 <ImageBackground
                     source={require('../../asset/images/welcome.png')}
@@ -25,11 +24,10 @@ const Welcome = () => {
                     <Text style={styles.textStyle}>Effortless & Reliable</Text>
                     <Text style={styles.textStyle}>Electrician Tracking !!!</Text>
                     <Text style={styles.textStyle}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
-                    
 
                 </View>
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OptionScreen')}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
         </View>
@@ -41,7 +39,7 @@ export default Welcome;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        
+
         padding: 20,
     },
     content: {
@@ -64,8 +62,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginVertical: 5,
     },
-    button: { 
-        marginLeft:200,
+    button: {
+        marginLeft: 200,
         alignItems: 'center',
         justifyContent: 'center',
         height: 45,

@@ -8,7 +8,7 @@ const CustomDrawer = (props) => {
   const { navigation } = props;
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ backgroundColor: '#ff7235', marginBottom: '2%', padding: '5%', borderTopRightRadius: 40,flexDirection:'column' ,}}>
+      <View style={{ backgroundColor: '#009eb4', marginBottom: '2%', padding: '5%',flexDirection:'column' ,}}>
         <Image
           source={require('../asset/images/user-profile.jpg')}
           style={styles.imgStyle}
