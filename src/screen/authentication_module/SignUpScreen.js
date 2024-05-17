@@ -75,9 +75,9 @@ const SignUpScreen = ({ navigation }) => {
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
                 <View style={styles.msg}>
-                    <Text style={{ color: '#6d767a', fontWeight: '700' }}>Already have an account?</Text>
-                    <TouchableOpacity>
-                        <Text style={{ color: '#009eb4', fontWeight: '700' }}> Login</Text>
+                    <Text style={styles.txtname1}>Already have an account?</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+                        <Text style={styles.txtname2}> Login</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -125,8 +125,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     txtinput: {
+        height:56,
         color: '#000000',
-        marginTop: 5,
+        marginTop: 4,
         backgroundColor: '#ffffff',
         fontSize: 15,
         borderRadius: 10,
@@ -135,11 +136,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-      
-
     },
     textfield:{
         marginLeft: '2%',
+        fontSize:15,
         color: '#000'
     },
     button: {
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        marginTop: 30,
+        marginTop: '12%',
     },
     buttonText: {
         color: '#fff',
@@ -159,19 +159,13 @@ const styles = StyleSheet.create({
     text: {
         fontWeight: '600',
         marginTop: 8,
-        fontSize: 16
-    },
-    msg: {
-        flex: 1,
-        flexDirection: 'row',
-        marginTop: 10
+        fontSize: 15
     },
     Numberinput: {
         flex:1,
         height:67,
         color: '#000',
         backgroundColor: '#fff',
-        fontSize: 15,
         borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -179,5 +173,19 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         alignItems: 'center',
+    },
+    msg: {
+        flex: 1,
+        flexDirection: 'row',
+        marginTop: '2%'
+    },
+    txtname1:{
+        color: '#6d767a',
+         fontWeight: 'bold',
+         marginLeft:'5%'
+    },
+    txtname2:{
+        color: '#009eb4',
+        fontWeight: 'bold'
     }
 })

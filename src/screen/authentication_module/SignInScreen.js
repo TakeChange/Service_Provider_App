@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'react-native'
 import React from 'react'
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
 
@@ -26,9 +26,16 @@ const SignInScreen = () => {
           keyboardType='numeric'
         />
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OtpVerifyScreen')}>
         <Text style={styles.buttonText}>Get OTP</Text>
       </TouchableOpacity>
+
+      <View style={styles.bottomtxt}>
+      <Text style={styles.txtname1}>New User?</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+      <Text style={styles.txtname2}> Create an Account</Text>
+      </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -70,6 +77,7 @@ const styles = StyleSheet.create({
     
   },
   textname: {
+    color:'#000',
     fontWeight: '600',
     marginTop: '10%',
     fontSize: 17,
@@ -77,6 +85,7 @@ const styles = StyleSheet.create({
 
   },
   txtinput: {
+    height:56,
     color: '#000000',
     marginTop: 5,
     backgroundColor: '#ffffff',
@@ -94,7 +103,7 @@ const styles = StyleSheet.create({
     color: '#000'
   },
   button: {
-    height: 50,
+    height: 56,
     backgroundColor: '#009eb4',
     justifyContent: 'center',
     alignItems: 'center',
@@ -107,5 +116,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
 
   },
-
+  txtname1:{
+    fontSize:15,
+    marginLeft:30,
+    fontWeight:'bold'
+  },
+  txtname2:{
+    fontSize:15,
+   color:'#009eb4',
+   fontWeight:'bold'
+  },
+  bottomtxt:{
+    flex:1,
+    flexDirection:'row',
+    marginTop:'2%',
+    
+  }
 })
