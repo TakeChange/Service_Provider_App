@@ -155,9 +155,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   updateButton: {
-    backgroundColor: '#ff7235',
+    backgroundColor: '#009eb4',
     justifyContent: 'center',
-    marginTop: '70%',
+    marginTop: '60%',
     alignSelf: 'center',
     alignItems: 'center',
     padding: '4%',
