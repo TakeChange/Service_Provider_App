@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LoginOption from './LoginOption';
+import SignUpScreen from './SignUpScreen';
 const OptionScreen = ({ navigation }) => {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
 
@@ -11,7 +12,7 @@ const OptionScreen = ({ navigation }) => {
 
   const handleRegisterPress = () => {
     setIsLoginClicked(false);
-    navigation.navigate('LoginOption'); // Change 'SignUpScreen' to the name of your sign-up screen
+    navigation.navigate('SignUpScreen'); // Change 'SignUpScreen' to the name of your sign-up screen
   };
 
   return (
