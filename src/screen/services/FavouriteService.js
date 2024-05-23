@@ -52,13 +52,12 @@ export default FavouriteService
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: '5%',
+        padding: '4%',
 
     },
     title:{
-        flexDirection: 'row',
+        marginBottom: '3%',
         alignItems: 'center',
-        marginBottom:'2%'
         
     },
     icon:{
@@ -70,8 +69,8 @@ const styles = StyleSheet.create({
         borderRadius:10
     },
     service: {
-        marginLeft: '18%',
-        fontSize: 18,
+       
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#000',
     },
@@ -92,7 +91,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingVertical: 10,
         paddingHorizontal: 15,
-        fontSize: 17,
+        fontSize: 15,
         color: 'black',
        
       },
@@ -105,19 +104,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         margin: 8,
         borderRadius: 10,
+        borderColor:'#009eb4',
+        borderWidth:1,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation: 10,
-        padding: 5,
-        paddingBottom: '10%',
+        elevation: 5,
+        padding: 10,
+        paddingBottom: '4%'
     },
     total: {
         color: '#000',
         fontWeight: 'bold',
-        paddingLeft: '5%',
-        fontSize: 17
+        //paddingLeft: '5%',
+        fontSize: 15
     },
     
 })

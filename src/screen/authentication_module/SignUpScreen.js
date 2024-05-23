@@ -105,14 +105,14 @@ const styles = StyleSheet.create({
 
     },
     Hellotxt: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         color: '#000',
         justifyContent: 'center',
         textAlign: 'center'
     },
     Acctxt: {
-        fontSize: 18,
+        fontSize: 17,
         color: '#000',
         justifyContent: 'center',
         textAlign: 'center'
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
 
     },
