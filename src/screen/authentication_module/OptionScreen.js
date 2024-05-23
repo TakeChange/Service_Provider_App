@@ -68,12 +68,14 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   imageContainer: {
-    alignItems: 'center',
-    marginVertical: 10,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:'4%'
+    
   },
   imageStyle: {
     height: 400,
-    width: 350,
+    width: '90%',
   },
   buttonContainer: {
     alignItems: 'center',
