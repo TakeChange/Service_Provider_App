@@ -23,8 +23,7 @@ const Welcome = ({ navigation }) => {
                 <View style={styles.textContainer}>
                     <Text style={styles.textStyle}>Effortless & Reliable</Text>
                     <Text style={styles.textStyle}>Electrician Tracking !!!</Text>
-                    <Text style={styles.textStyle}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Text>
-
+                    
                 </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OptionScreen')}>
@@ -48,7 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageBackground: {
-        height: 300,
+        height: 400,
         width: 300,
     },
     textContainer: {
@@ -56,25 +55,26 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     textStyle: {
-        fontSize: 18,
+        fontSize: 17,
         fontWeight: 'bold',
         color: '#000',
         textAlign: 'center',
-        marginVertical: 5,
+       
     },
     button: {
-        marginLeft: 200,
+        
         alignItems: 'center',
         justifyContent: 'center',
-        height: 45,
-        width: 100,
-        borderRadius: 15,
+        height:40,
+        width: '20%',
+        borderRadius: 10,
         backgroundColor: '#009eb4',
         marginBottom: 30,
+        marginLeft: '80%',
     },
     buttonText: {
         color: '#fff',
-        fontSize: 17,
+        fontSize: 15,
         fontWeight: 'bold',
     },
 });
