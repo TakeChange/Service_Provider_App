@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   TxtStyle: {
     marginTop: 40,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 'bold',
     color: '#000',
   },
@@ -84,10 +84,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderRadius: 10,
-    width: '100%',
-    height: 55,
     marginBottom: 20,
+    padding: '2%',
+    width: '80%',
+    borderRadius: 15,
+    
   },
   loginButtonActive: {
     borderColor: '#009eb4',
@@ -98,9 +99,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#009eb4',
   },
   buttonText: {
-    fontSize: 20,
     fontWeight: 'bold',
-    color: "#000"
+    color: "#000",
+    textAlign: 'center',
+    fontSize: 17,
+    
   },
   buttonTextActive: {
     color: '#fff',
