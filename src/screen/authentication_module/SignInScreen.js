@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   imgContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   msg: {
     color:'#000',
