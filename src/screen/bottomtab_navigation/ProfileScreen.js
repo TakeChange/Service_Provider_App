@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: '600',
-        fontSize: 17,
+        fontSize: 15,
         color: '#000',
         padding: '2%'
     },
