@@ -1,13 +1,42 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import PhoneInput from "react-native-phone-number-input";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
-
-
+import { useFocusEffect } from '@react-navigation/native';
 const SignUpScreen = ({ navigation }) => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [uname, setuName] = useState('');
+    const [unameErr, setuNameErr] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [mobileErr, setMobileErr] = useState('');
+    const [aadhar, setAadhar] = useState('');
+    const [aadharErr, setAadharErr] = useState('');
+    const [adress, setaddress] = useState('');
+    const [addressErr, setAdressErr] = useState('');
+    const [area, setarea] = useState('');
+    const [areaErr, setAreaErr] = useState('');
+
+    const Validation = () => {
+        var isValid = true;
+        if (uname == '') {
+            setuNameErr('Name do not empty');
+            isValid = false;
+        } else {
+            setuNameErr('');
+        }
+        if (isValid) {
+
+        }
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            return () => {
+                // Reset errors when navigating away from screen
+                setuNameErr('');
+            };
+        }, [])
+    );
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -16,7 +45,6 @@ const SignUpScreen = ({ navigation }) => {
                         <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
                     </View>
                 </View>
-
                 <View style={styles.txtstyle}>
                     <Text style={styles.Hellotxt}>Hello, User</Text>
                     <Text style={styles.Acctxt}>Create an Account</Text>
@@ -24,39 +52,47 @@ const SignUpScreen = ({ navigation }) => {
                 <Text style={styles.text} >Full Name</Text>
                 <View style={styles.txtinput}>
                     <TextInput
-                    style={styles.textfield}
+                        style={styles.textfield}
                         placeholder="Enter Your Name"
-                        
-                    />
-                    </View>
-                <Text style={styles.text}>Mobile Number</Text>
-                <View style={styles.Numberinput}>
-                    <PhoneInput
-                    placeholder="Enter Phone"
-                    defaultValue={phoneNumber}
-                        defaultCode='IN'
-                        keyboardType="phone-pad"
-                        autoCorrect={false}
-                        autoComplete="tel"
-                        textContentType="telephoneNumber"
-                        placeholderTextColor="#A0A0A0"
+                        value={uname}
+                        onChangeText={(text) => setuName(text)}
                     />
                 </View>
+                <Text style={styles.error}>{unameErr}</Text>
+                <Text style={styles.text}>Mobile Number</Text>
+                <View style={styles.txtinput}>
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter mobile Number"
+                        keyboardType='numeric'
+                        maxLength={10}
+                        value={mobile}
+                        onChangeText={(text) => setMobile(text)}
+                    />
+                </View>
+                <Text style={styles.error}>{mobileErr}</Text>
                 <Text style={styles.text}>Aadhar Number</Text>
                 <View style={styles.txtinput}>
-                <TextInput
-                style={styles.textfield}
-                    placeholder="Enter Your Aadhar Number"
-                    keyboardType='numeric'
-                />
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter Your Aadhar Number"
+                        keyboardType='numeric'
+                        maxLength={10}
+                        value={aadhar}
+                        onChangeText={(text) => setAadhar(text)}
+                    />
                 </View>
+                <Text style={styles.error}>{addressErr}</Text>
                 <Text style={styles.text}>Address</Text>
                 <View style={styles.txtinput}>
-                <TextInput
-                style={styles.textfield}                   
-                 placeholder="Enter Your Address"
-                />
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter Your Address"
+                        value={adress}
+                        onChangeText={(text) => setaddress(text)}
+                    />
                 </View>
+                <Text style={styles.error}>{addressErr}</Text>
                 <Text style={styles.text}>Area</Text>
                 <View style={styles.txtinput}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
@@ -68,10 +104,16 @@ const SignUpScreen = ({ navigation }) => {
                                 key: 'API_KEY',
                                 language: 'en'
                             }}
+                            value={area}
+                            onChangeText={(text) => setarea(text)}
                         />
+                    </View>
+                    <Text style={styles.error}>{areaErr}</Text>
                 </View>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('App_Drawer_Navigation')}>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => navigation.navigate('App_Drawer_Navigation')}
+                // onPress={Validation}
+                >
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
                 <View style={styles.msg}>
@@ -81,7 +123,7 @@ const SignUpScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            </ScrollView>
+        </ScrollView>
     )
 }
 
@@ -125,7 +167,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     txtinput: {
-        height:56,
+        height: 56,
         color: '#000000',
         marginTop: 4,
         backgroundColor: '#ffffff',
@@ -136,10 +178,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
+        justifyContent: 'center',
+
     },
-    textfield:{
+    textfield: {
         marginLeft: '2%',
-        fontSize:15,
+        fontSize: 15,
         color: '#000'
     },
     button: {
@@ -157,13 +201,14 @@ const styles = StyleSheet.create({
 
     },
     text: {
+        color: '#000',
         fontWeight: '600',
         marginTop: 8,
         fontSize: 15
     },
     Numberinput: {
-        flex:1,
-        height:67,
+        flex: 1,
+        height: 67,
         color: '#000',
         backgroundColor: '#fff',
         borderRadius: 10,
@@ -179,13 +224,18 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: '2%'
     },
-    txtname1:{
+    txtname1: {
         color: '#6d767a',
-         fontWeight: 'bold',
-         marginLeft:'5%'
+        fontWeight: 'bold',
+        marginLeft: '5%'
     },
-    txtname2:{
+    txtname2: {
         color: '#009eb4',
         fontWeight: 'bold'
+    },
+    error: {
+        color: 'red',
+        marginHorizontal: 10,
+        marginTop: '1%'
     }
 })

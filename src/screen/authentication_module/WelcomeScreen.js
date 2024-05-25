@@ -1,12 +1,9 @@
-
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import LeftArrow from 'react-native-vector-icons/Feather'
 
 const Welcome = ({ navigation }) => {
     return (
         <View style={styles.container}>
-           
             <View style={styles.content}>
                 <ImageBackground
                     source={require('../../asset/images/welcome.png')}
@@ -15,7 +12,6 @@ const Welcome = ({ navigation }) => {
                 />
                 <View style={styles.textContainer}>
                     <Text style={styles.mottoStyle}>Customer happiness is our motto !!!</Text>
-                    
                 </View>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OptionScreen')}>
@@ -50,10 +46,8 @@ const styles = StyleSheet.create({
         marginTop:20, 
         color:"#000",
         fontWeight:'700'
-        
     },
     button: {
-        
         alignItems: 'center',
         justifyContent: 'center',
         height:40,

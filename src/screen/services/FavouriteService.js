@@ -23,11 +23,11 @@ const FavouriteService = () => {
         <Text style={styles.service}>Favourite Services</Text>
         </View>
         <View style={styles.inputContainer}>
-                <Ionicons name="search" size={24} color="#ffffff" style={styles.searchicon} />
+                <Ionicons name="search" size={24} color="#000" style={styles.searchicon} />
                 <TextInput
                     style={styles.input}
                     placeholder="Search..."
-                    placeholderTextColor="gray"
+                    placeholderTextColor="#888"
                     onChangeText={text => setSearchText(text)}
                     value={searchText}
                 />
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
        
       },
       searchicon:{
-       color:'gray',
        marginLeft:10
       },
       listContainer: {
