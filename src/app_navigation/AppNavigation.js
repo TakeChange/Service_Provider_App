@@ -12,13 +12,6 @@ import SplashScreen from '../screen/authentication_module/SplashScreen';
 import LoginOption from '../screen/authentication_module/LoginOption';
 const AppNavigation = () => {
 
-  function NotificationsScreen({ navigation }) {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Button onPress={() => navigation.goBack()} title="Go back home" />
-      </View>
-    );
-  }
   const Stack = createNativeStackNavigator();
 
   return (
@@ -28,7 +21,6 @@ const AppNavigation = () => {
         component={SplashScreen}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name='WelcomeScreen'
         component={WelcomeScreen}
@@ -49,7 +41,6 @@ const AppNavigation = () => {
         component={SignInScreen}
         options={{ headerShown: false }}
       />
-
       <Stack.Screen
         name='OtpVerifyScreen'
         component={OtpVerifyScreen}
@@ -60,8 +51,6 @@ const AppNavigation = () => {
         component={SignUpScreen}
         options={{ headerShown: false }}
       />
-
-
       <Stack.Screen
         name='App_Drawer_Navigation'
         component={App_Drawer_Navigation}

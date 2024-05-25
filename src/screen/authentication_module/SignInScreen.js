@@ -1,10 +1,27 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'react-native'
-import React from 'react'
 
-const SignInScreen = ({navigation}) => {
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+
+const SignInScreen = ({ navigation }) => {
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleGetOTP = () => {
+
+    const mobileNumberPattern = /^[0-9]{10}$/;
+    if (mobileNumberPattern.test(mobileNumber)) {
+
+      setErrorMessage('');
+      navigation.navigate('OtpVerifyScreen');
+    }
+    else {
+
+      setErrorMessage('Please enter a valid 10-digit mobile number.');
+    }
+  };
+
   return (
     <View style={styles.container}>
-
       <View style={styles.imgContainer}>
         <Image
           source={require('../../asset/images/Signup.png')}
@@ -13,9 +30,8 @@ const SignInScreen = ({navigation}) => {
       </View>
       <View style={styles.title}>
         <Text style={styles.text}>Login Here</Text>
-        <Text style={styles.msg}>Enter Your Mobile Number </Text>
-        <Text style={styles.msg1}>reset your password </Text>
-
+        <Text style={styles.msg}>Enter Your Mobile Number</Text>
+        <Text style={styles.msg1}>reset your password</Text>
       </View>
 
       <Text style={styles.textname}>Mobile Number</Text>
@@ -24,68 +40,68 @@ const SignInScreen = ({navigation}) => {
           style={styles.textfield}
           placeholder="Enter your Mobile number"
           keyboardType='numeric'
+          maxLength={10}
+          value={mobileNumber}
+          onChangeText={setMobileNumber}
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OtpVerifyScreen')}>
+      {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
+      <TouchableOpacity style={styles.button} onPress={handleGetOTP}>
         <Text style={styles.buttonText}>Get OTP</Text>
       </TouchableOpacity>
 
       <View style={styles.bottomtxt}>
-      <Text style={styles.txtname1}>New User?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-      <Text style={styles.txtname2}> Create an Account</Text>
-      </TouchableOpacity>
+        <Text style={styles.txtname1}>New User?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+          <Text style={styles.txtname2}> Create an Account</Text>
+        </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default SignInScreen
+export default SignInScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: '8%',
-
   },
   title: {
     alignItems: 'center',
-    marginTop:'3%'
+    marginTop: '3%',
   },
   text: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#009eb4',
-   padding:'2%',
-   marginTop:'5%'
+    padding: '2%',
+    marginTop: '5%',
   },
   imgContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   msg: {
-    color:'#000',
+    color: '#000',
     fontSize: 20,
     fontWeight: '600',
-    marginTop:'5%'
+    marginTop: '5%',
   },
-  msg1:{
-    color:'#000',
+  msg1: {
+    color: '#000',
     fontSize: 20,
     fontWeight: '600',
-    
   },
   textname: {
-    color:'#000',
+    color: '#000',
     fontWeight: '600',
     marginTop: '10%',
     fontSize: 15,
-    padding: '2%'
-
+    padding: '2%',
   },
   txtinput: {
-    height:56,
+    height: 56,
     color: '#000000',
     marginTop: 5,
     backgroundColor: '#ffffff',
@@ -96,11 +112,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-
+    justifyContent:'center',
+    
   },
   textfield: {
     marginLeft: '2%',
-    color: '#000'
+    color: '#000',
+   
+  },
+  error: {
+    color: 'red',
+    marginTop: 5,
   },
   button: {
     height: 56,
@@ -114,22 +136,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
     fontWeight: 'bold',
-
   },
-  txtname1:{
-    fontSize:15,
-    marginLeft:30,
-    fontWeight:'bold'
+  txtname1: {
+    fontSize: 15,
+    marginLeft: 30,
+    fontWeight: 'bold',
   },
-  txtname2:{
-    fontSize:15,
-   color:'#009eb4',
-   fontWeight:'bold'
+  txtname2: {
+    fontSize: 15,
+    color: '#009eb4',
+    fontWeight: 'bold',
   },
-  bottomtxt:{
-    flex:1,
-    flexDirection:'row',
-    marginTop:'2%',
-    
-  }
-})
+  bottomtxt: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: '2%',
+  },
+});

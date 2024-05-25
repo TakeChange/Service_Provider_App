@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 React Native Vector Icon
     plugins:
         npm i react-native-vector-icons
@@ -24,17 +23,15 @@ Navigation :
             plugins: ['react-native-reanimated/plugin'],
 
         
-=======
 plugin :
         npm i react-native-paper
 Phone Number :
     plugin :
         npm i react-native-phone-number-input
-<<<<<<< HEAD
->>>>>>> c23f807cb4a8857af373066db7fbb93b4e1c092f
-=======
-
 
 plugin:
         npm i react-native-google-places-autocomplete
->>>>>>> 3a6662e71d86b0b68f69804ea48962b06dff025c
+
+for responsive dimensions
+//https://www.npmjs.com/package/react-native-responsive-dimensions
+npm i react-native-responsive-dimensions

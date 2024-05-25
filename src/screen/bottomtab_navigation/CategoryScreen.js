@@ -3,7 +3,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo'
 
-const CategoryScreen = ({navigation}) => {
+const CategoryScreen = ({ navigation }) => {
     const data = [
         { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
         { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
@@ -29,29 +29,25 @@ const CategoryScreen = ({navigation}) => {
 
     return (
         <View style={styles.container}>
-
-            <TouchableOpacity>   
-            <View style={{ flexDirection: 'row' }}>
-            <Entypo
+                <View style={styles.location}>
+                    <Entypo
                         name='location-pin'
-                        size={30}
+                        size={25}
                         color='#000'
-                     />
-                <Text style={styles.address}>123 Main St,City,Country</Text>
-            </View>
-            </TouchableOpacity> 
-
-            <View style={styles.inputContainer}>
-                <TouchableOpacity>
+                    />
+                    <Text style={styles.address}>123 Main St,City,Country</Text>
+                </View>
+        <View style={styles.inputContainer}>
+              
                     <Icon name="search" size={24} color='#000' style={styles.searchIcon} />
-                </TouchableOpacity>
+               
                 <TextInput
                     style={styles.input}
                     placeholder="Type service name here..."
                     placeholderTextColor="#888"
                 />
             </View>
-            <Text style={styles.allsrvc}>All Services...</Text>
+            <Text style={styles.allsrvc}>All Services</Text>
 
             <FlatList
                 data={data}
@@ -59,7 +55,7 @@ const CategoryScreen = ({navigation}) => {
                 keyExtractor={(item) => item.id}
                 horizontal={false}
                 numColumns={4}
-                />
+            />
         </View>
 
     );
@@ -78,44 +74,48 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         borderRadius: 10,
-        marginVertical: '2%',
-        paddingHorizontal: '3%',
+        marginBottom:'3%',
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
         shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 5, 
+        shadowRadius: 5,
+        elevation: 5,
     },
-    address:{
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: 'black',
-        marginBottom: '3%' 
+    location: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: '3%'
+    },
+    address: {
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#000',
     },
     input: {
         flex: 1,
-        paddingVertical: '2%',
-        fontSize: 16,
     },
     searchIcon: {
-        marginRight: '2%',
+       marginLeft:'3%'
     },
-    locIcon:{
-        backgroundColor:'#fff',
-        padding:'2%',
-        borderRadius:10,
+    locIcon: {
+        backgroundColor: '#fff',
+        padding: '2%',
+        borderRadius: 10,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
-        elevation: 5, 
+        elevation: 5,
     },
-   
+
     allsrvc: {
-        fontSize: 17,
+        fontSize: 15,
         fontWeight: 'bold',
         color: 'black',
-        marginBottom: '6%'
+        marginBottom: '4%'
     },
     cardContiner: {
         flex: 1,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     cardTitle: {
-        fontSize: 10,
+        fontSize: 8,
         fontWeight: 'bold',
         marginTop: 5,
         color: '#000',

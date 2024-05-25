@@ -2,6 +2,11 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput 
 import React, { useRef, useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation'
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 const OtpVerifyScreen = ({ navigation }) => {
   const et1 = useRef();
   const et2 = useRef();
@@ -15,17 +20,18 @@ const OtpVerifyScreen = ({ navigation }) => {
   return (
     <ScrollView >
       <View style={{ flex: 1, margin: 15 }}>
-        <TouchableOpacity  onPress={() => navigation.navigate('SignInScreen')}>
-          <LeftArrow
-            name='arrow-left'
-            size={30}
-            color='#000'
-          />
-        </TouchableOpacity>
-
+        <View style={styles.lefticon}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+            <LeftArrow
+              name='arrow-left'
+              size={25}
+              color='#fff'
+            />
+          </TouchableOpacity>
+        </View>
         <Image
-          source={require('../../asset/images/OTP.jpeg')}
-          style={{ width: 260, height: 260, alignSelf: 'center' }}
+          source={require('../../asset/images/Otp.png')}
+          style={styles.imageStyle}
         />
 
         <Text style={styles.enterText}>Enter OTP</Text>
@@ -91,9 +97,9 @@ const OtpVerifyScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={{ alignSelf: 'center',flexDirection:'row' }}>
+          <TouchableOpacity style={{ alignSelf: 'center', flexDirection: 'row' }}>
             <Text style={styles.resend}>Resend OTP</Text>
-            <Text style={{color:'#000',marginTop:'3%',paddingLeft:'2%'}}>0:20</Text>
+            <Text style={{ color: '#000', marginTop: '3%', paddingLeft: '2%' }}>0:20</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
     color: '#009eb4',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: '6%'
+    marginTop: '10%'
   },
   reqText: {
     textAlign: 'center',
@@ -164,6 +170,19 @@ const styles = StyleSheet.create({
     color: '#009eb4',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
-    marginTop:'3%'
+    marginTop: '3%'
+  },
+  lefticon: {
+    backgroundColor: '#000',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: '2%',
+    width: '12%',
+    borderRadius: 10
+  },
+  imageStyle: {
+    height:280, // 50% of window height
+    width: 280, 
+    alignSelf: 'center'
   }
 })
