@@ -16,13 +16,13 @@ const OtpVerifyScreen = ({ navigation }) => {
     <ScrollView >
       <View style={{ flex: 1, margin: 15 }}>
         <View style={styles.lefticon}>
-        <TouchableOpacity  onPress={() => navigation.navigate('SignInScreen')}>
-          <LeftArrow
-            name='arrow-left'
-            size={25}
-            color='#fff'
-          />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+            <LeftArrow
+              name='arrow-left'
+              size={25}
+              color='#fff'
+            />
+          </TouchableOpacity>
         </View>
         <Image
           source={require('../../asset/images/Otp.png')}
@@ -92,9 +92,9 @@ const OtpVerifyScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity style={{ alignSelf: 'center',flexDirection:'row' }}>
+          <TouchableOpacity style={{ alignSelf: 'center', flexDirection: 'row' }}>
             <Text style={styles.resend}>Resend OTP</Text>
-            <Text style={{color:'#000',marginTop:'3%',paddingLeft:'2%'}}>0:20</Text>
+            <Text style={{ color: '#000', marginTop: '3%', paddingLeft: '2%' }}>0:20</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     color: '#009eb4',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: '6%'
+    marginTop: '10%'
   },
   reqText: {
     textAlign: 'center',
@@ -165,14 +165,14 @@ const styles = StyleSheet.create({
     color: '#009eb4',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
-    marginTop:'3%'
+    marginTop: '3%'
   },
   lefticon: {
-    backgroundColor:'#000',
-    justifyContent:'flex-start',
-    alignItems:'center',
-    padding:'2%',
-    width:'12%',
-    borderRadius:10
-},
+    backgroundColor: '#000',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: '2%',
+    width: '12%',
+    borderRadius: 10
+  },
 })
