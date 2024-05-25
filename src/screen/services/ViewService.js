@@ -5,22 +5,22 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import data from '../../asset/data/data'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeartComponent from '../../component/HeartComponent'
-const ViewService = () => {
+const ViewService = ({ navigation }) => {
     const [searchText, setSearchText] = useState('');
     const renderItem = ({ item }) => {
         return (
-
             <View style={styles.listContainer}>
-                <View style={styles.name}>
-                    <Text style={styles.total}>Name : {item.name}</Text>
-                    <View>
-                        <HeartComponent />
+                <TouchableOpacity>
+                    <View style={styles.name}>
+                        <Text style={styles.total}>Name : {item.name}</Text>
+                        <View>
+                            <HeartComponent />
+                        </View>
                     </View>
-                </View>
-                <Text style={styles.total}>Contact No : {item.contactNumber}</Text>
-                <Text style={styles.total}>Service Type : {item.serviceType}</Text>
-                <Text style={styles.total}>Address : {item.address}</Text>
-
+                    <Text style={styles.total}>Contact No : {item.contactNumber}</Text>
+                    <Text style={styles.total}>Service Type : {item.serviceType}</Text>
+                    <Text style={styles.total}>Address : {item.address}</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -28,13 +28,15 @@ const ViewService = () => {
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity>
-                        <LeftArrow
-                            name='arrow-left'
-                            size={25}
-                            color='#000'
-                        />
-                    </TouchableOpacity>
+                    <View style={styles.leftIcon}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                            <LeftArrow
+                                name='arrow-left'
+                                size={20}
+                                color='#fff'
+                            />
+                        </TouchableOpacity>
+                    </View>
                     <Text style={styles.service}>Services</Text>
                 </View>
                 <View style={styles.location}>
@@ -46,11 +48,11 @@ const ViewService = () => {
                     <Text style={styles.total}>444 Walnut St, City, Country</Text>
                 </View>
                 <View style={styles.inputContainer}>
-                    <Ionicons name="search" size={24} color="gray" style={styles.icon} />
+                    <Ionicons name="search" size={24} color="#000" style={styles.icon} />
                     <TextInput
                         style={styles.input}
                         placeholder="Search..."
-                        placeholderTextColor="gray"
+                        placeholderTextColor="#888"
                         onChangeText={text => setSearchText(text)}
                         value={searchText}
                     />
@@ -100,8 +102,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         margin: 8,
         borderRadius: 10,
-        borderColor:'#009eb4',
-        borderWidth:1,
+        borderColor: '#009eb4',
+        borderWidth: 1,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
@@ -149,5 +151,13 @@ const styles = StyleSheet.create({
     icon: {
         marginLeft: 10,
     },
+    leftIcon: {
+        backgroundColor: '#000',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        padding: '2%',
+        width: '10%',
+        borderRadius: 10
+    }
 
 })
