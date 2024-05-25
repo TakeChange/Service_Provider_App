@@ -7,7 +7,7 @@ import CustomDrawer from '../app_navigation/CustomDrawer'
 const App_Drawer_Navigation = () => {
 
   const Drawer = createDrawerNavigator();
-  
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -17,6 +17,7 @@ const App_Drawer_Navigation = () => {
           backgroundColor: 'transparent',
           elevation: 0,
           shadowOpacity: 0,
+
 
         },
 
