@@ -15,17 +15,18 @@ const OtpVerifyScreen = ({ navigation }) => {
   return (
     <ScrollView >
       <View style={{ flex: 1, margin: 15 }}>
+        <View style={styles.lefticon}>
         <TouchableOpacity  onPress={() => navigation.navigate('SignInScreen')}>
           <LeftArrow
             name='arrow-left'
-            size={30}
-            color='#000'
+            size={25}
+            color='#fff'
           />
         </TouchableOpacity>
-
+        </View>
         <Image
-          source={require('../../asset/images/OTP.jpeg')}
-          style={{ width: 260, height: 260, alignSelf: 'center' }}
+          source={require('../../asset/images/Otp.png')}
+          style={{ width: 280, height: 280, alignSelf: 'center' }}
         />
 
         <Text style={styles.enterText}>Enter OTP</Text>
@@ -165,5 +166,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     marginTop:'3%'
-  }
+  },
+  lefticon: {
+    backgroundColor:'#000',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    padding:'2%',
+    width:'12%',
+    borderRadius:10
+},
 })

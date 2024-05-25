@@ -62,10 +62,8 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   TxtStyle1: {
-    marginTop: 10,
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#000',
   },
   imageContainer: {
@@ -88,7 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: '2%',
     width: '80%',
-    borderRadius: 15,
+    borderRadius: 10,
     
   },
   loginButtonActive: {

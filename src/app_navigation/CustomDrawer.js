@@ -19,7 +19,7 @@ const CustomDrawer = (props) => {
 
       <TouchableOpacity style={styles.btnStyle}>
         <View style={styles.shareContainer}>
-          <Ionicons name="exit-outline" size={22} color='#FF5757' />
+          <Ionicons name="exit-outline" size={22} color='#FF5757'/>
           <Text
             style={{
               fontSize: 15,
