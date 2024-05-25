@@ -64,7 +64,7 @@ const ProfileScreen = () => {
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
-                        placeholder=""
+                        placeholder="Enter your name"
                         value={fullName}
                         onChangeText={setFullName}
                     />
@@ -121,7 +121,7 @@ const ProfileScreen = () => {
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
-                        placeholder=""
+                        placeholder="Enter your Address"
                         value={address}
                         onChangeText={setAddress}
                     />
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: '600',
-        fontSize: 17,
+        fontSize: 15,
         color: '#000',
         padding: '2%'
     },
@@ -154,7 +154,6 @@ const styles = StyleSheet.create({
         color: '#000'
     },
     txtinput: {
-        height: 56,
         color: '#000',
         marginTop: 5,
         backgroundColor: '#fff',
@@ -167,7 +166,6 @@ const styles = StyleSheet.create({
         elevation: 5,
 
     },
-
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -179,8 +177,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        height: 56,
-
     },
     icon: {
         marginLeft: 10,
@@ -191,10 +187,10 @@ const styles = StyleSheet.create({
         marginTop: '10%',
         alignSelf: 'center',
         alignItems: 'center',
-        padding: '2%',
+        padding: '3%',
         width: '50%',
         borderRadius: 15,
-        height: 56,
+
 
     },
     error: {
