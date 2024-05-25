@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   cardTitle: {
-    fontSize: 10,
+    fontSize: 8,
     fontWeight: 'bold',
     marginTop: 5,
     color: '#000',
