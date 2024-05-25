@@ -1,13 +1,9 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import PhoneInput from "react-native-phone-number-input";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
-import { set } from 'lodash';
-
-
 const SignUpScreen = ({ navigation }) => {
     const [uname, setuName] = useState('');
     const [unameErr, setuNameErr] = useState('');
@@ -19,7 +15,7 @@ const SignUpScreen = ({ navigation }) => {
     const [addressErr, setAdressErr] = useState('');
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
-    
+
     const Validation = () => {
         var isValid = true;
         if (uname == '') {
@@ -28,7 +24,6 @@ const SignUpScreen = ({ navigation }) => {
         } else {
             setuNameErr('');
         }
-
         if (isValid) {
 
         }
@@ -50,7 +45,6 @@ const SignUpScreen = ({ navigation }) => {
                         <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
                     </View>
                 </View>
-
                 <View style={styles.txtstyle}>
                     <Text style={styles.Hellotxt}>Hello, User</Text>
                     <Text style={styles.Acctxt}>Create an Account</Text>
@@ -111,14 +105,14 @@ const SignUpScreen = ({ navigation }) => {
                                 language: 'en'
                             }}
                             value={area}
-                        onChangeText={(text) => setarea(text)}
+                            onChangeText={(text) => setarea(text)}
                         />
                     </View>
                     <Text style={styles.error}>{areaErr}</Text>
                 </View>
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigation.navigate('App_Drawer_Navigation')}
-                    // onPress={Validation}
+                // onPress={Validation}
                 >
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>

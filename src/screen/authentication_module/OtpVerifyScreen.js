@@ -2,6 +2,11 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput 
 import React, { useRef, useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation'
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize
+} from "react-native-responsive-dimensions";
 const OtpVerifyScreen = ({ navigation }) => {
   const et1 = useRef();
   const et2 = useRef();
@@ -26,7 +31,7 @@ const OtpVerifyScreen = ({ navigation }) => {
         </View>
         <Image
           source={require('../../asset/images/Otp.png')}
-          style={{ width: 280, height: 280, alignSelf: 'center' }}
+          style={styles.imageStyle}
         />
 
         <Text style={styles.enterText}>Enter OTP</Text>
@@ -175,4 +180,9 @@ const styles = StyleSheet.create({
     width: '12%',
     borderRadius: 10
   },
+  imageStyle: {
+    height:280, // 50% of window height
+    width: 280, 
+    alignSelf: 'center'
+  }
 })
