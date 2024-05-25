@@ -31,10 +31,10 @@ const CategoryScreen = ({navigation}) => {
         <View style={styles.container}>
 
             <TouchableOpacity>   
-            <View style={{ flexDirection: 'row' }}>
+            <View style={styles.location}>
             <Entypo
                         name='location-pin'
-                        size={30}
+                        size={25}
                         color='#000'
                      />
                 <Text style={styles.address}>123 Main St,City,Country</Text>
@@ -51,7 +51,7 @@ const CategoryScreen = ({navigation}) => {
                     placeholderTextColor="#888"
                 />
             </View>
-            <Text style={styles.allsrvc}>All Services...</Text>
+            <Text style={styles.allsrvc}>All Services</Text>
 
             <FlatList
                 data={data}
@@ -86,16 +86,19 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5, 
     },
+    location: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: '2%'
+    },
     address:{
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: 'black',
-        marginBottom: '3%' 
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#000',
     },
     input: {
         flex: 1,
         paddingVertical: '2%',
-        fontSize: 16,
     },
     searchIcon: {
         marginRight: '2%',
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     },
    
     allsrvc: {
-        fontSize: 17,
+        fontSize: 15,
         fontWeight: 'bold',
         color: 'black',
         marginBottom: '6%'
