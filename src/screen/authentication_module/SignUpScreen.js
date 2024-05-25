@@ -19,7 +19,7 @@ const SignUpScreen = ({ navigation }) => {
     const [addressErr, setAdressErr] = useState('');
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
-    
+
     const Validation = () => {
         var isValid = true;
         if (uname == '') {
@@ -105,20 +105,19 @@ const SignUpScreen = ({ navigation }) => {
                         <Entypo name='location-pin' size={30} color='#000' />
                         <GooglePlacesAutocomplete
                             placeholder='Search Area'
-                            debounce={400}
                             query={{
                                 key: 'API_KEY',
                                 language: 'en'
                             }}
                             value={area}
-                        onChangeText={(text) => setarea(text)}
+                            onChangeText={(text) => setarea(text)}
                         />
                     </View>
                     <Text style={styles.error}>{areaErr}</Text>
                 </View>
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigation.navigate('App_Drawer_Navigation')}
-                    // onPress={Validation}
+                // onPress={Validation}
                 >
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
@@ -241,7 +240,7 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
-        marginHorizontal: 10,
-        marginTop: '1%'
+
+
     }
 })

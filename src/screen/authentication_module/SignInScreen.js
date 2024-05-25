@@ -15,14 +15,6 @@ const SignInScreen = ({ navigation }) => {
     } else {
       setMobileError('');
     }
-    const phoneNumberRegex = /^[0-9]{10}$/;
-    if (!mobile || !phoneNumberRegex.test(mobile)) {
-      setMobileError('Enter a valid 10-digit mobile number');
-      isValid = false;
-    } else {
-      setMobileError('');
-    }
-
     if (isValid) {
 
     }
