@@ -31,7 +31,7 @@ const ViewService = () => {
                     <TouchableOpacity>
                         <LeftArrow
                             name='arrow-left'
-                            size={30}
+                            size={25}
                             color='#000'
                         />
                     </TouchableOpacity>
@@ -40,7 +40,7 @@ const ViewService = () => {
                 <View style={styles.location}>
                     <Entypo
                         name='location-pin'
-                        size={40}
+                        size={25}
                         color='#000'
                     />
                     <Text style={styles.total}>444 Walnut St, City, Country</Text>
@@ -112,9 +112,8 @@ const styles = StyleSheet.create({
     },
     total: {
         color: '#000',
-        fontWeight: 'bold',
-        //paddingLeft: '5%',
-        fontSize: 15
+        fontWeight: '500',
+        fontSize: 16
     },
     name: {
         flexDirection: 'row',

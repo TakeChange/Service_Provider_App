@@ -15,21 +15,22 @@ const OtpVerifyScreen = ({ navigation }) => {
   return (
     <ScrollView >
       <View style={{ flex: 1, margin: 15 }}>
-        <TouchableOpacity  onPress={() => navigation.navigate('')}>
+        <View style={styles.lefticon}>
+        <TouchableOpacity  onPress={() => navigation.navigate('SignInScreen')}>
           <LeftArrow
             name='arrow-left'
-            size={30}
-            color='#000'
+            size={25}
+            color='#fff'
           />
         </TouchableOpacity>
-
+        </View>
         <Image
-          source={require('../../asset/images/OTP.png')}
-          style={{ width: 230, height: 230, alignSelf: 'center', marginTop: '10%' }}
+          source={require('../../asset/images/Otp.png')}
+          style={{ width: 280, height: 280, alignSelf: 'center' }}
         />
 
         <Text style={styles.enterText}>Enter OTP</Text>
-        <Text style={styles.reqText}>On 4 Digit Code has been sent to *******421 number</Text>
+        <Text style={styles.reqText}>On 4 digit code has been sent to *******421 number</Text>
 
         <View style={styles.otpView}>
           <TextInput
@@ -130,11 +131,11 @@ const styles = StyleSheet.create({
     color: '#009eb4',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: '5%'
+    marginTop: '6%'
   },
   reqText: {
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 20,
     color: '#000',
   },
   otpView: {
@@ -165,5 +166,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     marginTop:'3%'
-  }
+  },
+  lefticon: {
+    backgroundColor:'#000',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    padding:'2%',
+    width:'12%',
+    borderRadius:10
+},
 })

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LoginOption from './LoginOption';
+import SignUpScreen from './SignUpScreen';
 const OptionScreen = ({ navigation }) => {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
 
@@ -11,7 +12,7 @@ const OptionScreen = ({ navigation }) => {
 
   const handleRegisterPress = () => {
     setIsLoginClicked(false);
-    navigation.navigate('LoginOption'); // Change 'SignUpScreen' to the name of your sign-up screen
+    navigation.navigate('SignUpScreen'); // Change 'SignUpScreen' to the name of your sign-up screen
   };
 
   return (
@@ -56,24 +57,24 @@ const styles = StyleSheet.create({
   TxtStyle: {
     marginTop: 40,
     textAlign: 'center',
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: 'bold',
     color: '#000',
   },
   TxtStyle1: {
-    marginTop: 10,
     textAlign: 'center',
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#000',
   },
   imageContainer: {
-    alignItems: 'center',
-    marginVertical: 10,
+    justifyContent:'center',
+    alignItems:'center',
+    padding:'4%'
+    
   },
   imageStyle: {
     height: 400,
-    width: 350,
+    width: '90%',
   },
   buttonContainer: {
     alignItems: 'center',
@@ -82,10 +83,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderRadius: 10,
-    width: '100%',
-    height: 55,
     marginBottom: 20,
+    padding: '2%',
+    width: '80%',
+    borderRadius: 10,
+    
   },
   loginButtonActive: {
     borderColor: '#009eb4',
@@ -96,9 +98,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#009eb4',
   },
   buttonText: {
-    fontSize: 20,
     fontWeight: 'bold',
-    color: "#000"
+    color: "#000",
+    textAlign: 'center',
+    fontSize: 17,
+    
   },
   buttonTextActive: {
     color: '#fff',
