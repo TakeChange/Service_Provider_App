@@ -17,8 +17,6 @@ const App_Drawer_Navigation = () => {
           backgroundColor: 'transparent',
           elevation: 0,
           shadowOpacity: 0,
-
-
         },
 
         headerTitle: ''

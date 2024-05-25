@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     cardTitle: {
-        fontSize: 10,
+        fontSize: 8,
         fontWeight: 'bold',
         marginTop: 5,
         color: '#000',

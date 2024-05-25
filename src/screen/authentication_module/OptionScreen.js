@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import LoginOption from './LoginOption';
-import SignUpScreen from './SignUpScreen';
 const OptionScreen = ({ navigation }) => {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
 

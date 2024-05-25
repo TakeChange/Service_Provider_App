@@ -10,7 +10,7 @@ const LoginOption = ({ navigation }) => {
         if (checked === 'first') {
             navigation.navigate('SignInScreen');
         } else if (checked === 'second') {
-            navigation.navigate('VendorScreen');
+            // navigation.navigate('VendorScreen');
         }
     }
 
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     lable: {
         paddingLeft: '4%',
         marginTop:'4%'
-       
     },
     leftIcon: {
         backgroundColor:'#000',
