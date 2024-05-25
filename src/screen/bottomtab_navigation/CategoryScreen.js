@@ -54,7 +54,7 @@ const CategoryScreen = ({ navigation }) => {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 horizontal={false}
-                numColumns={4}
+                numColumns={3}
             />
         </View>
 

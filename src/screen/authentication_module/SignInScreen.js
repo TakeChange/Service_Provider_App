@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
 
 const SignInScreen = ({ navigation }) => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -21,6 +21,7 @@ const SignInScreen = ({ navigation }) => {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.imgContainer}>
         <Image
@@ -57,6 +58,7 @@ const SignInScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
