@@ -7,13 +7,11 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const ProfileScreen = () => {
     const [fullName, setFullName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [area, setArea] = useState('');
     const [address, setAddress] = useState('');
 
     const [fullNameError, setFullNameError] = useState('');
     const [phoneNumberError, setPhoneNumberError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
     const [areaError, setAreaError] = useState('');
     const [addressError, setAddressError] = useState('');
 
@@ -31,18 +29,12 @@ const ProfileScreen = () => {
             setFullNameError('');
         }
 
-        if (!phoneNumber) {
-            setPhoneNumberError('Enter your mobile number');
+        const phoneNumberRegex = /^[0-9]{10}$/;
+        if (!phoneNumber || !phoneNumberRegex.test(phoneNumber)) {
+            setPhoneNumberError('Enter a valid 10-digit mobile number');
             isValid = false;
         } else {
             setPhoneNumberError('');
-        }
-
-        if (!confirmPassword) {
-            setConfirmPasswordError('Enter your confirm password');
-            isValid = false;
-        } else {
-            setConfirmPasswordError('');
         }
 
         if (!area) {
@@ -80,35 +72,25 @@ const ProfileScreen = () => {
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
 
                 <Text style={styles.text}>Mobile Number</Text>
-                <View style={styles.numberinput}>
-                    <PhoneInput
-                        defaultValue={phoneNumber}
-                        defaultCode='IN'
-                        onChangeFormattedText={(text) => setPhoneNumber(text)}
-                    />
-                    <TouchableOpacity onPress={() => { Alert.alert(phoneNumber) }}>
-                    </TouchableOpacity>
-                </View>
-                {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
 
-                <Text style={styles.text}>Confirm Password</Text>
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
-                        placeholder=""
-                        secureTextEntry
-                        value={confirmPassword}
-                        onChangeText={setConfirmPassword}
-
+                        placeholder="Enter your mobile number"
+                        value={phoneNumber}
+                        keyboardType="numeric"
+                        maxLength={10}
+                        onChangeText={setPhoneNumber}
                     />
                 </View>
-                {confirmPasswordError !== '' && <Text style={styles.error}>{confirmPasswordError}</Text>}
+                {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
 
 
                 <Text style={styles.text}>Area</Text>
                 <View style={styles.inputContainer}>
                     <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
                     <TextInput
+                        style={styles.txtfield}
                         placeholder="Enter location"
                         value={area}
                         onChangeText={setArea}
@@ -163,31 +145,19 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: '600',
-        fontSize: 17
+        fontSize: 17,
+        color: '#000',
+        padding: '2%'
     },
     txtfield: {
         marginLeft: '2%',
         color: '#000'
     },
     txtinput: {
+        height: 56,
+        color: '#000',
         marginTop: 5,
         backgroundColor: '#fff',
-        flex: 1,
-        height: '50%',
-        fontSize: 17,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    numberinput: {
-        height: 65,
-        textcolor: '#000',
-        marginTop: 5,
-        backgroundColor: '#ffffff',
-        flex: 1,
         fontSize: 15,
         borderRadius: 10,
         shadowColor: '#000',
@@ -195,8 +165,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        alignItems: 'center',
+
     },
+
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -208,6 +179,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
+        height: 56,
+
     },
     icon: {
         marginLeft: 10,
@@ -220,13 +193,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: '2%',
         width: '50%',
-        borderRadius: 15
+        borderRadius: 15,
+        height: 56,
+
     },
     error: {
         color: 'red',
     },
 
 })
+
+
+
+
 
 
 
