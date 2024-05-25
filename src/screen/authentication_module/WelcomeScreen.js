@@ -2,18 +2,11 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LeftArrow from 'react-native-vector-icons/Feather'
-import OptionScreen from './OptionScreen';
+
 const Welcome = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
-                <LeftArrow
-                    name='arrow-left'
-                    size={30}
-                    color='#000'
-                />
-            </TouchableOpacity>
-
+           
             <View style={styles.content}>
                 <ImageBackground
                     source={require('../../asset/images/welcome.png')}
@@ -21,8 +14,7 @@ const Welcome = ({ navigation }) => {
                     style={styles.imageBackground}
                 />
                 <View style={styles.textContainer}>
-                    <Text style={styles.textStyle}>Effortless & Reliable</Text>
-                    <Text style={styles.textStyle}>Electrician Tracking !!!</Text>
+                    <Text style={styles.mottoStyle}>Customer happiness is our motto !!!</Text>
                     
                 </View>
             </View>
@@ -38,7 +30,6 @@ export default Welcome;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
         padding: 20,
     },
     content: {
@@ -47,34 +38,34 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     imageBackground: {
-        height: 400,
+        height: 250,
         width: 300,
     },
     textContainer: {
         alignItems: 'center',
         marginBottom: 20,
     },
-    textStyle: {
-        fontSize: 17,
-        fontWeight: 'bold',
-        color: '#000',
-        textAlign: 'center',
-       
+    mottoStyle:{
+        fontSize:16, 
+        marginTop:20, 
+        color:"#000",
+        fontWeight:'700'
+        
     },
     button: {
         
         alignItems: 'center',
         justifyContent: 'center',
         height:40,
-        width: '20%',
+        width: '25%',
         borderRadius: 10,
         backgroundColor: '#009eb4',
         marginBottom: 30,
-        marginLeft: '80%',
+        marginLeft: '75%',
     },
     buttonText: {
         color: '#fff',
-        fontSize: 15,
-        fontWeight: 'bold',
+        fontSize: 18,
+        fontWeight: '500',
     },
 });

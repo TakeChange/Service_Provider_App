@@ -2,18 +2,26 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import LeftArrow from 'react-native-vector-icons/Feather'
 import { RadioButton } from 'react-native-paper'
-import SignInScreen from './SignInScreen'
-const LoginOption = ({navigation}) => {
+
+const LoginOption = ({ navigation }) => {
     const [checked, setChecked] = useState('');
+
+    const handleNextPress = () => {
+        if (checked === 'first') {
+            navigation.navigate('SignInScreen');
+        } else if (checked === 'second') {
+            navigation.navigate('VendorScreen');
+        }
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.leftIcon}>
-                <TouchableOpacity onPress={()=>navigation.navigate('OptionScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('OptionScreen')}>
                     <LeftArrow
                         name='arrow-left'
-                        size={25}
-                        color='#000'
+                        size={20}
+                        color='#fff'
                     />
                 </TouchableOpacity>
             </View>
@@ -38,7 +46,6 @@ const LoginOption = ({navigation}) => {
                         style={{ width: "90%", height: 200, borderRadius: 20 }}
                     />
                 </View>
-
             </View>
 
             <View>
@@ -59,7 +66,7 @@ const LoginOption = ({navigation}) => {
                 </View>
             </View>
             <View style={styles.Butnview}>
-                <TouchableOpacity style={styles.butn} onPress={()=>navigation.navigate('SignInScreen')}> 
+                <TouchableOpacity style={styles.butn} onPress={handleNextPress}>
                     <Text style={styles.next}>Next</Text>
                 </TouchableOpacity>
             </View>
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
     },
     txt: {
         fontSize: 20,
-        fontWeight: '600',
+        fontWeight: 'bold',
         color: '#000'
     },
     info: {
@@ -100,22 +107,31 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         alignItems: 'center',
         padding: '2%',
-        width: '20%',
+        width: '25%',
         borderRadius: 10
     },
     next: {
         color: '#fff',
         fontWeight: '500',
-        fontSize: 15
+        fontSize: 18
     },
     user: {
         alignSelf: 'center',
         fontWeight: 'bold',
         color: '#000',
-        fontSize: 20
+        fontSize: 17
     },
     lable: {
-        paddingLeft: '2%'
+        paddingLeft: '4%',
+        marginTop:'4%'
+       
+    },
+    leftIcon: {
+        backgroundColor:'#000',
+        justifyContent:'flex-start',
+        alignItems:'center',
+        padding:'2%',
+        width:'10%',
+        borderRadius:10
     }
-
 })
