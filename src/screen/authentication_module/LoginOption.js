@@ -9,10 +9,10 @@ const LoginOption = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.leftIcon}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('OptionScreen')}>
                     <LeftArrow
                         name='arrow-left'
-                        size={30}
+                        size={25}
                         color='#000'
                     />
                 </TouchableOpacity>

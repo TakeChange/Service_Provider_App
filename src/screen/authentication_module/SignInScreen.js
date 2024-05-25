@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginTop:'3%'
   },
   text: {
-    fontSize: 26,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#009eb4',
    padding:'2%',
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     color:'#000',
     fontWeight: '600',
     marginTop: '10%',
-    fontSize: 17,
+    fontSize: 15,
     padding: '2%'
 
   },
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
 
   },
