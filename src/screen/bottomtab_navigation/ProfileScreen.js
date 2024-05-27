@@ -129,7 +129,7 @@ const ProfileScreen = () => {
                 {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
 
                 <TouchableOpacity style={styles.updatebtn} onPress={handleUpdate}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#fff' }}>Update</Text>
+                    <Text style={styles.btn}>Update</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        justifyContent:'center',
+        justifyContent: 'center',
 
     },
     inputContainer: {
@@ -191,13 +191,15 @@ const styles = StyleSheet.create({
         padding: '3%',
         width: '50%',
         borderRadius: 15,
-
-
     },
     error: {
         color: 'red',
     },
-
+    btn: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#fff'
+    }
 })
 
 
