@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
+//Validation
 const SignInScreen = ({ navigation }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,6 +17,14 @@ const SignInScreen = ({ navigation }) => {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
+  useFocusEffect(
+    React.useCallback(() => {
+        return () => {
+            // Reset errors when navigating away from screen
+            setErrorMessage('');
+        };
+    }, [])
+);
   return (
     <ScrollView>
       <View style={styles.container}>
