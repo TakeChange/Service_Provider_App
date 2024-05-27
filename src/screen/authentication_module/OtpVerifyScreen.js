@@ -150,15 +150,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   inputView: {
-    marginTop: '15%',
-    width: '14%',
-    height: '45%',
+    marginTop: '8%',
+    width: '15%',
+    height: '57%',
     borderWidth: 0.5,
     borderRadius: 10,
     color: 'black',
     marginLeft: 10,
     textAlign: 'center'
-
   },
   TimeText: {
     textAlign: 'center',

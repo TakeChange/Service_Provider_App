@@ -9,7 +9,7 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../asset/images/Splash.png')}
+        source={require('../../asset/images/Sevakalpak.png')}
         resizeMode='contain'
         style={styles.imageStyle}
       />
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#009eb4'
+    backgroundColor: '#fff'
   },
   imageStyle: {
     height: "90%",
