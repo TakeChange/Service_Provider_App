@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
+
 const ProfileScreen = () => {
     const [fullName, setFullName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -52,7 +53,7 @@ const ProfileScreen = () => {
         if (isValid) {
             showToast('Profile Updated Successfully!');
         }
-        
+
     };
     useFocusEffect(
         React.useCallback(() => {
@@ -61,7 +62,7 @@ const ProfileScreen = () => {
                 setPhoneNumberError('');
                 setAreaError('');
                 setAddressError('');
-                
+
             };
         }, [])
     );
@@ -75,7 +76,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your name"
                         value={fullName}
-                        onChange={(text)=>setFullName(text)}
+                        onChange={(text) => setFullName(text)}
                     />
                 </View>
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
@@ -101,7 +102,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter location"
                         value={area}
-                        onChangeText={(text)=>setArea(text)}
+                        onChangeText={(text) => setArea(text)}
                     />
                     <View>
                         <GooglePlacesAutocomplete
@@ -131,7 +132,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your Address"
                         value={address}
-                        onChangeText={(text)=>setAddress(text)}
+                        onChangeText={(text) => setAddress(text)}
                     />
                 </View>
                 {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
