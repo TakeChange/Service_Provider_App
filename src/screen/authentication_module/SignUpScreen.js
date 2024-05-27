@@ -13,8 +13,7 @@ const SignUpScreen = ({ navigation }) => {
     const [aadharErr, setAadharErr] = useState('');
     const [adress, setaddress] = useState('');
     const [addressErr, setAdressErr] = useState('');
-    const [area, setarea] = useState('');
-    const [areaErr, setAreaErr] = useState('');
+
 
     const Validation = () => {
         var isValid = true;
@@ -24,16 +23,68 @@ const SignUpScreen = ({ navigation }) => {
         } else {
             setuNameErr('');
         }
+        if (mobile == '') {
+            setMobileErr('Mobile do not empty');
+            isValid = false;
+        }
+        else {
+            setMobileErr('');
+        }
+        if (aadhar == '') {
+            setAdressErr('Aadhar Number do not empty');
+            isValid = false;
+        }
+        else {
+            setAadharErr('');
+        }
+        if (adress == '') {
+            setAadharErr('Address do not empty');
+            isValid = false;
+        }
         if (isValid) {
-
+            storeData('');
+        }
+    }
+    const storeData = async ()=>{
+        try{
+            await AsyncStorage.setItem('uname',username);
+            await AsyncStorage.setItem('pass',password);
+            await AsyncStorage.setItem('mail',email);
+            getData();
+            ToastAndroid.show('SignUp successfully', ToastAndroid.LONG);
+            navigation.navigate('SignIn')
+        }
+        catch(e)
+        {
+            console.log(e);
         }
     }
 
+    const getData = async ()=>{
+        try{
+            var uname = await AsyncStorage.getItem('uname');
+            var pass = await AsyncStorage.getItem('pass');
+            var mail = await AsyncStorage.getItem('mail');
+
+            console.log('Username :',uname)
+            console.log('Password :',pass)
+            console.log('Email :',mail)
+
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+    }
     useFocusEffect(
         React.useCallback(() => {
             return () => {
                 // Reset errors when navigating away from screen
                 setuNameErr('');
+                setMobileErr('');
+                setAadharErr('');
+                setAdressErr('');
+                
             };
         }, [])
     );
@@ -82,7 +133,7 @@ const SignUpScreen = ({ navigation }) => {
                         onChangeText={(text) => setAadhar(text)}
                     />
                 </View>
-                <Text style={styles.error}>{addressErr}</Text>
+                <Text style={styles.error}>{aadharErr}</Text>
                 <Text style={styles.text}>Address</Text>
                 <View style={styles.txtinput}>
                     <TextInput
@@ -93,22 +144,7 @@ const SignUpScreen = ({ navigation }) => {
                     />
                 </View>
                 <Text style={styles.error}>{addressErr}</Text>
-                <Text style={styles.text}>Area</Text>
-                <View style={styles.txtinput}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                        <Entypo name='location-pin' size={30} color='#000' />
-                        <GooglePlacesAutocomplete
-                            placeholder='Search Area'
-                            query={{
-                                key: 'API_KEY',
-                                language: 'en'
-                            }}
-                            value={area}
-                            onChangeText={(text) => setarea(text)}
-                        />
-                    </View>
-                    <Text style={styles.error}>{areaErr}</Text>
-                </View>
+               
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigation.navigate('App_Drawer_Navigation')}
                 // onPress={Validation}
