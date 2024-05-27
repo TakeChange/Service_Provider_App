@@ -16,7 +16,15 @@ const SignUpScreen = ({ navigation }) => {
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
 
-    
+
+    const validateMobile = () => {
+        const mobileNumberPattern = /^[6-9]\d{9}$/;
+        if (!mobileNumberPattern.test(mobile)) {
+            setMobileErr('Please enter a valid 10-digit mobile number.');
+        } else {
+            setMobileErr('');
+        }
+    };
     const Validation = () => {
         var isValid = true;
         if (uname == '') {
@@ -24,14 +32,13 @@ const SignUpScreen = ({ navigation }) => {
             isValid = false;
         } else {
             setuNameErr('');
-            
+
         }
-        if (mobile == '') {
-            setMobileErr('Mobile do not empty');
+        if (mobile.trim() === '') {
+            setMobileErr('Mobile number cannot be empty');
             isValid = false;
-        }
-        else {
-            setMobileErr('');
+        } else {
+            validateMobile();
         }
         if (aadhar == '') {
             setAadharErr('Aadhar Number do not empty');
@@ -50,7 +57,7 @@ const SignUpScreen = ({ navigation }) => {
         if (isValid) {
             storeData('');
         }
-        
+
     }
     const storeData = async () => {
         try {
@@ -90,7 +97,7 @@ const SignUpScreen = ({ navigation }) => {
                 setMobileErr('');
                 setAadharErr('');
                 setAreaErr('');
-                
+
             };
         }, [])
     );
@@ -115,7 +122,7 @@ const SignUpScreen = ({ navigation }) => {
                         onChangeText={(text) => setuName(text)}
                     />
                 </View>
-                 <Text style={styles.error}>{unameErr}</Text>
+                <Text style={styles.error}>{unameErr}</Text>
                 <Text style={styles.text}>Mobile Number</Text>
                 <View style={styles.txtinput}>
                     <TextInput
@@ -125,6 +132,7 @@ const SignUpScreen = ({ navigation }) => {
                         maxLength={10}
                         value={mobile}
                         onChangeText={(text) => setMobile(text)}
+                        onBlur={validateMobile}
                     />
                 </View>
                 <Text style={styles.error}>{mobileErr}</Text>
