@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastA
 import React, { useState } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import { useFocusEffect } from '@react-navigation/native';
 const ProfileScreen = () => {
     const [fullName, setFullName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -52,8 +52,19 @@ const ProfileScreen = () => {
         if (isValid) {
             showToast('Profile Updated Successfully!');
         }
+        
     };
-
+    useFocusEffect(
+        React.useCallback(() => {
+            return () => {
+                setFullNameError('');
+                setPhoneNumberError('');
+                setAreaError('');
+                setAddressError('');
+                
+            };
+        }, [])
+    );
     return (
         <ScrollView>
             <View style={styles.Container}>
@@ -64,7 +75,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your name"
                         value={fullName}
-                        onChangeText={setFullName}
+                        onChange={(text)=>setFullName(text)}
                     />
                 </View>
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
@@ -77,7 +88,7 @@ const ProfileScreen = () => {
                         value={phoneNumber}
                         keyboardType="numeric"
                         maxLength={10}
-                        onChangeText={setPhoneNumber}
+                        onChangeText={(text) => setPhoneNumber(text)}
                     />
                 </View>
                 {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
@@ -90,7 +101,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter location"
                         value={area}
-                        onChangeText={setArea}
+                        onChangeText={(text)=>setArea(text)}
                     />
                     <View>
                         <GooglePlacesAutocomplete
@@ -120,7 +131,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your Address"
                         value={address}
-                        onChangeText={setAddress}
+                        onChangeText={(text)=>setAddress(text)}
                     />
                 </View>
                 {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
@@ -198,16 +209,5 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
 })
-
-
-
-
-
-
-
-
-
-
-
 
 
