@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import React, { useState } from 'react';
-import PhoneInput from "react-native-phone-number-input";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 
@@ -29,8 +28,8 @@ const ProfileScreen = () => {
             setFullNameError('');
         }
 
-        const phoneNumberRegex = /^[0-9]{10}$/;
-        if (!phoneNumber || !phoneNumberRegex.test(phoneNumber)) {
+        const phoneNumberpattern = /^[7-9][0-9]{9}$/;
+        if (!phoneNumber || !phoneNumberpattern.test(phoneNumber)) {
             setPhoneNumberError('Enter a valid 10-digit mobile number');
             isValid = false;
         } else {
@@ -50,7 +49,6 @@ const ProfileScreen = () => {
         } else {
             setAddressError('');
         }
-
         if (isValid) {
             showToast('Profile Updated Successfully!');
         }
@@ -72,7 +70,6 @@ const ProfileScreen = () => {
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
 
                 <Text style={styles.text}>Mobile Number</Text>
-
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
