@@ -1,73 +1,78 @@
-
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
+//Validation
 const SignInScreen = ({ navigation }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleGetOTP = () => {
-
-    const mobileNumberPattern = /^[0-9]{10}$/;
+    const mobileNumberPattern = /^[7-9][0-9]{9}$/;
     if (mobileNumberPattern.test(mobileNumber)) {
-
       setErrorMessage('');
       navigation.navigate('OtpVerifyScreen');
     }
     else {
-
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
-
+  useFocusEffect(
+    React.useCallback(() => {
+        return () => {
+            // Reset errors when navigating away from screen
+            setErrorMessage('');
+        };
+    }, [])
+);
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <View style={styles.imgContainer}>
-        <Image
-          source={require('../../asset/images/Signup.png')}
-          style={{ width: "90%", height: 200, }}
-        />
-      </View>
-      <View style={styles.title}>
-        <Text style={styles.text}>Login Here</Text>
-        <Text style={styles.msg}>Enter Your Mobile Number</Text>
-        <Text style={styles.msg1}>reset your password</Text>
-      </View>
-
-      <Text style={styles.textname}>Mobile Number</Text>
-      <View style={styles.txtinput}>
-        <TextInput
-          style={styles.textfield}
-          placeholder="Enter your Mobile number"
-          keyboardType='numeric'
-          maxLength={10}
-          value={mobileNumber}
-          onChangeText={setMobileNumber}
-        />
-      </View>
-      {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
-      <TouchableOpacity style={styles.button} onPress={handleGetOTP}>
-        <Text style={styles.buttonText}>Get OTP</Text>
-      </TouchableOpacity>
-
-      <View style={styles.bottomtxt}>
-        <Text style={styles.txtname1}>New User?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-          <Text style={styles.txtname2}> Create an Account</Text>
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Image
+            source={require('../../asset/images/Signup.png')}
+            style={styles.img}
+          />
+        </View>
+        <View style={styles.title}>
+          <Text style={styles.text}>Login Here</Text>
+          <Text style={styles.msg}>Enter Your Mobile Number</Text>
+          <Text style={styles.msg1}>reset your password</Text>
+        </View>
+        <Text style={styles.textname}>Mobile Number</Text>
+        <View style={styles.txtinput}>
+          <TextInput
+            style={styles.textfield}
+            placeholder="Enter your Mobile number"
+            keyboardType='numeric'
+            maxLength={10}
+            value={mobileNumber}
+            onChangeText={setMobileNumber}
+          />
+        </View>
+        {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
+        <TouchableOpacity style={styles.button} onPress={handleGetOTP}>
+          <Text style={styles.buttonText}>Get OTP</Text>
         </TouchableOpacity>
+        <View style={styles.bottomtxt}>
+          <Text style={styles.txtname1}>New User?</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
+            <Text style={styles.txtname2}> Create an Account</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 };
-
 export default SignInScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: '8%',
+  },
+  img: {
+    width: '90%',
+    height: 200,
   },
   title: {
     alignItems: 'center',
@@ -114,13 +119,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 5,
-    justifyContent:'center',
-    
+    justifyContent: 'center',
   },
   textfield: {
     marginLeft: '2%',
     color: '#000',
-   
   },
   error: {
     color: 'red',

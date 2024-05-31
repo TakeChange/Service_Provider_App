@@ -35,3 +35,6 @@ plugin:
 for responsive dimensions
 //https://www.npmjs.com/package/react-native-responsive-dimensions
 npm i react-native-responsive-dimensions
+
+plugin:
+        npm i @react-native-async-storage/async-storage

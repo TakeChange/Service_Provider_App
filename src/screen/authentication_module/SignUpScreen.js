@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native'
 import React, { useState } from 'react'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const SignUpScreen = ({ navigation }) => {
     const [uname, setuName] = useState('');
     const [unameErr, setuNameErr] = useState('');
@@ -11,11 +13,18 @@ const SignUpScreen = ({ navigation }) => {
     const [mobileErr, setMobileErr] = useState('');
     const [aadhar, setAadhar] = useState('');
     const [aadharErr, setAadharErr] = useState('');
-    const [adress, setaddress] = useState('');
-    const [addressErr, setAdressErr] = useState('');
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
 
+
+    const validateMobile = () => {
+        const mobileNumberPattern = /^[6-9]\d{9}$/;
+        if (!mobileNumberPattern.test(mobile)) {
+            setMobileErr('Please enter a valid 10-digit mobile number.');
+        } else {
+            setMobileErr('');
+        }
+    };
     const Validation = () => {
         var isValid = true;
         if (uname == '') {
@@ -23,17 +32,72 @@ const SignUpScreen = ({ navigation }) => {
             isValid = false;
         } else {
             setuNameErr('');
+
+        }
+        if (mobile.trim() === '') {
+            setMobileErr('Mobile number cannot be empty');
+            isValid = false;
+        } else {
+            validateMobile();
+        }
+        if (aadhar == '') {
+            setAadharErr('Aadhar Number do not empty');
+            isValid = false;
+        }
+        else {
+            setAadharErr('');
+        }
+        if (area == '') {
+            setAreaErr('Area do not empty');
+            isValid = false;
+        }
+        else {
+            setAreaErr('');
         }
         if (isValid) {
+            storeData('');
+        }
 
+    }
+    const storeData = async () => {
+        try {
+            await AsyncStorage.setItem('username', uname);
+            await AsyncStorage.setItem('Mobile', mobile);
+            await AsyncStorage.setItem('Aadhar', aadhar);
+            await AsyncStorage.setItem('Area', area);
+            getData();
+            ToastAndroid.show('SignUp successfully', ToastAndroid.LONG);
+            navigation.navigate('SignInScreen')
+        }
+        catch (e) {
+            console.log(e);
         }
     }
+    const getData = async () => {
+        try {
+            var username = await AsyncStorage.getItem('username');
+            var Mobile = await AsyncStorage.getItem('Mobile');
+            var aadhar = await AsyncStorage.getItem('Aadhar');
+            var Area = await AsyncStorage.getItem('Area');
 
+            console.log('Username :', username)
+            console.log('Mobile :', Mobile)
+            console.log('aadhar :', aadhar)
+            console.log('area :', Area)
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
     useFocusEffect(
         React.useCallback(() => {
             return () => {
                 // Reset errors when navigating away from screen
                 setuNameErr('');
+                setMobileErr('');
+                setAadharErr('');
+                setAreaErr('');
+
             };
         }, [])
     );
@@ -42,7 +106,7 @@ const SignUpScreen = ({ navigation }) => {
             <View style={styles.container}>
                 <View style={styles.mainIcon}>
                     <View style={styles.Icon}>
-                        <FontAwesome5 name="user" size={30} color="#ffffff" style={{ padding: 10 }} />
+                        <FontAwesome5 name="user" size={30} color="#ffffff" style={styles.icontop} />
                     </View>
                 </View>
                 <View style={styles.txtstyle}>
@@ -68,6 +132,7 @@ const SignUpScreen = ({ navigation }) => {
                         maxLength={10}
                         value={mobile}
                         onChangeText={(text) => setMobile(text)}
+                        onBlur={validateMobile}
                     />
                 </View>
                 <Text style={styles.error}>{mobileErr}</Text>
@@ -77,43 +142,42 @@ const SignUpScreen = ({ navigation }) => {
                         style={styles.textfield}
                         placeholder="Enter Your Aadhar Number"
                         keyboardType='numeric'
-                        maxLength={10}
+                        maxLength={12}
                         value={aadhar}
                         onChangeText={(text) => setAadhar(text)}
                     />
                 </View>
-                <Text style={styles.error}>{addressErr}</Text>
-                <Text style={styles.text}>Address</Text>
-                <View style={styles.txtinput}>
+                <Text style={styles.error}>{aadharErr}</Text>
+
+                <Text style={styles.text}>Area</Text>
+                <View style={styles.inputContainer}>
+                    <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
                     <TextInput
                         style={styles.textfield}
-                        placeholder="Enter Your Address"
-                        value={adress}
-                        onChangeText={(text) => setaddress(text)}
+                        placeholder="Enter location"
+                        value={area}
+                        onChangeText={(text) => setarea(text)}
                     />
-                </View>
-                <Text style={styles.error}>{addressErr}</Text>
-                <Text style={styles.text}>Area</Text>
-                <View style={styles.txtinput}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                        <Entypo name='location-pin' size={30} color='#000' />
+                    <View>
                         <GooglePlacesAutocomplete
-                            placeholder='Search Area'
-                            debounce={400}
                             query={{
                                 key: 'API_KEY',
                                 language: 'en'
                             }}
-                            value={area}
-                            onChangeText={(text) => setarea(text)}
+                            styles={{
+                                container: {
+                                    flex: 1,
+                                },
+                                listView: {
+                                    position: 'absolute',
+                                    top: 50,
+                                },
+                            }}
                         />
                     </View>
-                    <Text style={styles.error}>{areaErr}</Text>
                 </View>
-                <TouchableOpacity style={styles.button}
-                    onPress={() => navigation.navigate('App_Drawer_Navigation')}
-                // onPress={Validation}
-                >
+                <Text style={styles.error}>{areaErr}</Text>
+                <TouchableOpacity style={styles.button} onPress={Validation}>
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
                 <View style={styles.msg}>
@@ -126,14 +190,11 @@ const SignUpScreen = ({ navigation }) => {
         </ScrollView>
     )
 }
-
 export default SignUpScreen
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: '8%',
-
     },
     mainIcon: {
         alignItems: 'center'
@@ -144,7 +205,6 @@ const styles = StyleSheet.create({
         height: 50,
         width: 50,
         borderRadius: 40,
-
     },
     Hellotxt: {
         fontSize: 20,
@@ -169,7 +229,7 @@ const styles = StyleSheet.create({
     txtinput: {
         height: 56,
         color: '#000000',
-        marginTop: 4,
+        marginTop: 3,
         backgroundColor: '#ffffff',
         fontSize: 15,
         borderRadius: 10,
@@ -198,7 +258,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         fontWeight: 'bold',
-
     },
     text: {
         color: '#000',
@@ -235,7 +294,23 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
-        marginHorizontal: 10,
-        marginTop: '1%'
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 5,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    icon: {
+        marginLeft: 10,
+    },
+    icontop: {
+        padding: 10,
     }
 })
