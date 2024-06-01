@@ -1,9 +1,10 @@
 
 
 import { StyleSheet, Text, View, ScrollView, FlatList, TextInput, TouchableOpacity, Image, useWindowDimensions } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MaterialIcons from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo'
+import axios from 'axios';
 // Assuming you are using Expo for vector iconsr
 const HomeScreen = ({ navigation }) => {
   const services = [
@@ -21,6 +22,26 @@ const HomeScreen = ({ navigation }) => {
   ];
   const windowWidth = useWindowDimensions().width;
   const itemWidth = (windowWidth - 60) / 4;
+
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  const fetchData = async () => {
+    try {
+      const getUser = 'https://raviscyber.in/Sevakalpak/index.php/User/GetAllUsers'
+      const response = await axios.get(getUser, {
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        // },
+      });
+      console.log("Response here:", response.data); // Log the response data
+     // console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('ViewService')}>
       <View style={styles.imageContainer}>
@@ -128,10 +149,10 @@ const styles = StyleSheet.create({
   },
 
   //
-  address:{
+  address: {
     fontSize: 16,
     fontWeight: '500',
     color: 'black',
-   
-},
+
+  },
 });

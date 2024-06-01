@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import React, { useState } from 'react';
-import PhoneInput from "react-native-phone-number-input";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { useFocusEffect } from '@react-navigation/native';
 
 const ProfileScreen = () => {
     const [fullName, setFullName] = useState('');
@@ -29,8 +29,8 @@ const ProfileScreen = () => {
             setFullNameError('');
         }
 
-        const phoneNumberRegex = /^[0-9]{10}$/;
-        if (!phoneNumber || !phoneNumberRegex.test(phoneNumber)) {
+        const phoneNumberpattern = /^[7-9][0-9]{9}$/;
+        if (!phoneNumber || !phoneNumberpattern.test(phoneNumber)) {
             setPhoneNumberError('Enter a valid 10-digit mobile number');
             isValid = false;
         } else {
@@ -50,12 +50,22 @@ const ProfileScreen = () => {
         } else {
             setAddressError('');
         }
-
         if (isValid) {
             showToast('Profile Updated Successfully!');
         }
-    };
 
+    };
+    useFocusEffect(
+        React.useCallback(() => {
+            return () => {
+                setFullNameError('');
+                setPhoneNumberError('');
+                setAreaError('');
+                setAddressError('');
+
+            };
+        }, [])
+    );
     return (
         <ScrollView>
             <View style={styles.Container}>
@@ -66,21 +76,20 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your name"
                         value={fullName}
-                        onChangeText={setFullName}
+                        onChange={(text) => setFullName(text)}
                     />
                 </View>
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
 
                 <Text style={styles.text}>Mobile Number</Text>
-
-                <View style={styles.txtinput}>
+                <View style={styles.txtinput}> 
                     <TextInput
                         style={styles.txtfield}
                         placeholder="Enter your mobile number"
                         value={phoneNumber}
                         keyboardType="numeric"
                         maxLength={10}
-                        onChangeText={setPhoneNumber}
+                        onChangeText={(text) => setPhoneNumber(text)}
                     />
                 </View>
                 {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
@@ -93,7 +102,7 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter location"
                         value={area}
-                        onChangeText={setArea}
+                        onChangeText={(text) => setArea(text)}
                     />
                     <View>
                         <GooglePlacesAutocomplete
@@ -123,13 +132,13 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your Address"
                         value={address}
-                        onChangeText={setAddress}
+                        onChangeText={(text) => setAddress(text)}
                     />
                 </View>
                 {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
 
                 <TouchableOpacity style={styles.updatebtn} onPress={handleUpdate}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20, color: '#fff' }}>Update</Text>
+                    <Text style={styles.btn}>Update</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -164,7 +173,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
-        justifyContent:'center',
+        justifyContent: 'center',
 
     },
     inputContainer: {
@@ -191,24 +200,13 @@ const styles = StyleSheet.create({
         padding: '3%',
         width: '50%',
         borderRadius: 15,
-
-
     },
     error: {
         color: 'red',
     },
-
+    btn: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: '#fff'
+    }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
