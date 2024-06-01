@@ -82,7 +82,7 @@ const ProfileScreen = () => {
                 {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
 
                 <Text style={styles.text}>Mobile Number</Text>
-                <View style={styles.txtinput}>
+                <View style={styles.txtinput}> 
                     <TextInput
                         style={styles.txtfield}
                         placeholder="Enter your mobile number"
@@ -210,5 +210,3 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
 })
-
-
