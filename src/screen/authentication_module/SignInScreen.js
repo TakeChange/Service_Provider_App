@@ -7,16 +7,23 @@ const SignInScreen = ({ navigation }) => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleGetOTP = () => {
+  const handleGetOTP = (mobileNum) => {
     const mobileNumberPattern = /^[7-9][0-9]{9}$/;
     if (mobileNumberPattern.test(mobileNumber)) {
       setErrorMessage('');
-      navigation.navigate('OtpVerifyScreen');
+      navigation.navigate('OtpVerifyScreen',{mobileNum});
     }
     else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
+  
+  const handleChangeText = (text) => {
+    // Remove any non-numeric characters
+    const filteredText = text.replace(/[^0-9]/g, '');
+    setMobileNumber(filteredText);
+  };
+
   useFocusEffect(
     React.useCallback(() => {
         return () => {
@@ -47,7 +54,7 @@ const SignInScreen = ({ navigation }) => {
             keyboardType='numeric'
             maxLength={10}
             value={mobileNumber}
-            onChangeText={setMobileNumber}
+            onChangeText={handleChangeText}
           />
         </View>
         {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}

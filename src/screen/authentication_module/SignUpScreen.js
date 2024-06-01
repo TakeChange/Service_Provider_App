@@ -16,7 +16,6 @@ const SignUpScreen = ({ navigation }) => {
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
 
-
     const validateMobile = () => {
         const mobileNumberPattern = /^[6-9]\d{9}$/;
         if (!mobileNumberPattern.test(mobile)) {
@@ -32,7 +31,6 @@ const SignUpScreen = ({ navigation }) => {
             isValid = false;
         } else {
             setuNameErr('');
-
         }
         if (mobile.trim() === '') {
             setMobileErr('Mobile number cannot be empty');
@@ -57,7 +55,6 @@ const SignUpScreen = ({ navigation }) => {
         if (isValid) {
             storeData('');
         }
-
     }
     const storeData = async () => {
         try {
@@ -97,7 +94,6 @@ const SignUpScreen = ({ navigation }) => {
                 setMobileErr('');
                 setAadharErr('');
                 setAreaErr('');
-
             };
         }, [])
     );
