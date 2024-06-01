@@ -4,14 +4,14 @@ import { useFocusEffect } from '@react-navigation/native';
 
 //Validation
 const SignInScreen = ({ navigation }) => {
-  const [mobileNumber, setMobileNumber] = useState('');
+  const [mobileNum, setMobileNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleGetOTP = (mobileNum) => {
+  const handleGetOTP = (mobileNumber) => {
     const mobileNumberPattern = /^[7-9][0-9]{9}$/;
-    if (mobileNumberPattern.test(mobileNumber)) {
+    if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
-      navigation.navigate('OtpVerifyScreen',{mobileNum});
+      navigation.navigate('OtpVerifyScreen',{mobileNumber});
     }
     else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
@@ -23,7 +23,6 @@ const SignInScreen = ({ navigation }) => {
     const filteredText = text.replace(/[^0-9]/g, '');
     setMobileNumber(filteredText);
   };
-
   useFocusEffect(
     React.useCallback(() => {
         return () => {
@@ -53,7 +52,7 @@ const SignInScreen = ({ navigation }) => {
             placeholder="Enter your Mobile number"
             keyboardType='numeric'
             maxLength={10}
-            value={mobileNumber}
+            value={mobileNum}
             onChangeText={handleChangeText}
           />
         </View>
