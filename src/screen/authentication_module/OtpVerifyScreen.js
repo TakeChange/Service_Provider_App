@@ -1,135 +1,120 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native'
-import React, { useRef, useState } from 'react'
-import LeftArrow from 'react-native-vector-icons/Feather'
-import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation'
-import {
-  responsiveHeight,
-  responsiveWidth,
-  responsiveFontSize
-} from "react-native-responsive-dimensions";
+import React, { useRef, useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
+import LeftArrow from 'react-native-vector-icons/Feather';
+import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation';
+
 const OtpVerifyScreen = ({ navigation }) => {
-  const et1 = useRef();
-  const et2 = useRef();
-  const et3 = useRef();
-  const et4 = useRef();
+  const [otpInputs, setOtpInputs] = useState(['', '', '', '']);
+  const inputRefs = useRef([]);
+  const [error, setError] = useState('');
+  const [minutes, setMinutes] = useState(10);
+  const [seconds, setSeconds] = useState(0);
 
-  const [f1, setF1] = useState('');
-  const [f2, setF2] = useState('');
-  const [f3, setF3] = useState('');
-  const [f4, setF4] = useState('');
+  useEffect(() => {
+    let timer;
+    if (minutes > 0 || seconds > 0) {
+      timer = setTimeout(() => {
+        if (seconds > 0) {
+          setSeconds(prevSeconds => prevSeconds - 1);
+        } else if (minutes > 0) {
+          setMinutes(prevMinutes => prevMinutes - 1);
+          setSeconds(59);
+        }
+      }, 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [minutes, seconds]);
+
+  const handleInputChange = (index, value) => {
+    const updatedOtpInputs = [...otpInputs];
+    updatedOtpInputs[index] = value;
+    setOtpInputs(updatedOtpInputs);
+    setError('');
+    if (value === '' && index > 0) {
+      inputRefs.current[index - 1].focus();
+    } else if (index < otpInputs.length - 1 && value !== '') {
+      inputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleVerify = () => {
+    if (otpInputs.some(input => input === '')) {
+      setError('Please fill in all OTP fields.');
+      return;
+    }
+    navigation.navigate('App_Drawer_Navigation');
+  };
+
+  const handleResendOtp = () => {
+    setMinutes(10);
+    setSeconds(0);
+    // Add logic to resend the OTP here
+  };
+
+  const renderOtpInputs = () => {
+    return otpInputs.map((otp, index) => (
+      <TextInput
+        key={index}
+        ref={ref => (inputRefs.current[index] = ref)}
+        style={[styles.inputView, { borderColor: otp.length >= 1 ? '#009eb4' : '#000' }]}
+        keyboardType='number-pad'
+        maxLength={1}
+        onChangeText={txt => handleInputChange(index, txt)}
+        value={otp}
+      />
+    ));
+  };
+
+  const formatTime = () => {
+    return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  };
+
   return (
-    <ScrollView >
-      <View style={{ flex: 1, margin: 15 }}>
-        <View style={styles.lefticon}>
-          <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
-            <LeftArrow
-              name='arrow-left'
-              size={25}
-              color='#fff'
-            />
-          </TouchableOpacity>
-        </View>
-        <Image
-          source={require('../../asset/images/Otp.png')}
-          style={styles.imageStyle}
-        />
+    <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity style={styles.leftIcon} onPress={() => navigation.navigate('SignInScreen')}>
+        <LeftArrow name='arrow-left' size={25} color='#fff' />
+      </TouchableOpacity>
+      <Image source={require('../../asset/images/Otp.png')} style={styles.imageStyle} />
+      <Text style={styles.enterText}>Enter OTP</Text>
+      <Text style={styles.reqText}>One 4 digit code has been sent to *******421 number</Text>
+      <View style={styles.otpContainer}>
+        {renderOtpInputs()}
+      </View>
+      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      <TouchableOpacity style={styles.bottomButton} onPress={handleVerify}>
+        <Text style={styles.verify}>Verify</Text>
+      </TouchableOpacity>
 
-        <Text style={styles.enterText}>Enter OTP</Text>
-        <Text style={styles.reqText}>On 4 digit code has been sent to *******421 number</Text>
-
-        <View style={styles.otpView}>
-          <TextInput
-            ref={et1}
-            style={[styles.inputView, { borderColor: f1.length >= 1 ? '#009eb4' : '#000' }]}
-            keyboardType='number-pad'
-            maxLength={1}
-            onChangeText={txt => {
-              setF1(txt);
-              if (txt.length >= 1) {
-                et2.current.focus();
-              }
-            }} />
-          <TextInput
-            ref={et2}
-            style={[styles.inputView, { borderColor: f2.length >= 1 ? '#009eb4' : '#000' }]}
-            keyboardType='number-pad'
-            maxLength={1}
-            onChangeText={txt => {
-              setF2(txt);
-              if (txt.length >= 1) {
-                et3.current.focus();
-              } else if (txt.length < 1) {
-                et1.current.focus();
-              }
-            }} />
-          <TextInput
-            ref={et3}
-            style={[styles.inputView, { borderColor: f3.length >= 1 ? '#009eb4' : '#000' }]}
-            keyboardType='number-pad'
-            maxLength={1}
-            onChangeText={txt => {
-              setF3(txt);
-              if (txt.length >= 1) {
-                et4.current.focus();
-              } else if (txt.length < 1) {
-                et2.current.focus();
-              }
-            }} />
-          <TextInput
-            ref={et4}
-            style={[styles.inputView, { borderColor: f4.length >= 1 ? '#009eb4' : '#000' }]}
-            keyboardType='number-pad'
-            maxLength={1}
-            value={f4}
-            onChangeText={txt => {
-              setF4(txt);
-              if (txt.length >= 1) {
-                et4.current.focus();
-              } else if (txt.length < 1) {
-                et3.current.focus();
-              }
-            }} />
-        </View>
-
-        <View>
-          <TouchableOpacity style={styles.bottomButton} onPress={() => navigation.navigate('App_Drawer_Navigation')}>
-            <Text style={styles.verify}>Verify</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity style={{ alignSelf: 'center', flexDirection: 'row' }}>
-            <Text style={styles.resend}>Resend OTP</Text>
-            <Text style={{ color: '#000', marginTop: '3%', paddingLeft: '2%' }}>0:20</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.resendContainer}>
+        <TouchableOpacity onPress={handleResendOtp}>
+          <Text style={styles.resend}>Resend OTP</Text>
+        </TouchableOpacity>
+        <Text style={styles.timer}>{formatTime()}</Text>
       </View>
     </ScrollView>
-  )
-}
+  );
+};
 
-export default OtpVerifyScreen
+export default OtpVerifyScreen;
 
 const styles = StyleSheet.create({
-  MainText: {
-    fontSize: 26,
-    color: '#1D1E20',
-    fontWeight: '900',
-    textAlign: 'center',
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    padding: '3%',
   },
-  bottomButton: {
-    backgroundColor: '#009eb4',
+  leftIcon: {
+    backgroundColor: '#000',
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
     padding: '2%',
-    width: '80%',
-    borderRadius: 15,
-    marginTop: '12%'
+    borderRadius: 10,
+    alignSelf: 'flex-start',
   },
-  verify: {
-    textAlign: 'center',
-    color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: 'bold'
+  imageStyle: {
+    height: 280,
+    width: 280,
+    alignSelf: 'center'
   },
   enterText: {
     fontSize: 20,
@@ -140,48 +125,56 @@ const styles = StyleSheet.create({
   },
   reqText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 16,
     color: '#000',
   },
-  otpView: {
-    width: '100%',
-    justifyContent: 'center',
+  otpContainer: {
+    width: '70%',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
+    marginBottom: '7%',
   },
   inputView: {
     marginTop: '8%',
-    width: '15%',
-    height: '57%',
+    width: '19%',
+    height: '60%',
     borderWidth: 0.5,
     borderRadius: 10,
     color: 'black',
-    marginLeft: 10,
+    marginLeft: '5%',
     textAlign: 'center'
   },
-  TimeText: {
-    textAlign: 'center',
-    color: '#000000',
+  bottomButton: {
+    backgroundColor: '#009eb4',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    width: '70%',
+    borderRadius: 15,
+    marginBottom: '5%',
+  },
+  verify: {
+    color: '#FFFFFF',
     fontSize: 17,
-    marginTop: '10%',
+    fontWeight: 'bold',
+  },
+  resendContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   resend: {
     color: '#009eb4',
     fontWeight: 'bold',
     textDecorationLine: 'underline',
-    marginTop: '3%'
+    marginRight: '3%',
   },
-  lefticon: {
-    backgroundColor: '#000',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: '2%',
-    width: '12%',
-    borderRadius: 10
+  timer: {
+    color: '#000',
   },
-  imageStyle: {
-    height:280, // 50% of window height
-    width: 280, 
-    alignSelf: 'center'
-  }
-})
+  errorText: {
+    color: 'red',
+    marginBottom: '2%',
+  },
+});
