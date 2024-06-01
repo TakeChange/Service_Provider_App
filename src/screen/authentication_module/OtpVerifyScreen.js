@@ -76,7 +76,7 @@ const OtpVerifyScreen = ({ navigation }) => {
       </TouchableOpacity>
       <Image source={require('../../asset/images/Otp.png')} style={styles.imageStyle} />
       <Text style={styles.enterText}>Enter OTP</Text>
-      <Text style={styles.reqText}>One 4 digit code has been sent to *******921 number</Text>
+      <Text style={styles.reqText}>One 4 digit code has been sent to *******821 number</Text>
       <View style={styles.otpContainer}>
         {renderOtpInputs()}
       </View>
