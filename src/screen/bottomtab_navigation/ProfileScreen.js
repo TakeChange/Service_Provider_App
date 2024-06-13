@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
 
 const ProfileScreen = () => {
     const [fullName, setFullName] = useState('');
@@ -22,39 +22,40 @@ const ProfileScreen = () => {
     const handleUpdate = () => {
         let isValid = true;
 
-        if (!fullName) {
+        if (fullName == '') {
             setFullNameError('Enter your full name');
             isValid = false;
         } else {
             setFullNameError('');
         }
 
-        const phoneNumberpattern = /^[7-9][0-9]{9}$/;
-        if (!phoneNumber || !phoneNumberpattern.test(phoneNumber)) {
+        const phoneNumberPattern = /^[7-9][0-9]{9}$/;
+        if (!phoneNumber || !phoneNumberPattern.test(phoneNumber)) {
             setPhoneNumberError('Enter a valid 10-digit mobile number');
             isValid = false;
         } else {
             setPhoneNumberError('');
         }
 
-        if (!area) {
+        if (area == '') {
             setAreaError('Enter your area');
             isValid = false;
         } else {
             setAreaError('');
         }
 
-        if (!address) {
+        if (address == '') {
             setAddressError('Enter your address');
             isValid = false;
         } else {
             setAddressError('');
         }
+
         if (isValid) {
             showToast('Profile Updated Successfully!');
         }
-
     };
+
     useFocusEffect(
         React.useCallback(() => {
             return () => {
@@ -62,10 +63,30 @@ const ProfileScreen = () => {
                 setPhoneNumberError('');
                 setAreaError('');
                 setAddressError('');
-
             };
         }, [])
     );
+
+    useEffect(()=>{
+        fetchData();
+      },[])
+    
+      const fetchData = async () => {
+        try {
+          const UpdateUser = 'https://raviscyber.in/Sevakalpak/index.php/User/UpdateUser'
+          const response = await axios.get(UpdateUser, {
+            // headers: {
+            //   "Content-Type": "multipart/form-data",
+            // },
+          });
+          console.log("Response here:", response.data); // Log the response data
+         // console.log(response.data)
+        } catch (error) {
+         console.error('Error fetching data:', error);
+        }
+      };
+    
+
     return (
         <ScrollView>
             <View style={styles.Container}>
@@ -76,13 +97,13 @@ const ProfileScreen = () => {
                         style={styles.txtfield}
                         placeholder="Enter your name"
                         value={fullName}
-                        onChange={(text) => setFullName(text)}
+                        onChangeText={(text) => setFullName(text)}
                     />
                 </View>
-                {fullNameError !== '' && <Text style={styles.error}>{fullNameError}</Text>}
+                <Text style={styles.error}>{fullNameError}</Text>
 
                 <Text style={styles.text}>Mobile Number</Text>
-                <View style={styles.txtinput}> 
+                <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
                         placeholder="Enter your mobile number"
@@ -92,10 +113,10 @@ const ProfileScreen = () => {
                         onChangeText={(text) => setPhoneNumber(text)}
                     />
                 </View>
-                {phoneNumberError !== '' && <Text style={styles.error}>{phoneNumberError}</Text>}
+                <Text style={styles.error}>{phoneNumberError}</Text>
 
-
-                <Text style={styles.text}>Area</Text>
+                {/* Uncomment and fix GooglePlacesAutocomplete if needed */}
+                {/* <Text style={styles.text}>Area</Text>
                 <View style={styles.inputContainer}>
                     <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
                     <TextInput
@@ -122,9 +143,8 @@ const ProfileScreen = () => {
                             }}
                         />
                     </View>
-
                 </View>
-                {areaError !== '' && <Text style={styles.error}>{areaError}</Text>}
+                <Text style={styles.error}>{areaError}</Text> */}
 
                 <Text style={styles.text}>Address</Text>
                 <View style={styles.txtinput}>
@@ -135,17 +155,17 @@ const ProfileScreen = () => {
                         onChangeText={(text) => setAddress(text)}
                     />
                 </View>
-                {addressError !== '' && <Text style={styles.error}>{addressError}</Text>}
+                <Text style={styles.error}>{addressError}</Text>
 
                 <TouchableOpacity style={styles.updatebtn} onPress={handleUpdate}>
                     <Text style={styles.btn}>Update</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
-    )
-}
+    );
+};
 
-export default ProfileScreen
+export default ProfileScreen;
 
 const styles = StyleSheet.create({
     Container: {
@@ -174,7 +194,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         justifyContent: 'center',
-
     },
     inputContainer: {
         flexDirection: 'row',
@@ -209,4 +228,4 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#fff'
     }
-})
+});
