@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { VALIDATE_MOBILE_NUMBER } from '../../constant/App_constant';
+import { postAllDataRequest } from '../../api/Api_constant';
+import axios from 'axios';
 
 //Validation
 const SignInScreen = ({ navigation }) => {
@@ -11,13 +14,30 @@ const SignInScreen = ({ navigation }) => {
     const mobileNumberPattern = /^[7-9][0-9]{9}$/;
     if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
-      navigation.navigate('OtpVerifyScreen',{mobileNumber});
+      validateMobileNumber();
+      //navigation.navigate('OtpVerifyScreen', { mobileNumber });
     }
     else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
-  
+
+  const validateMobileNumber = async () => {
+    try {
+      const response = await axios.post('https://raviscyber.in/Sevakalpak/index.php/Api/ValidateMobileNumber', {
+        loginid: mobileNum
+      });
+      // setData(response.data);
+      console.log('response::',response)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      Alert.alert('Error', 'Failed to validate mobile number');
+    } finally {
+      //setLoading(false);
+      console.log('finally')
+    }
+  };
+
   const handleChangeText = (text) => {
     // Remove any non-numeric characters
     const filteredText = text.replace(/[^0-9]/g, '');
@@ -25,12 +45,12 @@ const SignInScreen = ({ navigation }) => {
   };
   useFocusEffect(
     React.useCallback(() => {
-        return () => {
-            // Reset errors when navigating away from screen
-            setErrorMessage('');
-        };
+      return () => {
+        // Reset errors when navigating away from screen
+        setErrorMessage('');
+      };
     }, [])
-);
+  );
   return (
     <ScrollView>
       <View style={styles.container}>
