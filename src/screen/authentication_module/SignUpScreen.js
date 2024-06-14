@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ListItem } from 'react-native-elements';
+import axios from 'axios';
 
 const SignUpScreen = ({ navigation }) => {
     const [uname, setuName] = useState('');
@@ -24,6 +26,7 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('');
         }
     };
+
     const Validation = () => {
         var isValid = true;
         if (uname == '') {
@@ -41,21 +44,20 @@ const SignUpScreen = ({ navigation }) => {
         if (aadhar == '') {
             setAadharErr('Aadhar Number do not empty');
             isValid = false;
-        }
-        else {
+        } else {
             setAadharErr('');
         }
         if (area == '') {
             setAreaErr('Area do not empty');
             isValid = false;
-        }
-        else {
+        } else {
             setAreaErr('');
         }
         if (isValid) {
             storeData('');
         }
-    }
+    };
+
     const storeData = async () => {
         try {
             await AsyncStorage.setItem('username', uname);
@@ -64,12 +66,12 @@ const SignUpScreen = ({ navigation }) => {
             await AsyncStorage.setItem('Area', area);
             getData();
             ToastAndroid.show('SignUp successfully', ToastAndroid.LONG);
-            navigation.navigate('SignInScreen')
-        }
-        catch (e) {
+            navigation.navigate('SignInScreen');
+        } catch (e) {
             console.log(e);
         }
-    }
+    };
+
     const getData = async () => {
         try {
             var username = await AsyncStorage.getItem('username');
@@ -77,15 +79,15 @@ const SignUpScreen = ({ navigation }) => {
             var aadhar = await AsyncStorage.getItem('Aadhar');
             var Area = await AsyncStorage.getItem('Area');
 
-            console.log('Username :', username)
-            console.log('Mobile :', Mobile)
-            console.log('aadhar :', aadhar)
-            console.log('area :', Area)
-        }
-        catch (e) {
+            console.log('Username :', username);
+            console.log('Mobile :', Mobile);
+            console.log('aadhar :', aadhar);
+            console.log('area :', Area);
+        } catch (e) {
             console.log(e);
         }
-    }
+    };
+
     useFocusEffect(
         React.useCallback(() => {
             return () => {
@@ -97,6 +99,67 @@ const SignUpScreen = ({ navigation }) => {
             };
         }, [])
     );
+
+    const [search, setSearch] = useState('');
+    const [data, setData] = useState([]);
+    const [sortedData, setSortedData] = useState([]);
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Areas/GetAllAreas';
+            const response = await axios.get(getUser, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const { status, data } = response.data;
+            const sorted = data.sort((a, b) => {
+                const nameA = a.area.toLowerCase();
+                const nameB = b.area.toLowerCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+            setData(sorted);
+            setSortedData(sorted);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const handleSearch = text => {
+        setSearch(text);
+        if (text.trim() === '') {
+            setData([]);
+        } else {
+            const filtered = sortedData.filter(item =>
+                item.area.toLowerCase().startsWith(text.toLowerCase())
+            );
+            setData(filtered);
+        }
+    };
+
+    const handleItemClick = (item) => {
+        setarea(item);
+        setSearch(item);
+        setData([]);
+    };
+
+    const renderItem = ({ item }) => (
+        <TouchableOpacity onPress={() => handleItemClick(`${item.area}`)}>
+            <ListItem>
+                <ListItem.Content>
+                    <ListItem.Title>{`${item.area}`}</ListItem.Title>
+                </ListItem.Content>
+            </ListItem>
+        </TouchableOpacity>
+    );
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -109,7 +172,7 @@ const SignUpScreen = ({ navigation }) => {
                     <Text style={styles.Hellotxt}>Hello, User</Text>
                     <Text style={styles.Acctxt}>Create an Account</Text>
                 </View>
-                <Text style={styles.text} >Full Name</Text>
+                <Text style={styles.text}>Full Name</Text>
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.textfield}
@@ -144,34 +207,29 @@ const SignUpScreen = ({ navigation }) => {
                     />
                 </View>
                 <Text style={styles.error}>{aadharErr}</Text>
-
                 <Text style={styles.text}>Area</Text>
                 <View style={styles.inputContainer}>
                     <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
                     <TextInput
                         style={styles.textfield}
                         placeholder="Enter location"
-                        value={area}
-                        onChangeText={(text) => setarea(text)}
+                        onChangeText={handleSearch}
+                        onSubmitEditing={() => handleSearch(search)}
+                        value={search}
                     />
-                    <View>
-                        <GooglePlacesAutocomplete
-                            query={{
-                                key: 'API_KEY',
-                                language: 'en'
-                            }}
-                            styles={{
-                                container: {
-                                    flex: 1,
-                                },
-                                listView: {
-                                    position: 'absolute',
-                                    top: 50,
-                                },
-                            }}
-                        />
-                    </View>
                 </View>
+                {search.trim() !== '' && (
+                    <View style={styles.listContainer}>
+                    <FlatList
+                        data={data}
+                        renderItem={renderItem}
+                        keyExtractor={(item, index) => index.toString()}
+                        style={styles.list}
+                        showsVerticalScrollIndicator={true}
+                        nestedScrollEnabled={true}
+                    />
+                    </View>
+                )}
                 <Text style={styles.error}>{areaErr}</Text>
                 <TouchableOpacity style={styles.button} onPress={Validation}>
                     <Text style={styles.buttonText}>Submit</Text>
@@ -184,9 +242,11 @@ const SignUpScreen = ({ navigation }) => {
                 </View>
             </View>
         </ScrollView>
-    )
-}
-export default SignUpScreen
+    );
+};
+
+export default SignUpScreen;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -235,12 +295,12 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         justifyContent: 'center',
-
     },
     textfield: {
         marginLeft: '2%',
         fontSize: 15,
-        color: '#000'
+        color: '#000',
+        flex: 1,
     },
     button: {
         height: 50,
@@ -248,7 +308,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        marginTop: '12%',
+        marginTop: '10%',
     },
     buttonText: {
         color: '#fff',
@@ -302,11 +362,17 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 4,
         elevation: 5,
+        paddingRight: 10,
     },
     icon: {
         marginLeft: 10,
     },
     icontop: {
         padding: 10,
+    },
+    listContainer: {
+        borderRadius: 10,
+        maxHeight: 200,
+        marginTop: 5,
     }
-})
+});
