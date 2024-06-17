@@ -1,56 +1,72 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView, Alert, ToastAndroid } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 import { VALIDATE_MOBILE_NUMBER } from '../../constant/App_constant';
-import { postAllDataRequest } from '../../api/Api_constant';
-import axios from 'axios';
 
-//Validation
 const SignInScreen = ({ navigation }) => {
   const [mobileNum, setMobileNumber] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleGetOTP = (mobileNumber) => {
+  const handleGetOTP = () => {
     const mobileNumberPattern = /^[7-9][0-9]{9}$/;
     if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
       validateMobileNumber();
-      //navigation.navigate('OtpVerifyScreen', { mobileNumber });
-    }
-    else {
+    } else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
 
   const validateMobileNumber = async () => {
+    const param = {
+      loginid: mobileNum
+    }
+    console.log('param :: ', param);
     try {
-      const response = await axios.post('https://raviscyber.in/Sevakalpak/index.php/Api/ValidateMobileNumber', {
-        loginid: mobileNum
-      });
-      // setData(response.data);
-      console.log('response::',response)
+      const response = postAllDataRequest(VALIDATE_MOBILE_NUMBER,param);
+      console.log('res', response);
+      const { status, message } = response.data;
+      console.log('res', message);
+      if (status === "success") {
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+      } else {
+        console.error('Login failed:', message);
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+      }
     } catch (error) {
-      console.error('Error fetching data:', error);
-      Alert.alert('Error', 'Failed to validate mobile number');
-    } finally {
-      //setLoading(false);
-      console.log('finally')
+      console.log('error', error)
+      ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
     }
   };
+  // const validateMobileNumber = async () => {
+  //   const param = {
+  //     loginid: mobileNum
+  //   }
+  //   try {
+  //     const response = postAllDataRequest(validateMobileNumber, param)
+  //     console.log('response:', response.data);
+  //     // Handle successful validation
+  //     // navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum });
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     Alert.alert('Error', 'Failed to validate mobile number');
+  //   }
+  // };
 
   const handleChangeText = (text) => {
-    // Remove any non-numeric characters
     const filteredText = text.replace(/[^0-9]/g, '');
     setMobileNumber(filteredText);
   };
+
   useFocusEffect(
     React.useCallback(() => {
       return () => {
-        // Reset errors when navigating away from screen
         setErrorMessage('');
       };
     }, [])
   );
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -90,7 +106,9 @@ const SignInScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
 export default SignInScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
