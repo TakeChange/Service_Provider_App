@@ -1,14 +1,40 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
 import LeftArrow from 'react-native-vector-icons/Feather';
+import axios from 'axios';
+//import { useRoute } from '@react-navigation/native';
 import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation';
 
 const OtpVerifyScreen = ({ navigation }) => {
+  // const route = useRoute();
+  // const { mobileNumber } = route.params;
+  // const maskedNumber = mobileNumber ? `*******${mobileNumber.slice(-3)}` : '*******';
+
   const [otpInputs, setOtpInputs] = useState(['', '', '', '']);
   const inputRefs = useRef([]);
   const [error, setError] = useState('');
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
+
+//   useEffect(()=>{
+//     fetchData();
+//   },[])
+
+//   const fetchData = async () => {
+//     try {
+//       const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Api/Login'
+//       const response = await axios.post(getUser, {
+//         // headers: {
+//         //   "Content-Type": "multipart/form-data",
+//         // },
+//       });
+//       console.log("Response here:", response.data); // Log the response data
+//      // console.log(response.data)
+//     } catch (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//  };
+
 
   useEffect(() => {
     let timer;
@@ -70,13 +96,15 @@ const OtpVerifyScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity style={styles.leftIcon} onPress={() => navigation.navigate('SignInScreen')}>
         <LeftArrow name='arrow-left' size={25} color='#fff' />
       </TouchableOpacity>
       <Image source={require('../../asset/images/Otp.png')} style={styles.imageStyle} />
       <Text style={styles.enterText}>Enter OTP</Text>
-      <Text style={styles.reqText}>One 4 digit code has been sent to *******421 number</Text>
+      <Text style={styles.reqText}>One 4 digit code has been sent to *******456 number</Text>
+      {/* <Text style={styles.reqText}>One 4 digit code has been sent to {maskedNumber} number</Text> */}
+      
       <View style={styles.otpContainer}>
         {renderOtpInputs()}
       </View>
@@ -91,7 +119,7 @@ const OtpVerifyScreen = ({ navigation }) => {
         </TouchableOpacity>
         <Text style={styles.timer}>{formatTime()}</Text>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -100,7 +128,7 @@ export default OtpVerifyScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'center',      
     padding: '3%',
   },
   leftIcon: {
@@ -138,7 +166,7 @@ const styles = StyleSheet.create({
   inputView: {
     marginTop: '8%',
     width: '19%',
-    height: '60%',
+    height: '65%',                
     borderWidth: 0.5,
     borderRadius: 10,
     color: 'black',
