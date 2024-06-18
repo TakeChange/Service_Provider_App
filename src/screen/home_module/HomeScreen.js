@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity, Image, Modal, TextInput, Dimensions } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -9,14 +10,31 @@ const HomeScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [location, setLocation] = useState('123 Main St, City, Country');
   const [search, setSearch] = useState('');
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const services = [
-    { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
-    { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
-    { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
-    { id: '4', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
-    { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
-  ];
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  const fetchServices = async () => {
+    try {
+      const response = await fetch('https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices');
+      const data = await response.json();
+      console.log(data); // For debugging, you can remove this in production
+
+      if (data.status === 'success') {
+        setServices(data.service);
+        setLoading(false);
+      } else {
+        console.error('Failed to fetch services');
+        setLoading(false); // Set loading to false even on failure
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      setLoading(false); // Set loading to false on error
+    }
+  };
 
   const handlePress = (id) => {
     setSelectedService(prevSelectedService => prevSelectedService === id ? null : id);
@@ -26,6 +44,7 @@ const HomeScreen = ({ navigation }) => {
     setSearch('');
   };
 
+  
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={[
@@ -35,10 +54,20 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => handlePress(item.id)}
     >
       <View style={styles.imageContainer}>
-        <Image source={item.icon} style={styles.serviceIcon} />
-        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Image
+          source={{ uri: 'https://raviscyber.in/Sevakalpak/uploads/' + item.serviceimg }}
+          style={styles.serviceIcon}
+          onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
+        />
+        <Text style={styles.cardTitle}>{item.service}</Text>
       </View>
     </TouchableOpacity>
+  );
+  
+
+
+  const filteredServices = services.filter(service =>
+    service.service.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -86,12 +115,16 @@ const HomeScreen = ({ navigation }) => {
             <Text>View All</Text>
           </View>
           <View style={styles.flatlist}>
-            <FlatList
-              data={services.filter(service => service.title.toLowerCase().includes(search.toLowerCase()))}
-              renderItem={renderItem}
-              keyExtractor={item => item.id.toString()}
-              numColumns={3}
-            />
+            {loading ? (
+              <Text>Loading...</Text>
+            ) : (
+              <FlatList
+                data={filteredServices}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+                numColumns={3}
+              />
+            )}
           </View>
         </View>
       </ScrollView>
@@ -153,7 +186,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   text: {
-    marginBottom: 10, // Reduced the marginBottom to decrease space
+    marginBottom: 10,
   },
   searchLocationContainer: {
     flexDirection: 'row',
@@ -170,7 +203,7 @@ const styles = StyleSheet.create({
   popularContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10, // Ensured no additional margin
+    marginTop: 10,
   },
   flatlist: {
     flex: 1,
@@ -284,12 +317,14 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     padding: 10,
-    borderColor: 'black', // Changed border color to black
+    borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius:  5,
   },
   clearIcon: {
     position: 'absolute',
     right: 10,
   },
 });
+
+
