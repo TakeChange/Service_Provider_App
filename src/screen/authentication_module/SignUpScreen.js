@@ -7,6 +7,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ListItem } from 'react-native-elements';
 import axios from 'axios';
+import { REGISTER_USER } from '../../constant/App_constant';
+import {  postAllDataRequest } from '../../api/Api_constant';
 
 const SignUpScreen = ({ navigation }) => {
     const [uname, setuName] = useState('');
@@ -27,10 +29,38 @@ const SignUpScreen = ({ navigation }) => {
         }
     };
 
+    const RegisterUser = async () => {
+        const param = {
+            name: uname,
+            contact: mobile,
+            aadhar: aadhar,
+            area: area,
+            role:'',
+            address:''
+        };
+        console.log('param :: ', param);
+        try {
+            const response = await postAllDataRequest(REGISTER_USER,param);
+            console.log('res', response);
+            const { status, message } = response.data;
+            console.log('res', message);
+            if (status === "success") {
+                //console.log(response.data);
+              ToastAndroid.show(message, ToastAndroid.SHORT);
+            } else {
+              console.error('registration failed:', message);
+              ToastAndroid.show(message, ToastAndroid.SHORT);
+            }
+          } catch (error) {
+            console.log('error', error.response)
+            ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
+          }
+        };
+
     const Validation = () => {
         var isValid = true;
-        if (uname == '') {
-            setuNameErr('Name do not empty');
+        if (uname === '') {
+            setuNameErr('Name cannot be empty');
             isValid = false;
         } else {
             setuNameErr('');
@@ -39,59 +69,30 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('Mobile number cannot be empty');
             isValid = false;
         } else {
-            validateMobile();
+            validateMobile(); 
         }
-        if (aadhar == '') {
-            setAadharErr('Aadhar Number do not empty');
+        if (aadhar === '') {
+            setAadharErr('Aadhar Number cannot be empty');
             isValid = false;
         } else {
             setAadharErr('');
         }
-        if (area == '') {
-            setAreaErr('Area do not empty');
+        if (area === '') {
+            setAreaErr('Area cannot be empty');
             isValid = false;
         } else {
             setAreaErr('');
         }
         if (isValid) {
-            storeData('');
+            RegisterUser(); 
+            //storeData();
+            navigation.navigate('SignInScreen') 
         }
     };
-
-    const storeData = async () => {
-        try {
-            await AsyncStorage.setItem('username', uname);
-            await AsyncStorage.setItem('Mobile', mobile);
-            await AsyncStorage.setItem('Aadhar', aadhar);
-            await AsyncStorage.setItem('Area', area);
-            getData();
-            ToastAndroid.show('SignUp successfully', ToastAndroid.LONG);
-            navigation.navigate('SignInScreen');
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    const getData = async () => {
-        try {
-            var username = await AsyncStorage.getItem('username');
-            var Mobile = await AsyncStorage.getItem('Mobile');
-            var aadhar = await AsyncStorage.getItem('Aadhar');
-            var Area = await AsyncStorage.getItem('Area');
-
-            console.log('Username :', username);
-            console.log('Mobile :', Mobile);
-            console.log('aadhar :', aadhar);
-            console.log('area :', Area);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
+    
     useFocusEffect(
         React.useCallback(() => {
             return () => {
-                // Reset errors when navigating away from screen
                 setuNameErr('');
                 setMobileErr('');
                 setAadharErr('');

@@ -13,6 +13,7 @@ const SignInScreen = ({ navigation }) => {
     if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
       validateMobileNumber();
+      navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum })
     } else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
@@ -35,7 +36,7 @@ const SignInScreen = ({ navigation }) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
       }
     } catch (error) {
-      console.log('error', error)
+      //console.log('error', error)
       ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
     }
   };
