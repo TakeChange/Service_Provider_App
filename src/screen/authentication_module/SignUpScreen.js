@@ -216,6 +216,7 @@ const SignUpScreen = ({ navigation }) => {
                         onChangeText={handleSearch}
                         onSubmitEditing={() => handleSearch(search)}
                         value={search}
+                        
                     />
                 </View>
                 {search.trim() !== '' && (

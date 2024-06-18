@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity, ToastA
 import React, { useState, useEffect } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { useFocusEffect } from '@react-navigation/native';
+import Entypo from 'react-native-vector-icons/Entypo';
 import axios from 'axios';
 
 const ProfileScreen = () => {
@@ -116,7 +117,7 @@ const ProfileScreen = () => {
                 <Text style={styles.error}>{phoneNumberError}</Text>
 
                 {/* Uncomment and fix GooglePlacesAutocomplete if needed */}
-                {/* <Text style={styles.text}>Area</Text>
+                <Text style={styles.text}>Area</Text>
                 <View style={styles.inputContainer}>
                     <Entypo name='location-pin' size={24} color='#000' style={styles.icon} />
                     <TextInput
@@ -144,13 +145,13 @@ const ProfileScreen = () => {
                         />
                     </View>
                 </View>
-                <Text style={styles.error}>{areaError}</Text> */}
+                <Text style={styles.error}>{areaError}</Text>
 
-                <Text style={styles.text}>Address</Text>
+                <Text style={styles.text}>Area</Text>
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.txtfield}
-                        placeholder="Enter your Address"
+                        placeholder="Enter your Area"
                         value={address}
                         onChangeText={(text) => setAddress(text)}
                     />
@@ -229,3 +230,6 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
 });
+
+
+
