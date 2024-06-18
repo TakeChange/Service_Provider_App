@@ -1,40 +1,41 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput,ToastAndroid } from 'react-native';
 import LeftArrow from 'react-native-vector-icons/Feather';
 import axios from 'axios';
-//import { useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
 import App_Drawer_Navigation from '../../app_navigation/App_Drawer_Navigation';
+import { VALIDATE_MOBILE_NUMBER } from '../../constant/App_constant';
+import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 
 const OtpVerifyScreen = ({ navigation }) => {
-  // const route = useRoute();
-  // const { mobileNumber } = route.params;
-  // const maskedNumber = mobileNumber ? `*******${mobileNumber.slice(-3)}` : '*******';
+  const route = useRoute();
+  const { mobileNumber } = route.params;
+  const maskedNumber = mobileNumber ? `******${mobileNumber.slice(-4)}` : '*******';
 
-  const [otpInputs, setOtpInputs] = useState(['', '', '', '']);
+  const [otpInputs, setOtpInputs] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState('');  
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
 
-//   useEffect(()=>{
-//     fetchData();
-//   },[])
+  useEffect(() => {
+    fetchData();
+  }, [])
 
-//   const fetchData = async () => {
-//     try {
-//       const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Api/Login'
-//       const response = await axios.post(getUser, {
-//         // headers: {
-//         //   "Content-Type": "multipart/form-data",
-//         // },
-//       });
-//       console.log("Response here:", response.data); // Log the response data
-//      // console.log(response.data)
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//  };
-
+  const fetchData = async () => {
+    try {
+      const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Api/Login'
+      const response = await axios.post(getUser, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Response here:", response.data); // Log the response data
+       console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
     let timer;
@@ -71,11 +72,28 @@ const OtpVerifyScreen = ({ navigation }) => {
     navigation.navigate('App_Drawer_Navigation');
   };
 
-  const handleResendOtp = () => {
-    setMinutes(10);
-    setSeconds(0);
-    // Add logic to resend the OTP here
+  const handleResendOtp = async () => {
+    const param = {
+      loginid: ''
+    }
+    console.log('param :: ', param);
+    try {
+      const response = postAllDataRequest(VALIDATE_MOBILE_NUMBER,param);
+      console.log('res', response);
+      const { status, message } = response.data;
+      console.log('res', message);
+      if (status === "success") {
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+      } else {
+        console.error('Login failed:', message);
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.log('error', error)
+      ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
+    }
   };
+
 
   const renderOtpInputs = () => {
     return otpInputs.map((otp, index) => (
@@ -102,9 +120,9 @@ const OtpVerifyScreen = ({ navigation }) => {
       </TouchableOpacity>
       <Image source={require('../../asset/images/Otp.png')} style={styles.imageStyle} />
       <Text style={styles.enterText}>Enter OTP</Text>
-      <Text style={styles.reqText}>One 4 digit code has been sent to *******456 number</Text>
+      <Text style={styles.reqText}>One 6 digit code has been sent to {maskedNumber} number</Text>
       {/* <Text style={styles.reqText}>One 4 digit code has been sent to {maskedNumber} number</Text> */}
-      
+
       <View style={styles.otpContainer}>
         {renderOtpInputs()}
       </View>
@@ -128,7 +146,7 @@ export default OtpVerifyScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',      
+    alignItems: 'center',
     padding: '3%',
   },
   leftIcon: {
@@ -157,7 +175,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   otpContainer: {
-    width: '70%',
+    width: '90%',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -165,12 +183,11 @@ const styles = StyleSheet.create({
   },
   inputView: {
     marginTop: '8%',
-    width: '19%',
-    height: '65%',                
+    width: '14%',
+    height: '65%',
     borderWidth: 0.5,
     borderRadius: 10,
     color: 'black',
-    marginLeft: '5%',
     textAlign: 'center'
   },
   bottomButton: {
