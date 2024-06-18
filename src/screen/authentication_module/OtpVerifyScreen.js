@@ -16,25 +16,24 @@ const OtpVerifyScreen = ({ navigation }) => {
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
 
-//   useEffect(()=>{
-//     fetchData();
-//   },[])
+  useEffect(() => {
+    fetchData();
+  }, [])
 
-//   const fetchData = async () => {
-//     try {
-//       const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Api/Login'
-//       const response = await axios.post(getUser, {
-//         // headers: {
-//         //   "Content-Type": "multipart/form-data",
-//         // },
-//       });
-//       console.log("Response here:", response.data); // Log the response data
-//      // console.log(response.data)
-//     } catch (error) {
-//       console.error('Error fetching data:', error);
-//     }
-//  };
-
+  const fetchData = async () => {
+    try {
+      const getUser = 'https://raviscyber.in/Sevakalpak/index.php/Api/Login'
+      const response = await axios.post(getUser, {
+        // headers: {
+        //   "Content-Type": "multipart/form-data",
+        // },
+      });
+      console.log("Response here:", response.data); // Log the response data
+      // console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
     let timer;
@@ -77,6 +76,7 @@ const OtpVerifyScreen = ({ navigation }) => {
     // Add logic to resend the OTP here
   };
 
+
   const renderOtpInputs = () => {
     return otpInputs.map((otp, index) => (
       <TextInput
@@ -104,7 +104,7 @@ const OtpVerifyScreen = ({ navigation }) => {
       <Text style={styles.enterText}>Enter OTP</Text>
       <Text style={styles.reqText}>One 4 digit code has been sent to *******456 number</Text>
       {/* <Text style={styles.reqText}>One 4 digit code has been sent to {maskedNumber} number</Text> */}
-      
+
       <View style={styles.otpContainer}>
         {renderOtpInputs()}
       </View>
@@ -128,7 +128,7 @@ export default OtpVerifyScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',      
+    alignItems: 'center',
     padding: '3%',
   },
   leftIcon: {
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   inputView: {
     marginTop: '8%',
     width: '19%',
-    height: '65%',                
+    height: '65%',
     borderWidth: 0.5,
     borderRadius: 10,
     color: 'black',
