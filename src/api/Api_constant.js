@@ -8,9 +8,9 @@ export const getAllDataRequest = async (user_url) => {
   return response;
 }
 
-export const postAllDataRequest = async (VALIDATE_MOBILE_NUMBER, param) => {
+export const postAllDataRequest = async (URL, param) => {
   try {
-    const response = await axios.post(VALIDATE_MOBILE_NUMBER, param,
+    const response = await axios.post(URL, param,
       {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -19,7 +19,7 @@ export const postAllDataRequest = async (VALIDATE_MOBILE_NUMBER, param) => {
       }
     );
     const { status, message } = response.data;
-    console.log('res', response);
+    console.log('res const', response);
     return response;
   } catch (error) {
     console.log('error', error)

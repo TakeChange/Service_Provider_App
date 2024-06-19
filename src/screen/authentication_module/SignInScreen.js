@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, TextInput, Image, ScrollView,
 import { useFocusEffect } from '@react-navigation/native';
 import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 import { VALIDATE_MOBILE_NUMBER } from '../../constant/App_constant';
+import axios from 'axios';
 
 const SignInScreen = ({ navigation }) => {
   const [mobileNum, setMobileNumber] = useState('');
@@ -13,7 +14,7 @@ const SignInScreen = ({ navigation }) => {
     if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
       validateMobileNumber();
-      navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum })
+
     } else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
@@ -22,38 +23,29 @@ const SignInScreen = ({ navigation }) => {
   const validateMobileNumber = async () => {
     const param = {
       loginid: mobileNum
-    }
-    console.log('param :: ', param);
+    };
     try {
-      const response = postAllDataRequest(VALIDATE_MOBILE_NUMBER,param);
-      console.log('res', response);
+      const response = await axios.post(VALIDATE_MOBILE_NUMBER, param, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+      );
+
       const { status, message } = response.data;
-      console.log('res', message);
+      console.log('res!!', response);
+
       if (status === "success") {
         ToastAndroid.show(message, ToastAndroid.SHORT);
+        navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum })
       } else {
         console.error('Login failed:', message);
         ToastAndroid.show(message, ToastAndroid.SHORT);
       }
     } catch (error) {
-      //console.log('error', error)
-      ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
+      console.log('error config', error.config);
     }
   };
-  // const validateMobileNumber = async () => {
-  //   const param = {
-  //     loginid: mobileNum
-  //   }
-  //   try {
-  //     const response = postAllDataRequest(validateMobileNumber, param)
-  //     console.log('response:', response.data);
-  //     // Handle successful validation
-  //     // navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum });
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //     Alert.alert('Error', 'Failed to validate mobile number');
-  //   }
-  // };
 
   const handleChangeText = (text) => {
     const filteredText = text.replace(/[^0-9]/g, '');
