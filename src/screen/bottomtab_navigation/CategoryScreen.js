@@ -1,70 +1,85 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image } from 'react-native';
-import React from 'react';
+
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo'
+import Entypo from 'react-native-vector-icons/Entypo';
+import axios from 'axios';
 
 const CategoryScreen = ({ navigation }) => {
-    const data = [
-        { id: '1', title: 'House cleaning', icon: require('../../asset/icons/houseclean.png') },
-        { id: '2', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
-        { id: '3', title: 'Beauty', icon: require('../../asset/icons/beauty.png') },
-        { id: '4', title: 'AC Repair', icon: require('../../asset/icons/ac-repair.png') },
-        { id: '5', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
-        { id: '6', title: 'Home painting', icon: require('../../asset/icons/painter.png') },
-        { id: '7', title: 'Repair', icon: require('../../asset/icons/repair.png') },
-        { id: '8', title: 'Cleaning', icon: require('../../asset/icons/cleaning.png') },
-        { id: '9', title: 'Carpenter', icon: require('../../asset/icons/carpenter.png') },
-        { id: '10', title: 'Electrician', icon: require('../../asset/icons/electrician.png') },
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    ];
+    useEffect(() => {
+        axios.get('https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices')
+            .then(response => {
+                if (response.data.status === 'success') {
+                    setData(response.data.service);
+                } else {
+                    console.error('Failed to fetch services');
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setLoading(false);
+            });
+    }, []);
 
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.cardContiner} onPress={() => navigation.navigate('ViewService')}>
-            <View style={styles.imageContiner}>
-                <Image source={item.icon} style={styles.serviceIcon} />
-                <Text style={styles.cardTitle}>{item.title}</Text>
+        <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('ViewService')}>
+            <View style={styles.imageContainer}>
+                <Image 
+                    source={{ uri: `https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices${item.serviceimg}` }} 
+                    style={styles.serviceIcon} 
+                    onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
+                />
+                <Text style={styles.cardTitle}>{item.service}</Text>
             </View>
         </TouchableOpacity>
     );
 
+    if (loading) {
+        return (
+            <View style={styles.loaderContainer}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
+
     return (
         <View style={styles.container}>
-                <View style={styles.location}>
-                    <Entypo
-                        name='location-pin'
-                        size={25}
-                        color='#000'
-                    />
-                    <Text style={styles.address}>123 Main St,City,Country</Text>
-                </View>
-        <View style={styles.inputContainer}>
-              
-                    <Icon name="search" size={24} color='#000' style={styles.searchIcon} />
-               
+            <View style={styles.location}>
+                <Entypo
+                    name='location-pin'
+                    size={25}
+                    color='#000'
+                />
+                <Text style={styles.address}>123 Main St, City, Country</Text>
+            </View>
+            <View style={styles.inputContainer}>
+                <Icon name="search" size={24} color='#000' style={styles.searchIcon} />
                 <TextInput
                     style={styles.input}
                     placeholder="Type service name here..."
                     placeholderTextColor="#888"
                 />
             </View>
-            <Text style={styles.allsrvc}>All Services</Text>
+            <Text style={styles.allServices}>All Services</Text>
 
             <FlatList
                 data={data}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
                 horizontal={false}
                 numColumns={3}
             />
         </View>
-
     );
 };
 
 export default CategoryScreen;
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         padding: '4%'
@@ -74,7 +89,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         borderRadius: 10,
-        marginBottom:'3%',
+        marginBottom: '3%',
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -98,7 +113,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     searchIcon: {
-       marginLeft:'3%'
+        marginLeft: '3%'
     },
     locIcon: {
         backgroundColor: '#fff',
@@ -110,14 +125,13 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-
-    allsrvc: {
+    allServices: {
         fontSize: 15,
         fontWeight: 'bold',
         color: 'black',
         marginBottom: '4%'
     },
-    cardContiner: {
+    cardContainer: {
         flex: 1,
         backgroundColor: '#fff',
         borderRadius: 10,
@@ -135,12 +149,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 5,
         color: '#000',
-        fontWeight: 'bold',
         textAlign: 'center',
     },
     serviceIcon: {
         width: 50,
         height: 50,
     },
+    loaderContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
-

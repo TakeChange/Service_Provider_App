@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity, Image, Modal, TextInput, Dimensions } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
 
 const HomeScreen = ({ navigation }) => {
   const [selectedService, setSelectedService] = useState(null);
@@ -19,12 +19,11 @@ const HomeScreen = ({ navigation }) => {
 
   const fetchServices = async () => {
     try {
-      const response = await fetch('https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices');
-      const data = await response.json();
-      console.log(data); // For debugging, you can remove this in production
+      const response = await axios.get('https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices');
+      console.log(response.data); // For debugging, you can remove this in production
 
-      if (data.status === 'success') {
-        setServices(data.service);
+      if (response.data.status === 'success') {
+        setServices(response.data.service);
         setLoading(false);
       } else {
         console.error('Failed to fetch services');
@@ -44,7 +43,6 @@ const HomeScreen = ({ navigation }) => {
     setSearch('');
   };
 
-  
   const renderItem = ({ item }) => (
     <TouchableOpacity
       style={[
@@ -55,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
     >
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: 'https://raviscyber.in/Sevakalpak/uploads/' + item.serviceimg }}
+         source={{ uri: item.serviceimg == "" ? 'https://www.mobismea.com/upload/iblock/2a0/2f5hleoupzrnz9o3b8elnbv82hxfh4ld/No%20Product%20Image%20Available.png' : item.serviceimg }} 
           style={styles.serviceIcon}
           onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
         />
@@ -63,8 +61,6 @@ const HomeScreen = ({ navigation }) => {
       </View>
     </TouchableOpacity>
   );
-  
-
 
   const filteredServices = services.filter(service =>
     service.service.toLowerCase().includes(search.toLowerCase())
