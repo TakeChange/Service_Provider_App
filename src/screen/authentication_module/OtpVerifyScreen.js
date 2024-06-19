@@ -10,7 +10,7 @@ import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 const OtpVerifyScreen = ({ navigation }) => {
   const route = useRoute();
   const { mobileNumber } = route.params;
-  const maskedNumber = mobileNumber ? `******${mobileNumber.slice(-4)}` : '*******';
+  const maskedNumber = mobileNumber ? `******${mobileNumber.slice(-4)}` : '******';
 
   const [otpInputs, setOtpInputs] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
