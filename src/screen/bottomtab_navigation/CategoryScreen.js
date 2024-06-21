@@ -29,7 +29,7 @@ const CategoryScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('ViewService')}>
             <View style={styles.imageContainer}>
                 <Image 
-                    source={{ uri: `https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices${item.serviceimg}` }} 
+                    source={{ uri: `https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices$:item.serviceimg}` }} 
                     style={styles.serviceIcon} 
                     onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
                 />
