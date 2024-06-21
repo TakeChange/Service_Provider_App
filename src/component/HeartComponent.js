@@ -1,16 +1,13 @@
-import { TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { TouchableOpacity } from 'react-native';
+import React from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const HeartComponent = () => {
-
-    const [checkState, setCheckState] = useState(false)
-
+const HeartComponent = ({ isFavorite, onPress }) => {
     return (
-        <TouchableOpacity style={{ alignSelf: 'flex-end', top: 10, right: 10 }} onPress={() => setCheckState(!checkState)}>
-            <AntDesign name={checkState ? 'heart' : 'hearto'} size={20} color={checkState ? 'red' : '#000'} />
-        </TouchableOpacity>
-    )
-}
+      <TouchableOpacity style={{ alignSelf: 'flex-end', top: 10, right: 10 }} onPress={onPress}>
+        <AntDesign name={isFavorite ? 'heart' : 'hearto'} size={20} color={isFavorite ? 'red' : '#000'} />
+      </TouchableOpacity>
+    );
+  };
 
-export default HeartComponent
+export default HeartComponent;

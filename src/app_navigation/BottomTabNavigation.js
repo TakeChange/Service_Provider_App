@@ -45,7 +45,7 @@ const BottomTabNavigation = () => {
           )
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="category"
         component={CategoryScreen}
         options={{
@@ -63,7 +63,7 @@ const BottomTabNavigation = () => {
             </View>
           )
         }}
-      />
+      /> */}
       <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
