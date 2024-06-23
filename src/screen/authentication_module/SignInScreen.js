@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 import { VALIDATE_MOBILE_NUMBER } from '../../constant/App_constant';
 import axios from 'axios';
+import LeftArrow from 'react-native-vector-icons/Feather';
 
 const SignInScreen = ({ navigation }) => {
   const [mobileNum, setMobileNumber] = useState('');
@@ -63,6 +64,10 @@ const SignInScreen = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={styles.container}>
+      <TouchableOpacity style={styles.leftIcon} onPress={() => navigation.navigate('OptionScreen')}>
+        <LeftArrow name='arrow-left' size={25} color='#fff' />
+      </TouchableOpacity>
+      
         <View style={styles.imgContainer}>
           <Image
             source={require('../../asset/images/Signup.png')}
@@ -114,6 +119,15 @@ const styles = StyleSheet.create({
   title: {
     alignItems: 'center',
     marginTop: '3%',
+  },
+  leftIcon: {
+    backgroundColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '2%',
+    borderRadius: 10,
+    alignSelf: 'flex-start',
+  
   },
   text: {
     fontSize: 20,

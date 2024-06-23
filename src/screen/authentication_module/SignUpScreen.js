@@ -7,8 +7,9 @@ import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ListItem } from 'react-native-elements';
 import axios from 'axios';
+import LeftArrow from 'react-native-vector-icons/Feather';
 import { REGISTER_USER } from '../../constant/App_constant';
-import {  postAllDataRequest } from '../../api/Api_constant';
+import { postAllDataRequest } from '../../api/Api_constant';
 
 const SignUpScreen = ({ navigation }) => {
     const [uname, setuName] = useState('');
@@ -19,6 +20,8 @@ const SignUpScreen = ({ navigation }) => {
     const [aadharErr, setAadharErr] = useState('');
     const [area, setarea] = useState('');
     const [areaErr, setAreaErr] = useState('');
+    const [address, setAddress] = useState('');
+    const [addressErr, setAddressErr] = useState('');
 
     const validateMobile = () => {
         const mobileNumberPattern = /^[6-9]\d{9}$/;
@@ -35,27 +38,27 @@ const SignUpScreen = ({ navigation }) => {
             contact: mobile,
             aadhar: aadhar,
             area: area,
-            role:'',
-            address:''
+            role: '',
+            address: address
         };
         console.log('param :: ', param);
         try {
-            const response = await postAllDataRequest(REGISTER_USER,param);
+            const response = await postAllDataRequest(REGISTER_USER, param);
             console.log('res', response);
             const { status, message } = response.data;
             console.log('res', message);
             if (status === "success") {
                 //console.log(response.data);
-              ToastAndroid.show(message, ToastAndroid.SHORT);
+                ToastAndroid.show(message, ToastAndroid.SHORT);
             } else {
-              console.error('registration failed:', message);
-              ToastAndroid.show(message, ToastAndroid.SHORT);
+                console.error('registration failed:', message);
+                ToastAndroid.show(message, ToastAndroid.SHORT);
             }
-          } catch (error) {
+        } catch (error) {
             console.log('error', error.response)
             ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
-          }
-        };
+        }
+    };
 
     const Validation = () => {
         var isValid = true;
@@ -69,7 +72,7 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('Mobile number cannot be empty');
             isValid = false;
         } else {
-            validateMobile(); 
+            validateMobile();
         }
         if (aadhar === '') {
             setAadharErr('Aadhar Number cannot be empty');
@@ -83,13 +86,19 @@ const SignUpScreen = ({ navigation }) => {
         } else {
             setAreaErr('');
         }
+        if (address === '') {
+            setAddressErr('Address cannot be empty');
+            isValid = false;
+        } else {
+            setAddressErr('');
+        }
         if (isValid) {
-            RegisterUser(); 
+            RegisterUser();
             //storeData();
-            navigation.navigate('SignInScreen') 
+            navigation.navigate('SignInScreen')
         }
     };
-    
+
     useFocusEffect(
         React.useCallback(() => {
             return () => {
@@ -164,7 +173,11 @@ const SignUpScreen = ({ navigation }) => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <TouchableOpacity style={styles.leftIcon} onPress={() => navigation.navigate('OptionScreen')}>
+                    <LeftArrow name='arrow-left' size={25} color='#fff' />
+                </TouchableOpacity>
                 <View style={styles.mainIcon}>
+
                     <View style={styles.Icon}>
                         <FontAwesome5 name="user" size={30} color="#ffffff" style={styles.icontop} />
                     </View>
@@ -217,22 +230,32 @@ const SignUpScreen = ({ navigation }) => {
                         onChangeText={handleSearch}
                         onSubmitEditing={() => handleSearch(search)}
                         value={search}
-                        
+
                     />
                 </View>
                 {search.trim() !== '' && (
                     <View style={styles.listContainer}>
-                    <FlatList
-                        data={data}
-                        renderItem={renderItem}
-                        keyExtractor={(item, index) => index.toString()}
-                        style={styles.list}
-                        showsVerticalScrollIndicator={true}
-                        nestedScrollEnabled={true}
-                    />
+                        <FlatList
+                            data={data}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            style={styles.list}
+                            showsVerticalScrollIndicator={true}
+                            nestedScrollEnabled={true}
+                        />
                     </View>
                 )}
                 <Text style={styles.error}>{areaErr}</Text>
+                <Text style={styles.text}>Address</Text>
+                <View style={styles.txtinput}>
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter Your Address"
+                        value={address}
+                        onChangeText={(text) => setAddress(text)}
+                    />
+                </View>
+                <Text style={styles.error}>{addressErr}</Text>
                 <TouchableOpacity style={styles.button} onPress={Validation}>
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
@@ -256,6 +279,15 @@ const styles = StyleSheet.create({
     },
     mainIcon: {
         alignItems: 'center'
+    },
+    leftIcon: {
+        backgroundColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2%',
+        borderRadius: 10,
+        alignSelf: 'flex-start',
+
     },
     Icon: {
         alignItems: 'center',
