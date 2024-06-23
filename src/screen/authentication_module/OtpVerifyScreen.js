@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput,ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput, ToastAndroid } from 'react-native';
 import LeftArrow from 'react-native-vector-icons/Feather';
 import axios from 'axios';
 import { useRoute } from '@react-navigation/native';
@@ -10,11 +10,11 @@ import { handleAdd, postAllDataRequest } from '../../api/Api_constant';
 const OtpVerifyScreen = ({ navigation }) => {
   const route = useRoute();
   const { mobileNumber } = route.params;
-  const maskedNumber = mobileNumber ? `******${mobileNumber.slice(-4)}` : '*******';
+  const maskedNumber = mobileNumber ? `******${mobileNumber.slice(-4)}` : '******';
 
   const [otpInputs, setOtpInputs] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
-  const [error, setError] = useState('');  
+  const [error, setError] = useState('');
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(0);
 
@@ -31,7 +31,7 @@ const OtpVerifyScreen = ({ navigation }) => {
         },
       });
       console.log("Response here:", response.data); // Log the response data
-       console.log(response.data)
+      console.log(response.data)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -78,7 +78,7 @@ const OtpVerifyScreen = ({ navigation }) => {
     }
     console.log('param :: ', param);
     try {
-      const response = postAllDataRequest(VALIDATE_MOBILE_NUMBER,param);
+      const response = postAllDataRequest(VALIDATE_MOBILE_NUMBER, param);
       console.log('res', response);
       const { status, message } = response.data;
       console.log('res', message);
@@ -121,7 +121,7 @@ const OtpVerifyScreen = ({ navigation }) => {
       <Image source={require('../../asset/images/Otp.png')} style={styles.imageStyle} />
       <Text style={styles.enterText}>Enter OTP</Text>
       <Text style={styles.reqText}>One 6 digit code has been sent to {maskedNumber} number</Text>
-      {/* <Text style={styles.reqText}>One 4 digit code has been sent to {maskedNumber} number</Text> */}
+
 
       <View style={styles.otpContainer}>
         {renderOtpInputs()}
