@@ -6,9 +6,8 @@ import ProfileScreen from './src/screen/bottomtab_navigation/ProfileScreen'
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <AppNavigation />      
-      {/* <ProfileScreen/>                           */}
+     <NavigationContainer>
+       <AppNavigation />                               
     </NavigationContainer>
    )
 }

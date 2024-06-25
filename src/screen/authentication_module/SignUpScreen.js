@@ -31,6 +31,7 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('');
         }
     };
+   
 
     const RegisterUser = async () => {
         const param = {
@@ -95,7 +96,7 @@ const SignUpScreen = ({ navigation }) => {
         if (isValid) {
             RegisterUser();
             //storeData();
-            navigation.navigate('SignInScreen')
+            navigation.navigate('App_Drawer_Navigation')
         }
     };
 
@@ -261,7 +262,7 @@ const SignUpScreen = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={styles.msg}>
                     <Text style={styles.txtname1}>Already have an account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('App_Drawer_Navigation')}>
                         <Text style={styles.txtname2}> Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -410,3 +411,15 @@ const styles = StyleSheet.create({
         marginTop: 5,
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
