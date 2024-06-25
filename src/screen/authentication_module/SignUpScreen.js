@@ -1,18 +1,16 @@
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ListItem } from 'react-native-elements';
 import axios from 'axios';
 import { REGISTER_USER } from '../../constant/App_constant';
 import {  postAllDataRequest } from '../../api/Api_constant';
 
 const SignUpScreen = ({ navigation }) => {
-    const [uname, setuName] = useState('');
-    const [unameErr, setuNameErr] = useState('');
+    const [name, setName] = useState('');
+    const [nameErr, setNameErr] = useState('');
     const [mobile, setMobile] = useState('');
     const [mobileErr, setMobileErr] = useState('');
     const [aadhar, setAadhar] = useState('');
@@ -31,7 +29,7 @@ const SignUpScreen = ({ navigation }) => {
 
     const RegisterUser = async () => {
         const param = {
-            name: uname,
+            name: name,
             contact: mobile,
             aadhar: aadhar,
             area: area,
@@ -59,11 +57,11 @@ const SignUpScreen = ({ navigation }) => {
 
     const Validation = () => {
         var isValid = true;
-        if (uname === '') {
-            setuNameErr('Name cannot be empty');
+        if (name === '') {
+            setNameErr('Name cannot be empty');
             isValid = false;
         } else {
-            setuNameErr('');
+            setNameErr('');
         }
         if (mobile.trim() === '') {
             setMobileErr('Mobile number cannot be empty');
@@ -93,7 +91,7 @@ const SignUpScreen = ({ navigation }) => {
     useFocusEffect(
         React.useCallback(() => {
             return () => {
-                setuNameErr('');
+                setNameErr('');
                 setMobileErr('');
                 setAadharErr('');
                 setAreaErr('');
@@ -178,11 +176,11 @@ const SignUpScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.textfield}
                         placeholder="Enter Your Name"
-                        value={uname}
-                        onChangeText={(text) => setuName(text)}
+                        value={name}
+                        onChangeText={(text) => setName(text)}
                     />
                 </View>
-                <Text style={styles.error}>{unameErr}</Text>
+                <Text style={styles.error}>{nameErr}</Text>
                 <Text style={styles.text}>Mobile Number</Text>
                 <View style={styles.txtinput}>
                     <TextInput

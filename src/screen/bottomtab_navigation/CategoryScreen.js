@@ -1,163 +1,841 @@
+// import React, { useState, useEffect } from 'react';
+// import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity, ToastAndroid, TextInput, ActivityIndicator, Alert, Modal, Image, Dimensions } from 'react-native';
+// import Entypo from 'react-native-vector-icons/Entypo';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+// import axios from 'axios';
+// import { ListItem } from 'react-native-elements';
+// import { formatData } from '../../component/ServiceCard'
+// import AntDesign from 'react-native-vector-icons/AntDesign';
+// import { VENDORS_SERVICE, VENDORS_SERVICE_AREA, GET_ALL_SERVICES, All_AREA } from '../../constant/App_constant';
+// import LeftArrow from 'react-native-vector-icons/Feather'
 
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, FlatList, Image, ActivityIndicator } from 'react-native';
+
+// const baseURL = 'https://raviscyber.in/Sevakalpak/uploads/ServiceImages/';
+
+// const CategoryScreen = ({ route, navigation }) => {
+//     const { area } = route.params;
+//   const [selectedService, setSelectedService] = useState(null);
+//   const [search, setSearch] = useState('');
+//   const [services, setServices] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [isAreaListVisible, setIsAreaListVisible] = useState(false);
+
+//   //GET_ALL_SERVICES
+
+//   useEffect(() => {
+//     fetchServices();
+//   }, []);
+
+//   const fetchServices = async () => {
+//     try {
+//       const response = await axios.get(GET_ALL_SERVICES);
+//       console.log(response.data);
+
+//       if (response.data.status === 'success') {
+//         const updatedServices = response.data.service.map(service => ({
+//           ...service,
+//           serviceimg: service.serviceimg
+//             ? `${baseURL}${service.serviceimg}`
+//             : 'https://via.placeholder.com/150?text=No+Image+Available'
+//         }));
+//         setServices(updatedServices);
+//         setLoading(false);
+//       } else {
+//         console.error('Failed to fetch services');
+//         setLoading(false);
+//       }
+//     } catch (error) {
+//       console.error('Error fetching services:', error);
+//       setLoading(false);
+//     }
+//   };
+
+//   //GET_VENDORS_BY_SERVICES_WITH_AREA and GET_VENDORS_BY_SERVICES
+
+//   const handlePress = async (service) => {
+//     try {
+//       const response = area
+//         ? await axios.post(
+//             VENDORS_SERVICE_AREA,
+//             { service, area },
+//             { headers: { "Content-Type": "multipart/form-data" } }
+//           )
+//         : await axios.post(
+//             VENDORS_SERVICE,
+//             { service },
+//             { headers: { "Content-Type": "multipart/form-data" } }
+//           );
+
+//       console.log('API response:', response.data);
+
+//       if (response.data.status === 'success') {
+//         if (response.data.data && response.data.data.length > 0) {
+//           setSelectedService(service);
+//           navigation.navigate('ViewService', {
+//             vendors: response.data.data,
+//             service,
+//             area: area || 'No area selected',
+//           });
+//         } else {
+//           ToastAndroid.show('No vendors available for this service.', ToastAndroid.SHORT);
+//         }
+//       } else {
+//         ToastAndroid.show(response.data.message || 'Failed to fetch vendors.', ToastAndroid.SHORT);
+//       }
+//     } catch (error) {
+//       if (error.response) {
+//         console.log('Error response:', error.response.data);
+//         if (error.response.data.status === 'error' && error.response.data.message === 'No Users Found') {
+//           ToastAndroid.show('No vendors available for this service.', ToastAndroid.SHORT);
+//         } else {
+//           ToastAndroid.show(error.response.data.message || 'An error occurred while fetching vendors.', ToastAndroid.SHORT);
+//         }
+//       } else {
+//         console.error('Error:', error.message);
+//         ToastAndroid.show('An error occurred while fetching vendors. Please try again later.', ToastAndroid.SHORT);
+//       }
+//     }
+//   };
+
+
+
+//   const clearSearch = () => {
+//     setSearch('');
+//   };
+
+//   const renderServiceItem = ({ item }) => {
+//     if (item.empty) {
+//       return <View style={[styles.cardContainer, styles.invisible]} />;
+//     }
+//     return (
+
+//       <TouchableOpacity
+//         style={[
+//           styles.cardContainer,
+//           { backgroundColor: selectedService === item.service ? '#009eb4' : '#fff' }
+//         ]}
+//         onPress={() => handlePress(item.service)}
+//       >
+
+//         <View style={styles.imageContainer}>
+//           <Image
+//             source={{ uri: item.serviceimg }}
+//             style={styles.serviceIcon}
+//             onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
+//             defaultSource={{ uri: 'https://via.placeholder.com/150?text=No+Image+Available' }}
+//           />
+//           <Text style={styles.cardTitle}>{item.service}</Text>
+//         </View>
+//       </TouchableOpacity>
+//     );
+//   };
+
+//   const filteredServices = services.filter(service =>
+//     service.service.toLowerCase().includes(search.toLowerCase())
+//   );
+
+// //   //Get All Area
+
+// //   const [searchQuery, setSearchQuery] = useState('');
+// //   const [data, setData] = useState([]);
+// //   const [sortedData, setSortedData] = useState([]);
+// //   const [area, setArea] = useState('');
+
+// //   useEffect(() => {
+// //     fetchData();
+// //   }, []);
+
+// //   const fetchData = async () => {
+// //     try {
+// //       const getArea = All_AREA;
+// //       const response = await axios.get(getArea, {
+// //         headers: {
+// //           "Content-Type": "multipart/form-data",
+// //         },
+// //       });
+// //       console.log(response.data);
+
+// //       const { status, data } = response.data;
+// //       const sorted = data.sort((a, b) => {
+// //         const nameA = a.area.toLowerCase();
+// //         const nameB = b.area.toLowerCase();
+// //         if (nameA < nameB) return -1;
+// //         if (nameA > nameB) return 1;
+// //         return 0;
+// //       });
+// //       setData(sorted);
+// //       setSortedData(sorted);
+// //     } catch (error) {
+// //       console.error('Error fetching data:', error);
+// //     }
+// //   };
+
+// //   const handleSearch = (text) => {
+// //     setSearchQuery(text);
+// //     if (text.trim() === '') {
+// //       setData([]);
+// //     } else {
+// //       const filtered = sortedData.filter((item) =>
+// //         item.area.toLowerCase().startsWith(text.toLowerCase())
+// //       );
+// //       setData(filtered);
+// //     }
+// //   };
+
+// //   const handleItemClick = (item) => {
+// //     setArea(item.area);
+// //     setSearchQuery(item.area);
+// //     setData([]);
+// //     setIsAreaListVisible(false);
+// //   };
+
+// //   const renderAreaItem = ({ item }) => (
+// //     <TouchableOpacity onPress={() => handleItemClick(item)}>
+// //       <ListItem bottomDivider>
+// //         <ListItem.Content>
+// //           <ListItem.Title>{item.area}</ListItem.Title>
+// //         </ListItem.Content>
+// //       </ListItem>
+// //     </TouchableOpacity>
+// //   );
+
+
+//   return (
+//     <View style={styles.container}>
+//       <ScrollView>
+//       <View style={styles.container1}>
+//       <View style={styles.leftIcon}>
+//                 <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+//                     <LeftArrow
+//                         name='arrow-left'
+//                         size={20}
+//                         color='#fff'
+//                     />
+//                 </TouchableOpacity>
+//             </View>
+//           <View style={styles.text}>
+//             <Text style={styles.selectTxt}> 
+//               Selected Area: {area}
+//             </Text>
+//             <View style={styles.searchContainer}>
+//               <TextInput
+//                 style={styles.searchInput}
+//                 placeholder="Search services..."
+//                 value={search}
+//                 onChangeText={setSearch}
+//               />
+//               {search.length > 0 && (
+//                 <TouchableOpacity onPress={clearSearch} style={styles.clearIcon}>
+//                   <Ionicons name="close" size={25} color="black" />
+//                 </TouchableOpacity>
+//               )}
+//             </View>
+//           </View>
+//           <View style={styles.popularContainer}>
+//             <Text style={styles.popServices}>All Services Here</Text>
+//           </View>
+//           <View style={styles.flatlist}>
+//             {loading ? (
+//               <ActivityIndicator size="large" color="#009eb4" />
+//             ) : (
+//               <FlatList
+//                 data={formatData(filteredServices, numColumns)}
+//                 renderItem={renderServiceItem}
+//                 keyExtractor={item => item.id?.toString() || item.key}
+//                 numColumns={numColumns}
+//               />
+//             )}
+//           </View>
+//           {/* {selectedService && (
+//         <TouchableOpacity
+//           style={styles.floatingButton}
+//           onPress={() => {
+//             navigation.navigate('ViewService');
+//           }}
+//         >
+//           <MaterialIcons name="arrow-forward" size={24} color="white" />
+//         </TouchableOpacity>
+//       )} */}
+
+//         </View>
+//      </ScrollView>
+//     </View>
+//   );
+// };
+
+// export default CategoryScreen;
+
+// const { width } = Dimensions.get('window');
+// const numColumns = 3;
+// const itemPadding = 5;
+// const itemWidth = (width - (numColumns + 1) * itemPadding) / numColumns;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   container1: {
+//     padding: 12,
+//   },
+//   leftIcon: {
+//     backgroundColor:'#000',
+//     justifyContent:'flex-start',
+//     alignItems:'center',
+//     padding:'2%',
+//     width:'10%',
+//     borderRadius:10
+// },
+//   selectTxt: {
+//     color: 'black',
+//     fontWeight: '400',
+//     fontSize: 18
+//   },
+//   reqTxt: {
+//     fontSize: 16,
+//     color: '#5A5A5A'
+//   },
+//   listContainer: {
+//     borderRadius: 10,
+//     maxHeight: 200,
+//   },
+//   textfield: {
+//     fontSize: 17,
+//     color: '#000',
+//     flex: 1,
+//     //fontWeight: '500'
+//   },
+//   searchContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     marginTop: '5%',
+//     position: 'relative',
+//   },
+//   popularContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'space-between',
+//     marginTop: 10,
+//   },
+//   flatlist: {
+//     flex: 1,
+//     marginTop: 15,
+//   },
+//   cardContainer: {
+//     flex: 1,
+//     borderRadius: 10,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     height: itemWidth + 0,
+//     padding: itemPadding,
+//     width: itemWidth,
+//     margin: itemPadding,
+//   },
+//   cardTitle: {
+//     fontSize: 11,
+//     fontWeight: 'bold',
+//     marginTop: 5,
+//     color: '#000',
+//     textAlign: 'center',
+//     flexWrap: 'wrap-reverse'
+//   },
+//   serviceIcon: {
+//     width: 65,
+//     height: 65,
+//   },
+//   address: {
+//     fontSize: 16,
+//     fontWeight: '500',
+//     color: 'black',
+//   },
+//   searchInput: {
+//     flex: 1,
+//     padding: 10,
+//     borderColor: 'black',
+//     borderWidth: 1,
+//     borderRadius: 5,
+//   },
+//   popServices: {
+//     color: 'black',
+//     fontSize: 15,
+//     fontWeight: '500',
+//   },
+//   viewAllContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   viewIcon: {
+//     color: '#000',
+//   },
+//   imageContainer: {
+//     alignItems: 'center',
+//   },
+//   editIconContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   squareBorder: {
+//     borderWidth: 1,
+//     borderColor: 'black',
+//     padding: 5,
+//     borderRadius: 5,
+//   },
+//   // input: {
+//   //   width: '100%',
+//   //   height: 40,
+//   //   borderColor: '#ccc',
+//   //   borderWidth: 1,
+//   //   padding: 10,
+//   //   marginBottom: 20,
+//   //   borderRadius: 5,
+//   // },
+//   listContainer: {
+//     borderRadius: 10,
+//     maxHeight: 200,
+//     marginTop: 5,
+//   },
+//   clearIcon: {
+//     position: 'absolute',
+//     right: 10,
+//   },
+// });
+
+
 import React, { useState, useEffect } from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, Text, View, ScrollView, FlatList, TouchableOpacity, ToastAndroid, TextInput, ActivityIndicator, Alert, Modal, Image, Dimensions } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
+import { ListItem } from 'react-native-elements';
+import { formatData } from '../../component/ServiceCard'
+import LeftArrow from 'react-native-vector-icons/Feather'
+import { VENDORS_SERVICE, VENDORS_SERVICE_AREA, GET_ALL_SERVICES, All_AREA } from '../../constant/App_constant';
 
-const CategoryScreen = ({ navigation }) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        axios.get('https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices')
-            .then(response => {
-                if (response.data.status === 'success') {
-                    setData(response.data.service);
-                } else {
-                    console.error('Failed to fetch services');
-                }
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error(error);
-                setLoading(false);
-            });
-    }, []);
+const baseURL = 'https://raviscyber.in/Sevakalpak/uploads/ServiceImages/';
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.cardContainer} onPress={() => navigation.navigate('ViewService')}>
-            <View style={styles.imageContainer}>
-                <Image 
-                    source={{ uri: `https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices$:item.serviceimg}` }} 
-                    style={styles.serviceIcon} 
-                    onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
-                />
-                <Text style={styles.cardTitle}>{item.service}</Text>
-            </View>
-        </TouchableOpacity>
-    );
+const HomeScreen = ({ navigation }) => {
+  const [selectedService, setSelectedService] = useState(null);
+  const [search, setSearch] = useState('');
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [isAreaListVisible, setIsAreaListVisible] = useState(false);
+  //const [isAreaSelected, setIsAreaSelected] = useState(false);
 
-    if (loading) {
-        return (
-            <View style={styles.loaderContainer}>
-                <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
+  //GET_ALL_SERVICES
+
+  useEffect(() => {
+    fetchServices();
+  }, []);
+
+  const fetchServices = async () => {
+    try {
+      const response = await axios.get(GET_ALL_SERVICES);
+      console.log(response.data);
+
+      if (response.data.status === 'success') {
+        const updatedServices = response.data.service.map(service => ({
+          ...service,
+          serviceimg: service.serviceimg
+            ? `${baseURL}${service.serviceimg}`
+            : 'https://via.placeholder.com/150?text=No+Image+Available'
+        }));
+        setServices(updatedServices);
+        setLoading(false);
+      } else {
+        console.error('Failed to fetch services');
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error fetching services:', error);
+      setLoading(false);
     }
+  };
 
+  //GET_VENDORS_BY_SERVICES_WITH_AREA and GET_VENDORS_BY_SERVICES
+
+  const handlePress = async (service) => {
+    try {
+      const response = area
+        ? await axios.post(
+          VENDORS_SERVICE_AREA,
+          { service, area },
+          { headers: { "Content-Type": "multipart/form-data" } }
+        )
+        : await axios.post(
+          VENDORS_SERVICE,
+          { service },
+          { headers: { "Content-Type": "multipart/form-data" } }
+        );
+
+      console.log('API response:', response.data);
+
+      if (response.data.status === 'success') {
+        if (response.data.data && response.data.data.length > 0) {
+          setSelectedService(service);
+          navigation.navigate('ViewService', {
+            vendors: response.data.data,
+            service,
+            area: area || 'No area selected',
+          });
+        } else {
+          ToastAndroid.show('No vendors available for this service.', ToastAndroid.SHORT);
+        }
+      } else {
+        ToastAndroid.show(response.data.message || 'Failed to fetch vendors.', ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      if (error.response) {
+        console.log('Error response:', error.response.data);
+        if (error.response.data.status === 'error' && error.response.data.message === 'No Users Found') {
+          ToastAndroid.show('No vendors available for this service.', ToastAndroid.SHORT);
+        } else {
+          ToastAndroid.show(error.response.data.message || 'An error occurred while fetching vendors.', ToastAndroid.SHORT);
+        }
+      } else {
+        console.error('Error:', error.message);
+        ToastAndroid.show('An error occurred while fetching vendors. Please try again later.', ToastAndroid.SHORT);
+      }
+    }
+  };
+
+
+
+  const clearSearch = () => {
+    setSearch('');
+  };
+
+  const clearSearchQuery = () => {
+    setSearchQuery('')
+  };
+
+  const renderServiceItem = ({ item }) => {
+    if (item.empty) {
+      return <View style={[styles.cardContainer, styles.invisible]} />;
+    }
     return (
-        <View style={styles.container}>
-            <View style={styles.location}>
-                <Entypo
-                    name='location-pin'
-                    size={25}
-                    color='#000'
-                />
-                <Text style={styles.address}>123 Main St, City, Country</Text>
-            </View>
-            <View style={styles.inputContainer}>
-                <Icon name="search" size={24} color='#000' style={styles.searchIcon} />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Type service name here..."
-                    placeholderTextColor="#888"
-                />
-            </View>
-            <Text style={styles.allServices}>All Services</Text>
 
-            <FlatList
-                data={data}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-                horizontal={false}
-                numColumns={3}
-            />
+      <TouchableOpacity
+        style={[
+          styles.cardContainer,
+          { backgroundColor: selectedService === item.service ? '#009eb4' : '#fff' }
+        ]}
+        onPress={() => handlePress(item.service)}
+      >
+
+        <View style={styles.imageContainer}>
+          <Image
+            source={{ uri: item.serviceimg }}
+            style={styles.serviceIcon}
+            onError={() => console.warn(`Failed to load image: ${item.serviceimg}`)}
+            defaultSource={{ uri: 'https://via.placeholder.com/150?text=No+Image+Available' }}
+          />
+          <Text style={styles.cardTitle}>{item.service}</Text>
         </View>
+      </TouchableOpacity>
     );
+  };
+
+  const filteredServices = services.filter(service =>
+    service.service.toLowerCase().includes(search.toLowerCase())
+  );
+
+  //Get All Area
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [data, setData] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
+  const [area, setArea] = useState('');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const getArea = All_AREA;
+      const response = await axios.get(getArea, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+
+      const { status, data } = response.data;
+      const sorted = data.sort((a, b) => {
+        const nameA = a.area.toLowerCase();
+        const nameB = b.area.toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+      setData(sorted);
+      setSortedData(sorted);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+    if (text.trim() === '') {
+      setData([]);
+    } else {
+      const filtered = sortedData.filter((item) =>
+        item.area.toLowerCase().startsWith(text.toLowerCase())
+      );
+      setData(filtered);
+    }
+  };
+
+  const handleItemClick = (item) => {
+    setArea(item.area);
+    setSearchQuery(item.area);
+    setData([]);
+    setIsAreaListVisible(false);
+  };
+
+
+  const renderAreaItem =  ({ item = {} }) => (
+    <TouchableOpacity onPress={() => handleItemClick(item)}>
+      <ListItem bottomDivider>
+        <ListItem.Content>
+          <ListItem.Title>{item.area}</ListItem.Title>
+        </ListItem.Content>
+      </ListItem>
+    </TouchableOpacity>
+  );
+
+
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.container1}>
+          <View style={styles.text}>
+            <Text style={styles.hellotxt}>
+              Hello, User
+            </Text>
+            <View style={styles.searchLocationContainer}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Entypo name='location-pin' size={30} color='#000' />
+                <TextInput
+                  style={styles.textfield}
+                  placeholder="Select Area..."
+                  onChangeText={handleSearch}
+                  onSubmitEditing={() => handleSearch(searchQuery)}
+                  value={searchQuery}
+                  onFocus={() => setIsAreaListVisible(true)}
+                  onBlur={() => {
+                    if (searchQuery.trim() === '') {
+                      setIsAreaListVisible(false);
+                    }
+                  }}
+                />
+                 {searchQuery.length > 0 && (
+                <TouchableOpacity onPress={clearSearchQuery} style={styles.clearIcon}>
+                  <Ionicons name="close" size={25} color="black" />
+                </TouchableOpacity>
+              )}
+              </View>
+              {isAreaListVisible && searchQuery.trim() !== '' && (
+                <View style={styles.listContainer}>
+                  <FlatList
+                    data={data}
+                    renderItem={renderAreaItem}
+                    keyExtractor={(item, index) => index.toString()}
+                    style={styles.list}
+                    showsVerticalScrollIndicator={true}
+                    nestedScrollEnabled={true}
+                    onChangeText={setSearchQuery}
+                  />
+                </View>
+              )}
+            </View>
+            <View style={styles.searchContainer}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search services..."
+                value={search}
+                onChangeText={setSearch}
+              />
+              {search.length > 0 && (
+                <TouchableOpacity onPress={clearSearch} style={styles.clearIcon}>
+                  <Ionicons name="close" size={25} color="black" />
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+          <View style={styles.popularContainer}>
+            <Text style={styles.popServices}>All Services</Text>
+
+          </View>
+          <View style={styles.flatlist}>
+            {loading ? (
+              <ActivityIndicator size="large" color="#009eb4" />
+            ) : (
+              <FlatList
+                data={formatData(filteredServices, numColumns)}
+                renderItem={renderServiceItem}
+                keyExtractor={item => item.id?.toString() || item.key}
+                numColumns={numColumns}
+              />
+            )}
+          </View>
+          {/* {selectedService && (
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={() => {
+            navigation.navigate('ViewService');
+          }}
+        >
+          <MaterialIcons name="arrow-forward" size={24} color="white" />
+        </TouchableOpacity>
+      )} */}
+
+        </View>
+      </ScrollView>
+    </View>
+  );
 };
 
-export default CategoryScreen;
+export default HomeScreen;
+
+const { width } = Dimensions.get('window');
+const numColumns = 3;
+const itemPadding = 5;
+const itemWidth = (width - (numColumns + 1) * itemPadding) / numColumns;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: '4%'
-    },
-    inputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        marginBottom: '3%',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.3,
-        shadowRadius: 5,
-        elevation: 5,
-    },
-    location: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: '3%'
-    },
-    address: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#000',
-    },
-    input: {
-        flex: 1,
-    },
-    searchIcon: {
-        marginLeft: '3%'
-    },
-    locIcon: {
-        backgroundColor: '#fff',
-        padding: '2%',
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
-        elevation: 5,
-    },
-    allServices: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        color: 'black',
-        marginBottom: '4%'
-    },
-    cardContainer: {
-        flex: 1,
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: '4%',
-        margin: '1%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        elevation: 5,
-        shadowRadius: 5,
-    },
-    cardTitle: {
-        fontSize: 8,
-        fontWeight: 'bold',
-        marginTop: 5,
-        color: '#000',
-        textAlign: 'center',
-    },
-    serviceIcon: {
-        width: 50,
-        height: 50,
-    },
-    loaderContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+  container: {
+    flex: 1,
+     paddingBottom: '15%'
+  },
+  container1: {
+    padding: 12,
+  },
+  hellotxt: {
+    color: 'black',
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  reqTxt: {
+    fontSize: 16,
+    color: '#5A5A5A'
+  },
+  listContainer: {
+    borderRadius: 10,
+    maxHeight: 200,
+  },
+  leftIcon: {
+    backgroundColor:'#000',
+    justifyContent:'flex-start',
+    alignItems:'center',
+    padding:'2%',
+    width:'10%',
+    borderRadius:10
+},
+  textfield: {
+    fontSize: 17,
+    color: '#000',
+    flex: 1,
+    //fontWeight: '500'
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+    position: 'relative',
+  },
+  popularContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  flatlist: {
+    flex: 1,
+    marginTop: 15,
+  },
+  cardContainer: {
+    flex: 1,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: itemWidth + 0,
+    padding: itemPadding,
+    width: itemWidth,
+    margin: itemPadding,
+  },
+  cardTitle: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    marginTop: 5,
+    color: '#000',
+    textAlign: 'center',
+    flexWrap: 'wrap-reverse'
+  },
+  serviceIcon: {
+    width: 65,
+    height: 65,
+  },
+  address: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: 'black',
+  },
+  searchInput: {
+    flex: 1,
+    padding: 10,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 5,
+  },
+  popServices: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  viewAll: {
+    color: '#009eb4',
+    fontSize: 15,
+    fontWeight: '500',
+    textDecorationLine: 'underline',
+  },
+  viewAllContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  viewIcon: {
+    color: '#009eb4',
+  },
+  imageContainer: {
+    alignItems: 'center',
+  },
+  editIconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  squareBorder: {
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 5,
+    borderRadius: 5,
+  },
+  // input: {
+  //   width: '100%',
+  //   height: 40,
+  //   borderColor: '#ccc',
+  //   borderWidth: 1,
+  //   padding: 10,
+  //   marginBottom: 20,
+  //   borderRadius: 5,
+  // },
+  listContainer: {
+    borderRadius: 10,
+    maxHeight: 200,
+    marginTop: 5,
+  },
+  clearIcon: {
+    position: 'absolute',
+    right: 10,
+  },
 });
+
+

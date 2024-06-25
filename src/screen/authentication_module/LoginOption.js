@@ -8,9 +8,10 @@ const LoginOption = ({ navigation }) => {
 
     const handleNextPress = () => {
         if (checked === 'first') {
-            navigation.navigate('SignInScreen');
+            // navigation.navigate('SignInScreen');
+            navigation.navigate('App_Drawer_Navigation');
         } else if (checked === 'second') {
-            // navigation.navigate('VendorScreen');
+             navigation.navigate('OptionScreen');
         }
     }
 

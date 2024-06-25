@@ -14,7 +14,7 @@ const WelcomeScreen = ({ navigation }) => {
                     <Text style={styles.mottoStyle}>Customer happiness is our motto !!!</Text>
                 </View>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OptionScreen')}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('LoginOption')}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
         </View>

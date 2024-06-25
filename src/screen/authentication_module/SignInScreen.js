@@ -14,8 +14,10 @@ const SignInScreen = ({ navigation }) => {
     if (mobileNumberPattern.test(mobileNum)) {
       setErrorMessage('');
       validateMobileNumber();
+      navigation.navigate('OtpVerifyScreen', { mobileNumber: mobileNum })
 
-    } else {
+    }
+    else {
       setErrorMessage('Please enter a valid 10-digit mobile number.');
     }
   };
