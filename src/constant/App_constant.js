@@ -13,3 +13,4 @@ export const VENDORS_SERVICE='https://raviscyber.in/Sevakalpak/index.php/Vendor/
 export const GET_ALL_SERVICES ='https://raviscyber.in/Sevakalpak/index.php/Services/GetAllServices'
 
 export const REGISTER_VENDOR='https://raviscyber.in/Sevakalpak/index.php/Vendor/RegisterVendor'
+
