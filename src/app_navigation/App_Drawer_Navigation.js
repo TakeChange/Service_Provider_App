@@ -32,10 +32,6 @@ const App_Drawer_Navigation = () => {
         options={{
           headerShown: true,
           title: 'Home',
-          drawerIcon: ({ focused, size }) => (
-            <FontAwesome name='home' size={22} color='#000'
-              style={{ height: 25, width: 25, marginRight: -20 }} />
-          ),
         }}
       />
       <Drawer.Screen
@@ -44,11 +40,6 @@ const App_Drawer_Navigation = () => {
         options={{
           headerShown: true,
           title: 'Favourite Service',
-          drawerIcon: ({ focused, size }) => (
-            <MaterialIcons name='favorite'
-              size={22} color='#000'
-              style={{ height: 25, width: 25, marginRight: -20 }} />
-          ),
         }}
       />
     </Drawer.Navigator>

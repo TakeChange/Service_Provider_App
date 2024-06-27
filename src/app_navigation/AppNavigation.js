@@ -12,6 +12,9 @@ import SplashScreen from '../screen/authentication_module/SplashScreen';
 import LoginOption from '../screen/authentication_module/LoginOption';
 import CategoryScreen from '../screen/bottomtab_navigation/CategoryScreen';
 import { FavoriteProvider } from '../screen/context/FavoriteContext';
+import VendorDetailScreen from '../screen/services/VendorDetailScreen';
+import VendorProfile from '../screen/home_module/VendorProfile';
+import ProfileScreen from '../screen/bottomtab_navigation/ProfileScreen';
 const AppNavigation = () => {
 
   const Stack = createNativeStackNavigator();
@@ -64,9 +67,23 @@ const AppNavigation = () => {
           component={ViewService}
           options={{ headerShown: false }}
         />
+        <Stack.Screen 
+        name="Vendor Details" 
+        component={VendorDetailScreen}
+         />
         <Stack.Screen
-          name='CategoryScreen'
+          name='All Services'
           component={CategoryScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name='VendorProfile'
+          component={VendorProfile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name='ProfileScreen'
+          component={ProfileScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

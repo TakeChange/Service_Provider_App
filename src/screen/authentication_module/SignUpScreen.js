@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, ToastAndroid, FlatList, Image } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Entypo from 'react-native-vector-icons/Entypo';
+import LeftArrow from 'react-native-vector-icons/Feather';
 import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ListItem } from 'react-native-elements';
 import axios from 'axios';
-import LeftArrow from 'react-native-vector-icons/Feather';
-import { REGISTER_USER } from '../../constant/App_constant';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { REGISTER_USER, REGISTER_VENDOR } from '../../constant/App_constant';
 import { postAllDataRequest } from '../../api/Api_constant';
 
 const SignUpScreen = ({ navigation }) => {
@@ -18,8 +17,16 @@ const SignUpScreen = ({ navigation }) => {
     const [mobileErr, setMobileErr] = useState('');
     const [aadhar, setAadhar] = useState('');
     const [aadharErr, setAadharErr] = useState('');
-    const [area, setarea] = useState('');
+    const [area, setArea] = useState('');
     const [areaErr, setAreaErr] = useState('');
+    const [service, setService] = useState('');
+    const [serviceErr, setServiceErr] = useState('');
+    const [logo, setLogo] = useState('');
+    const [logoErr, setLogoErr] = useState('');
+    const [profilephoto, setProfilePhoto] = useState('');
+    const [profilePhotoErr, setProfilePhotoErr] = useState('');
+    const [role, setRole] = useState('');
+    const [roleErr, setRoleErr] = useState('');
     const [address, setAddress] = useState('');
     const [addressErr, setAddressErr] = useState('');
 
@@ -31,33 +38,56 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('');
         }
     };
-   
 
     const RegisterUser = async () => {
-        const param = {
-            name: uname,
-            contact: mobile,
-            aadhar: aadhar,
-            area: area,
-            role: '',
-            address: address
-        };
-        console.log('param :: ', param);
+
+        const formData = new FormData();
+        formData.append('name', uname);
+        formData.append('contact', mobile);
+        formData.append('aadhar', aadhar);
+        formData.append('area', area);
+        formData.append('role', role);
+        formData.append('address', address);
+
+        // Append logo if selected
+        if (logo) {
+            formData.append('logo', {
+                uri: logo,
+                type: 'image/jpeg',
+                name: 'logo.jpg',
+            });
+        }
+
+
+        if (profilephoto) {
+            formData.append('profilephoto', {
+                uri: profilephoto,
+                type: 'image/jpeg',
+                name: 'profilephoto.jpg',
+            });
+        }
+
         try {
-            const response = await postAllDataRequest(REGISTER_USER, param);
-            console.log('res', response);
+            const response = await axios.post(REGISTER_VENDOR, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Response:', response.data);
+
             const { status, message } = response.data;
-            console.log('res', message);
-            if (status === "success") {
-                //console.log(response.data);
+
+            if (status === 'success') {
                 ToastAndroid.show(message, ToastAndroid.SHORT);
+                navigation.navigate('SignInScreen');
             } else {
-                console.error('registration failed:', message);
+                console.error('Registration failed:', message);
                 ToastAndroid.show(message, ToastAndroid.SHORT);
             }
         } catch (error) {
-            console.log('error', error.response)
-            ToastAndroid.show('Please enter valid mobile number', ToastAndroid.SHORT);
+            console.error('Error:', error.response);
+            ToastAndroid.show('Failed to register. Please try again.', ToastAndroid.SHORT);
         }
     };
 
@@ -87,8 +117,32 @@ const SignUpScreen = ({ navigation }) => {
         } else {
             setAreaErr('');
         }
+        if (service === '') {
+            setServiceErr('Service cannot be empty');
+            isValid = false;
+        } else {
+            setServiceErr('');
+        }
+        // if (logo === '') {
+        //     setLogoErr('Logo cannot be empty');
+        //     isValid = false;
+        // } else {
+        //     setLogoErr('');
+        // }
+        // if (profilephoto === '') {
+        //     setProfilePhotoErr('Profile Photo cannot be empty');
+        //     isValid = false;
+        // } else {
+        //     setProfilePhotoErr('');
+        // }
+        if (role === '') {
+            setRoleErr('Logo cannot be empty');
+            isValid = false;
+        } else {
+            setRoleErr('');
+        }
         if (address === '') {
-            setAddressErr('Address cannot be empty');
+            setAddressErr('Area cannot be empty');
             isValid = false;
         } else {
             setAddressErr('');
@@ -96,9 +150,10 @@ const SignUpScreen = ({ navigation }) => {
         if (isValid) {
             RegisterUser();
             //storeData();
-            navigation.navigate('App_Drawer_Navigation')
+            navigation.navigate('SignInScreen')
         }
     };
+
 
     useFocusEffect(
         React.useCallback(() => {
@@ -156,7 +211,7 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     const handleItemClick = (item) => {
-        setarea(item);
+        setArea(item);
         setSearch(item);
         setData([]);
     };
@@ -171,17 +226,51 @@ const SignUpScreen = ({ navigation }) => {
         </TouchableOpacity>
     );
 
+    const selectProfilePhoto = () => {
+        const options = {
+            mediaType: 'photo',
+        };
+
+        launchImageLibrary(options, response => {
+            handleImagePickerResponse(response, setProfilePhoto);
+        });
+    };
+
+    const selectLogo = () => {
+        const options = {
+            mediaType: 'photo',
+        };
+
+        launchImageLibrary(options, response => {
+            handleImagePickerResponse(response, setLogo);
+        });
+    };
+
+    const handleImagePickerResponse = (response, setImage) => {
+        if (response.didCancel) {
+            console.log('User cancelled image picker');
+        } else if (response.errorMessage) {
+            console.log('ImagePicker Error: ', response.errorMessage);
+        } else {
+            const uri = response.assets[0].uri;
+            setImage(uri);
+        }
+    };
+
     return (
         <ScrollView>
             <View style={styles.container}>
                 <TouchableOpacity style={styles.leftIcon} onPress={() => navigation.navigate('OptionScreen')}>
                     <LeftArrow name='arrow-left' size={25} color='#fff' />
                 </TouchableOpacity>
-                <View style={styles.mainIcon}>
-
-                    <View style={styles.Icon}>
-                        <FontAwesome5 name="user" size={30} color="#ffffff" style={styles.icontop} />
-                    </View>
+                <View style={styles.profileContainer}>
+                    <TouchableOpacity onPress={selectProfilePhoto}>
+                        {profilephoto ? (
+                            <Image source={{ uri: profilephoto }} style={styles.profilePhoto} />
+                        ) : (
+                            <FontAwesome5 name="user" size={50} color="#ffffff" style={styles.defaultProfileIcon} />
+                        )}
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.txtstyle}>
                     <Text style={styles.Hellotxt}>Hello, User</Text>
@@ -231,7 +320,6 @@ const SignUpScreen = ({ navigation }) => {
                         onChangeText={handleSearch}
                         onSubmitEditing={() => handleSearch(search)}
                         value={search}
-
                     />
                 </View>
                 {search.trim() !== '' && (
@@ -247,22 +335,63 @@ const SignUpScreen = ({ navigation }) => {
                     </View>
                 )}
                 <Text style={styles.error}>{areaErr}</Text>
+
+                <Text style={styles.text}>Service</Text>
+                <View style={styles.txtinput}>
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter Your Service "
+                        maxLength={12}
+                        value={service}
+                        onChangeText={(text) => setService(text)}
+                    />
+                </View>
+                <Text style={styles.error}>{serviceErr}</Text>
+
+
+
+                <Text style={styles.text}>Role</Text>
+                <View style={styles.txtinput}>
+                    <TextInput
+                        style={styles.textfield}
+                        placeholder="Enter Your Role"
+                        maxLength={12}
+                        value={role}
+                        onChangeText={(text) => setRole(text)}
+                    />
+                </View>
+                <Text style={styles.error}>{roleErr}</Text>
+
                 <Text style={styles.text}>Address</Text>
                 <View style={styles.txtinput}>
                     <TextInput
                         style={styles.textfield}
-                        placeholder="Enter Your Address"
+                        placeholder="Enter Your Address "
+                        maxLength={12}
                         value={address}
                         onChangeText={(text) => setAddress(text)}
                     />
                 </View>
                 <Text style={styles.error}>{addressErr}</Text>
+
+                <View style={styles.logoContainer}>
+                    <Text style={styles.text}>Add Logo here</Text>
+                    <TouchableOpacity onPress={selectLogo}>
+                        {logo ? (
+                            <Image source={{ uri: logo }} style={styles.logo} />
+                        ) : (
+                            <FontAwesome5 name="store" size={100} color="#ffffff" style={styles.defaultLogoIcon} />
+                        )}
+                    </TouchableOpacity>
+                    {logoErr ? <Text style={styles.errorText}>{logoErr}</Text> : null}
+                </View>
+
                 <TouchableOpacity style={styles.button} onPress={Validation}>
                     <Text style={styles.buttonText}>Submit</Text>
                 </TouchableOpacity>
                 <View style={styles.msg}>
                     <Text style={styles.txtname1}>Already have an account?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('App_Drawer_Navigation')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
                         <Text style={styles.txtname2}> Login</Text>
                     </TouchableOpacity>
                 </View>
@@ -276,10 +405,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: '8%',
-    },
-    mainIcon: {
-        alignItems: 'center'
+        padding: '6%',
     },
     leftIcon: {
         backgroundColor: '#000',
@@ -288,7 +414,9 @@ const styles = StyleSheet.create({
         padding: '2%',
         borderRadius: 10,
         alignSelf: 'flex-start',
-
+    },
+    mainIcon: {
+        alignItems: 'center'
     },
     Icon: {
         alignItems: 'center',
@@ -309,6 +437,25 @@ const styles = StyleSheet.create({
         color: '#000',
         justifyContent: 'center',
         textAlign: 'center'
+    },
+    profileContainer: {
+        alignItems: 'center',
+        marginBottom: '5%',
+    },
+    profilePhoto: {
+        width: 130,
+        height: 130,
+        borderRadius: 80,
+        borderWidth: 2,
+        borderColor: '#000',
+    },
+    defaultProfileIcon: {
+        width: 130,
+        height: 130,
+        borderRadius: 80,
+        backgroundColor: '#d3d3d3',
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     txtstyle: {
         fontSize: 15,
@@ -409,17 +556,24 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         maxHeight: 200,
         marginTop: 5,
-    }
+    },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: '5%',
+    },
+    logo: {
+        width: 300,
+        height: 200,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#000',
+    },
+    defaultLogoIcon: {
+        width: 300,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: '#d3d3d3',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
 });
-
-
-
-
-
-
-
-
-
-
-
-

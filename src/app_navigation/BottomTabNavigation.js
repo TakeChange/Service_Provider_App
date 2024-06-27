@@ -4,9 +4,10 @@ import HomeScreen from '../screen/home_module/HomeScreen';
 import CategoryScreen from '../screen/bottomtab_navigation/CategoryScreen';
 import { View, StyleSheet } from 'react-native';
 import HomeIcon from 'react-native-vector-icons/MaterialIcons';
-import Category from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Profile from 'react-native-vector-icons/FontAwesome';
 import ProfileScreen from '../screen/bottomtab_navigation/ProfileScreen';
+import FavouriteService from '../screen/services/FavouriteService';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,25 +47,6 @@ const BottomTabNavigation = () => {
         }}
       />
       {/* <Tab.Screen
-        name="category"
-        component={CategoryScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.iconWrapper}>
-              <View style={[styles.iconContainer, focused && styles.iconFocused]}>
-                <Category
-                  name='category'
-                  color='white'
-                  size={28}
-                  style={{ alignSelf: 'center' }}
-                />
-              </View>
-            </View>
-          )
-        }}
-      /> */}
-      <Tab.Screen
         name="ProfileScreen"
         component={ProfileScreen}
         options={{
@@ -75,6 +57,26 @@ const BottomTabNavigation = () => {
                 <Profile
                   name='user'
                   color='white'
+                  size={28}
+                  style={{ alignSelf: 'center' }}
+                />
+              </View>
+            </View>
+          )
+        }}
+      /> */}
+      <Tab.Screen
+        name="Favourite Services"
+        component={FavouriteService}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'center',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.iconWrapper}>
+              <View style={[styles.iconContainer, focused && styles.iconFocused]}>
+                <AntDesign
+                  name='heart'
+                  color='#fff'
                   size={28}
                   style={{ alignSelf: 'center' }}
                 />

@@ -5,7 +5,7 @@ const OptionScreen = ({ navigation }) => {
 
   const handleLoginPress = () => {
     setIsLoginClicked(true);
-    navigation.navigate('LoginOption'); // Change 'LoginScreen' to the name of your login screen
+    navigation.navigate('SignInScreen'); // Change 'LoginScreen' to the name of your login screen
   };
 
   const handleRegisterPress = () => {
