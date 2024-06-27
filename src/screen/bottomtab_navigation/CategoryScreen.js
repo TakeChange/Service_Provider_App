@@ -606,8 +606,8 @@ const HomeScreen = ({ navigation }) => {
 
 
   return (
+    
     <View style={styles.container}>
-      <ScrollView>
         <View style={styles.container1}>
           <View style={styles.text}>
             <Text style={styles.hellotxt}>
@@ -667,6 +667,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.popServices}>All Services</Text>
 
           </View>
+          
           <View style={styles.flatlist}>
             {loading ? (
               <ActivityIndicator size="large" color="#009eb4" />
@@ -679,6 +680,7 @@ const HomeScreen = ({ navigation }) => {
               />
             )}
           </View>
+         
           {/* {selectedService && (
         <TouchableOpacity
           style={styles.floatingButton}
@@ -691,8 +693,9 @@ const HomeScreen = ({ navigation }) => {
       )} */}
 
         </View>
-      </ScrollView>
+     
     </View>
+    
   );
 };
 
@@ -750,8 +753,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   flatlist: {
-    flex: 1,
-    marginTop: 15,
+    marginTop: '5%',
+    //flex:1
   },
   cardContainer: {
     flex: 1,

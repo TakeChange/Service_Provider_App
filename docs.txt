@@ -38,3 +38,6 @@ npm i react-native-responsive-dimensions
 
 plugin:
         npm i @react-native-async-storage/async-storage
+
+plugin :
+        npm install react-native-image-picker

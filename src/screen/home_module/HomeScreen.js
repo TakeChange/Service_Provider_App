@@ -6,6 +6,7 @@ import axios from 'axios';
 import { ListItem } from 'react-native-elements';
 import { formatData } from '../../component/ServiceCard'
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useFocusEffect } from '@react-navigation/native';
 import { VENDORS_SERVICE, VENDORS_SERVICE_AREA, GET_ALL_SERVICES, All_AREA } from '../../constant/App_constant';
 
 
@@ -96,14 +97,21 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-
+  useFocusEffect(
+    React.useCallback(() => {
+      // This code will run when the screen is focused (i.e., when you navigate back to it)
+      setArea('');
+      setSearchQuery('');
+    }, [])
+  );
 
   const clearSearch = () => {
     setSearch('');
   };
 
   const clearSearchQuery = () => {
-    setSearchQuery('')
+    setSearchQuery('');
+    setArea(''); // Reset the area as well
   };
 
 
@@ -134,10 +142,10 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  const filteredServices = services.filter(service =>
-    service.service.toLowerCase().includes(search.toLowerCase())
-  );
-
+  const filteredServices = services
+    .filter(service => service.service.toLowerCase().includes(search.toLowerCase()))
+    .slice(0, 9);
+    
   //Get All Area
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -208,7 +216,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+    
         <View style={styles.container1}>
           <View style={styles.text}>
             <Text style={styles.hellotxt}>
@@ -289,7 +297,7 @@ const HomeScreen = ({ navigation }) => {
                 renderItem={renderServiceItem}
                 keyExtractor={item => item.id?.toString() || item.key}
                 numColumns={numColumns}
-              />
+              />             
             )}
           </View>
           {/* {selectedService && (
@@ -304,7 +312,7 @@ const HomeScreen = ({ navigation }) => {
       )} */}
 
         </View>
-      </ScrollView>
+
     </View>
   );
 };
@@ -352,11 +360,10 @@ const styles = StyleSheet.create({
   popularContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 10,
+    marginTop: '5%',
   },
   flatlist: {
-    flex: 1,
-    marginTop: 15,
+    marginTop: '5%',
   },
   cardContainer: {
     flex: 1,

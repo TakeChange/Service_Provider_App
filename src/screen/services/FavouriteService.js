@@ -1,15 +1,11 @@
 import { ScrollView, StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
 import React, { useState, useContext } from 'react'
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import data from '../../asset/data/data';
 import FavoriteContext from '../context/FavoriteContext';
 import HeartComponent from '../../component/HeartComponent'
 
 
 const FavouriteService = ({ }) => {
-  const { favorites } = useContext(FavoriteContext);
-  const { favourites, toggleFavourite } = useContext(FavoriteContext);
+  const { favorites,toggleFavorite } = useContext(FavoriteContext);
 
   const renderItem = ({ item }) => (
     <View style={styles.listContainer}>
@@ -17,7 +13,7 @@ const FavouriteService = ({ }) => {
       <Text style={styles.total}>Name : {item.name}</Text>
       <View>
         <HeartComponent  isFavorite={favorites.some(fav => fav.id === item.id)}
-            onPress={() => toggleFavourite(item)} />
+            onPress={() => toggleFavorite(item)} />
       </View>
       </View>
       <Text style={styles.total}>Contact No : {item.contact}</Text>
