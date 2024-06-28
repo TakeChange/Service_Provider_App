@@ -38,7 +38,6 @@ const SignUpScreen = ({ navigation }) => {
             setMobileErr('');
         }
     };
-
     const RegisterUser = async () => {
 
         const formData = new FormData();
@@ -150,7 +149,7 @@ const SignUpScreen = ({ navigation }) => {
         if (isValid) {
             RegisterUser();
             //storeData();
-            navigation.navigate('SignInScreen')
+            //navigation.navigate('ProfileScreen')
         }
     };
 
@@ -277,8 +276,8 @@ const SignUpScreen = ({ navigation }) => {
                     <Text style={styles.Acctxt}>Create an Account</Text>
                 </View>
                 <Text style={styles.text}>Full Name</Text>
-                <View style={styles.txtinput}>
-                    <TextInput
+                 <View style={styles.txtinput}>
+                     <TextInput
                         style={styles.textfield}
                         placeholder="Enter Your Name"
                         value={uname}
@@ -348,8 +347,6 @@ const SignUpScreen = ({ navigation }) => {
                 </View>
                 <Text style={styles.error}>{serviceErr}</Text>
 
-
-
                 <Text style={styles.text}>Role</Text>
                 <View style={styles.txtinput}>
                     <TextInput
@@ -367,7 +364,6 @@ const SignUpScreen = ({ navigation }) => {
                     <TextInput
                         style={styles.textfield}
                         placeholder="Enter Your Address "
-                        maxLength={12}
                         value={address}
                         onChangeText={(text) => setAddress(text)}
                     />
@@ -577,3 +573,12 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
     },
 });
+
+
+
+
+
+
+
+
+

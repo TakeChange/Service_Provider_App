@@ -5,7 +5,6 @@ import { RadioButton } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo'
 import LeftArrow from 'react-native-vector-icons/Feather';
-import { hasRestParameter } from 'typescript';
 
 const PaymentMethodScreen = () => {
     const [selectedMethod, setSelectedMethod] = useState('');
@@ -18,13 +17,11 @@ const PaymentMethodScreen = () => {
                     </TouchableOpacity>
                     <Text style={styles.paymenttxt}>Payment Method</Text>
                 </View>
-
                 <View style={styles.boxcontainer}>
                     <Text style={styles.sectionHeader}>UPI</Text>
                     <TouchableOpacity
                         style={styles.option}
-                        onPress={() => setSelectedMethod('Phone Pay')}
-                    >
+                        onPress={() => setSelectedMethod('Phone Pay')} >
                         <Image source={require('../../asset/images/phonepay.jpeg')} style={styles.icon} />
                         <Text style={styles.optionText}>Phone Pay</Text>
                         <RadioButton
@@ -35,8 +32,7 @@ const PaymentMethodScreen = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.option}
-                        onPress={() => setSelectedMethod('Google Pay')}
-                    >
+                        onPress={() => setSelectedMethod('Google Pay')} >
                         <Image source={require('../../asset/images/googlepay.jpeg')} style={styles.icon} />
                         <Text style={styles.optionText}>Google Pay</Text>
                         <RadioButton
@@ -47,18 +43,15 @@ const PaymentMethodScreen = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.option}
-                        onPress={() => setSelectedMethod('Enter UPI ID')}
-                    >
+                        onPress={() => setSelectedMethod('Enter UPI ID')}>
                         <Image source={require('../../asset/images/upi.jpeg')} style={styles.icon} />
                         <Text style={styles.optionText}>Enter UPI ID</Text>
                         <RadioButton
                             value="Enter UPI ID"
                             status={selectedMethod === 'Enter UPI ID' ? 'checked' : 'unchecked'}
-                            onPress={() => setSelectedMethod('Enter UPI ID')}
-                        />
+                            onPress={() => setSelectedMethod('Enter UPI ID')} />
                     </TouchableOpacity>
                 </View>
-
                 <View style={styles.boxcontainer}>
                     <View style={styles.section}>
                         <Text style={styles.sectionHeader}>Credit/Debit Card</Text>
@@ -69,20 +62,15 @@ const PaymentMethodScreen = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-
                 <View style={styles.boxcontainer}>
                     <View style={styles.section}>
                         <Text style={styles.sectionHeader}>Net banking</Text>
                         <TouchableOpacity style={styles.option}>
                             <Entypo name="network" size={24} color="#000" style={{}} />
                             <Text style={styles.optionText}>Net banking all Major Banks avaliable</Text>
-
                         </TouchableOpacity>
-
                     </View>
                 </View>
-
                 <View style={styles.boxcontainer}>
                     <View style={styles.section}>
                         <Text style={styles.sectionHeader}>Wallets</Text>
@@ -92,8 +80,6 @@ const PaymentMethodScreen = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-
-
             </View>
         </ScrollView>
     )
@@ -104,6 +90,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1
     },
+    leftIcon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '3%',
+        borderRadius: 10,
+        alignSelf: 'flex-start',
+    },
     paymenttxt: {
         fontSize: 18,
         color: '#000',
@@ -111,21 +104,11 @@ const styles = StyleSheet.create({
         marginLeft: '5%',
         fontWeight: 'bold'
     },
-    leftIcon: {
-
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '3%',
-        borderRadius: 10,
-        alignSelf: 'flex-start',
-
-    },
     boxcontainer: {
         backgroundColor: '#fff',
         borderRadius: 20,
         paddingHorizontal: '5%',
         marginHorizontal: '3%',
-        //marginTop: '10%',
         paddingVertical: '4%',
         marginVertical: '2%',
         shadowColor: '#000',
@@ -134,22 +117,20 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 5,
     },
-
+    sectionHeader: {
+        fontSize: 15,
+        color: '#000',
+        fontWeight: 'bold',
+    },
     option: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 12,
-        //borderBottomWidth: 1,
         borderBottomColor: '#cccccc',
     },
     icon: {
         width: '12%',
         height: '90%',
-        marginRight: 16,
-    },
-    amzonicon:{
-        width: '12%',
-        height: '125%',
         marginRight: 16,
     },
     optionText: {
@@ -162,12 +143,6 @@ const styles = StyleSheet.create({
     section: {
         marginVertical: 8,
     },
-    sectionHeader: {
-        fontSize: 15,
-        color: '#000',
-        fontWeight: 'bold',
-        //marginVertical: 8,
-    },
     selectedIndicator: {
         fontSize: 18,
         color: 'green',
@@ -176,5 +151,10 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: '#000',
         fontWeight: 'bold'
+    },
+    amzonicon: {
+        width: '12%',
+        height: '125%',
+        marginRight: 16,
     },
 })

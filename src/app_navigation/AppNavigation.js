@@ -15,6 +15,8 @@ import { FavoriteProvider } from '../screen/context/FavoriteContext';
 import VendorDetailScreen from '../screen/services/VendorDetailScreen';
 import VendorProfile from '../screen/home_module/VendorProfile';
 import ProfileScreen from '../screen/bottomtab_navigation/ProfileScreen';
+import PaymentSuccessfullyScreen from '../screen/authentication_module/PaymentSuccessfullyScreen';
+import SuggestionScreen from '../screen/authentication_module/SuggestionScreen';
 const AppNavigation = () => {
 
   const Stack = createNativeStackNavigator();
@@ -84,6 +86,16 @@ const AppNavigation = () => {
         <Stack.Screen
           name='ProfileScreen'
           component={ProfileScreen}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='PaymentSuccessfullyScreen'
+          component={PaymentSuccessfullyScreen}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name='SuggestionScreen'
+          component={SuggestionScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
